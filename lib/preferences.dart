@@ -1,0 +1,4 @@
+class Preferences {
+  static const animebytesUsername = "animebytes_username";
+  static const animebytesTorrentkey = "animebytes_torrentkey";
+}
