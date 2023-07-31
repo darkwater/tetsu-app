@@ -20,3 +20,18 @@ Stream<List<Torrent>> torrents(Ref ref) async* {
     await Future.delayed(const Duration(seconds: 5));
   }
 }
+
+@riverpod
+Set<int> animebytesTorrentIds(AnimebytesTorrentIdsRef ref) {
+  return ref.watch(torrentsProvider).maybeWhen(
+        data: (torrents) =>
+            torrents.map((t) => t.animebytesId).whereType<int>().toSet(),
+        orElse: () => {},
+      );
+}
+
+@riverpod
+Future<int> freeSpace(Ref ref) async {
+  final response = await transmission.freeSpace("/data/torrents/anime");
+  return response.data["arguments"]["size-bytes"];
+}

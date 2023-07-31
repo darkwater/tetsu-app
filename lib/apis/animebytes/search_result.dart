@@ -77,7 +77,7 @@ class AnimebytesSearchResponse with _$AnimebytesSearchResponse {
     required int results,
     required Pagination pagination,
     required int matches,
-    required List<AnimebytesSearchResult> groups,
+    @JsonKey(defaultValue: []) required List<AnimebytesSearchResult> groups,
   }) = _AnimebytesSearchResponse;
 
   factory AnimebytesSearchResponse.fromJson(Map<String, Object?> json) =>
@@ -135,6 +135,16 @@ class AnimebytesSearchResult with _$AnimebytesSearchResult {
     required bool? ongoing,
     required List<AnimebytesTorrent> torrents,
   }) = _AnimebytesSearchResult;
+
+  int? get malId {
+    final ints =
+        links["MAL"]?.split("/").map((e) => int.tryParse(e) ?? 0).toList();
+
+    final max = ints?.reduce((a, b) => a > b ? a : b);
+
+    if (max == 0) return null;
+    return max;
+  }
 
   factory AnimebytesSearchResult.fromJson(Map<String, Object?> json) =>
       _$AnimebytesSearchResultFromJson(json);

@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:streaming_shared_preferences/streaming_shared_preferences.dart";
-import "package:tetsu_app/pages/scaffold.dart";
 
 import "router.dart";
 

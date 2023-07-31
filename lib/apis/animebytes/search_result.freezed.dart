@@ -24,6 +24,7 @@ mixin _$AnimebytesSearchResponse {
   int get results => throw _privateConstructorUsedError;
   Pagination get pagination => throw _privateConstructorUsedError;
   int get matches => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: [])
   List<AnimebytesSearchResult> get groups => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +43,7 @@ abstract class $AnimebytesSearchResponseCopyWith<$Res> {
       {int results,
       Pagination pagination,
       int matches,
-      List<AnimebytesSearchResult> groups});
+      @JsonKey(defaultValue: []) List<AnimebytesSearchResult> groups});
 
   $PaginationCopyWith<$Res> get pagination;
 }
@@ -108,7 +109,7 @@ abstract class _$$_AnimebytesSearchResponseCopyWith<$Res>
       {int results,
       Pagination pagination,
       int matches,
-      List<AnimebytesSearchResult> groups});
+      @JsonKey(defaultValue: []) List<AnimebytesSearchResult> groups});
 
   @override
   $PaginationCopyWith<$Res> get pagination;
@@ -160,6 +161,7 @@ class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
       {required this.results,
       required this.pagination,
       required this.matches,
+      @JsonKey(defaultValue: [])
       required final List<AnimebytesSearchResult> groups})
       : _groups = groups,
         super._();
@@ -175,6 +177,7 @@ class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
   final int matches;
   final List<AnimebytesSearchResult> _groups;
   @override
+  @JsonKey(defaultValue: [])
   List<AnimebytesSearchResult> get groups {
     if (_groups is EqualUnmodifiableListView) return _groups;
     // ignore: implicit_dynamic_type
@@ -223,6 +226,7 @@ abstract class _AnimebytesSearchResponse extends AnimebytesSearchResponse {
           {required final int results,
           required final Pagination pagination,
           required final int matches,
+          @JsonKey(defaultValue: [])
           required final List<AnimebytesSearchResult> groups}) =
       _$_AnimebytesSearchResponse;
   const _AnimebytesSearchResponse._() : super._();
@@ -237,6 +241,7 @@ abstract class _AnimebytesSearchResponse extends AnimebytesSearchResponse {
   @override
   int get matches;
   @override
+  @JsonKey(defaultValue: [])
   List<AnimebytesSearchResult> get groups;
   @override
   @JsonKey(ignore: true)

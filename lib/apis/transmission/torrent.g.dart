@@ -15,6 +15,7 @@ _$_Torrent _$$_TorrentFromJson(Map<String, dynamic> json) => _$_Torrent(
       percentDone: (json['percentDone'] as num).toDouble(),
       rateDownload: (json['rateDownload'] as num).toDouble(),
       rateUpload: (json['rateUpload'] as num).toDouble(),
+      comment: json['comment'] as String?,
       dateCreated: _dateFromJson(json['dateCreated'] as int),
     );
 
@@ -28,5 +29,6 @@ Map<String, dynamic> _$$_TorrentToJson(_$_Torrent instance) =>
       'percentDone': instance.percentDone,
       'rateDownload': instance.rateDownload,
       'rateUpload': instance.rateUpload,
+      'comment': instance.comment,
       'dateCreated': instance.dateCreated.toIso8601String(),
     };

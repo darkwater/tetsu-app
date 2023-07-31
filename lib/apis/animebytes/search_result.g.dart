@@ -13,10 +13,11 @@ _$_AnimebytesSearchResponse _$$_AnimebytesSearchResponseFromJson(
       pagination:
           Pagination.fromJson(json['Pagination'] as Map<String, dynamic>),
       matches: json['Matches'] as int,
-      groups: (json['Groups'] as List<dynamic>)
-          .map(
-              (e) => AnimebytesSearchResult.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      groups: (json['Groups'] as List<dynamic>?)
+              ?.map((e) =>
+                  AnimebytesSearchResult.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_AnimebytesSearchResponseToJson(

@@ -59,6 +59,7 @@ class TransmissionClient {
           "rateDownload",
           "rateUpload",
           "dateCreated",
+          "comment",
         ],
       },
     });
@@ -69,6 +70,16 @@ class TransmissionClient {
       "method": "torrent-add",
       "arguments": {
         "filename": torrentUrl,
+      },
+    });
+  }
+
+  Future<Response> freeSpace(String path) {
+    return dio.post("/transmission/rpc", data: {
+      "method": "free-space",
+      "arguments": {
+        "path": path,
+        "download-dir": "/data/torrents/anime",
       },
     });
   }

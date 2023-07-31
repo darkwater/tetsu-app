@@ -28,6 +28,7 @@ mixin _$Torrent {
   double get percentDone => throw _privateConstructorUsedError;
   double get rateDownload => throw _privateConstructorUsedError;
   double get rateUpload => throw _privateConstructorUsedError;
+  String? get comment => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _dateFromJson)
   DateTime get dateCreated => throw _privateConstructorUsedError;
 
@@ -50,6 +51,7 @@ abstract class $TorrentCopyWith<$Res> {
       double percentDone,
       double rateDownload,
       double rateUpload,
+      String? comment,
       @JsonKey(fromJson: _dateFromJson) DateTime dateCreated});
 }
 
@@ -74,6 +76,7 @@ class _$TorrentCopyWithImpl<$Res, $Val extends Torrent>
     Object? percentDone = null,
     Object? rateDownload = null,
     Object? rateUpload = null,
+    Object? comment = freezed,
     Object? dateCreated = null,
   }) {
     return _then(_value.copyWith(
@@ -109,6 +112,10 @@ class _$TorrentCopyWithImpl<$Res, $Val extends Torrent>
           ? _value.rateUpload
           : rateUpload // ignore: cast_nullable_to_non_nullable
               as double,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
       dateCreated: null == dateCreated
           ? _value.dateCreated
           : dateCreated // ignore: cast_nullable_to_non_nullable
@@ -133,6 +140,7 @@ abstract class _$$_TorrentCopyWith<$Res> implements $TorrentCopyWith<$Res> {
       double percentDone,
       double rateDownload,
       double rateUpload,
+      String? comment,
       @JsonKey(fromJson: _dateFromJson) DateTime dateCreated});
 }
 
@@ -154,6 +162,7 @@ class __$$_TorrentCopyWithImpl<$Res>
     Object? percentDone = null,
     Object? rateDownload = null,
     Object? rateUpload = null,
+    Object? comment = freezed,
     Object? dateCreated = null,
   }) {
     return _then(_$_Torrent(
@@ -189,6 +198,10 @@ class __$$_TorrentCopyWithImpl<$Res>
           ? _value.rateUpload
           : rateUpload // ignore: cast_nullable_to_non_nullable
               as double,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
       dateCreated: null == dateCreated
           ? _value.dateCreated
           : dateCreated // ignore: cast_nullable_to_non_nullable
@@ -209,6 +222,7 @@ class _$_Torrent extends _Torrent {
       required this.percentDone,
       required this.rateDownload,
       required this.rateUpload,
+      required this.comment,
       @JsonKey(fromJson: _dateFromJson) required this.dateCreated})
       : super._();
 
@@ -232,12 +246,14 @@ class _$_Torrent extends _Torrent {
   @override
   final double rateUpload;
   @override
+  final String? comment;
+  @override
   @JsonKey(fromJson: _dateFromJson)
   final DateTime dateCreated;
 
   @override
   String toString() {
-    return 'Torrent(id: $id, name: $name, status: $status, downloadDir: $downloadDir, totalSize: $totalSize, percentDone: $percentDone, rateDownload: $rateDownload, rateUpload: $rateUpload, dateCreated: $dateCreated)';
+    return 'Torrent(id: $id, name: $name, status: $status, downloadDir: $downloadDir, totalSize: $totalSize, percentDone: $percentDone, rateDownload: $rateDownload, rateUpload: $rateUpload, comment: $comment, dateCreated: $dateCreated)';
   }
 
   @override
@@ -258,6 +274,7 @@ class _$_Torrent extends _Torrent {
                 other.rateDownload == rateDownload) &&
             (identical(other.rateUpload, rateUpload) ||
                 other.rateUpload == rateUpload) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.dateCreated, dateCreated) ||
                 other.dateCreated == dateCreated));
   }
@@ -265,7 +282,7 @@ class _$_Torrent extends _Torrent {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, status, downloadDir,
-      totalSize, percentDone, rateDownload, rateUpload, dateCreated);
+      totalSize, percentDone, rateDownload, rateUpload, comment, dateCreated);
 
   @JsonKey(ignore: true)
   @override
@@ -291,6 +308,7 @@ abstract class _Torrent extends Torrent {
       required final double percentDone,
       required final double rateDownload,
       required final double rateUpload,
+      required final String? comment,
       @JsonKey(fromJson: _dateFromJson)
       required final DateTime dateCreated}) = _$_Torrent;
   const _Torrent._() : super._();
@@ -313,6 +331,8 @@ abstract class _Torrent extends Torrent {
   double get rateDownload;
   @override
   double get rateUpload;
+  @override
+  String? get comment;
   @override
   @JsonKey(fromJson: _dateFromJson)
   DateTime get dateCreated;

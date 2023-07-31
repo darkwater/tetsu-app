@@ -1,0 +1,44 @@
+query AlAiring($page: Int, $perPage: Int, $season: MediaSeason, $seasonYear: Int) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      currentPage
+      lastPage
+      hasNextPage
+      perPage
+    }
+    media (season: $season, seasonYear: $seasonYear, sort: POPULARITY_DESC,
+        format_in: [TV, TV_SHORT]) {
+      id
+      idMal
+      description
+      source
+      episodes
+      title {
+        romaji
+        english
+        native
+      }
+      nextAiringEpisode {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+      coverImage {
+        extraLarge
+      }
+      studios {
+        nodes {
+          name
+          isAnimationStudio
+        }
+      }
+      externalLinks {
+        url
+        site
+        type
+        notes
+      }
+    }
+  }
+}

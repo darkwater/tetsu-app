@@ -13,13 +13,17 @@ class AnimebytesClient {
           ),
         ); //..interceptors.add(LogInterceptor());
 
-  Future<Response<Map<String, dynamic>>> search(String name) {
+  Future<Response<Map<String, dynamic>>> search(
+    String name,
+    Map<String, dynamic> parameters,
+  ) {
     return dio.get("scrape.php", queryParameters: {
       "username": username,
       "torrent_pass": passkey,
       "type": "anime",
       "searchstr": name,
       "search_type": "title",
+      ...parameters,
     });
   }
 }
