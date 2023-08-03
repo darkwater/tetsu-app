@@ -1,99 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tetsu_app/main.dart';
 import 'package:tetsu_app/preferences.dart';
-import 'package:tetsu_app/providers/animebytes.dart';
+
+import 'choice_pref.dart';
+import 'input_pref.dart';
 
 class SettingsMainPane extends ConsumerWidget {
   const SettingsMainPane({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final torrentkey = ref.watch(abTorrentkeyProvider).valueOrNull ?? "";
-    final torrentkeyPreview = switch (torrentkey.length) {
-      0 => "<unset>",
-      < 4 => "***",
-      _ => "${torrentkey.substring(0, 4)}...",
-    };
-
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "AnimeBytes",
-            style: Theme.of(context).textTheme.titleLarge,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Settings"),
+      ),
+      body: ListView(
+        children: const [
+          _Header("AnimeBytes"),
+          InputPreference(
+            title: "Username",
+            preferenceKey: Preferences.animebytesUsername,
+            hintText: "Enter your username",
           ),
-        ),
-        ListTile(
-          title: const Text("Username"),
-          subtitle: Text(
-            ref.watch(abUsernameProvider).valueOrNull ?? "<unset>",
+          InputPreference(
+            title: "Torrent key",
+            preferenceKey: Preferences.animebytesTorrentkey,
+            hintText: "Enter your torrent key",
+            semiConceal: true,
           ),
-          onTap: () async {
-            final newname = await showInputDialog(
-              context: context,
-              title: "AnimeBytes username",
-              hintText: "Enter your username",
-              initialValue: ref.watch(abUsernameProvider).valueOrNull,
-            );
-
-            if (newname != null) {
-              preferences.setString(Preferences.animebytesUsername, newname);
-            }
-          },
-        ),
-        ListTile(
-          title: const Text("Torrent key"),
-          subtitle: Text(torrentkeyPreview),
-          onTap: () async {
-            final newkey = await showInputDialog(
-              context: context,
-              title: "AnimeBytes torrent key",
-              hintText: "Enter your torrent key",
-              initialValue: ref.watch(abTorrentkeyProvider).valueOrNull,
-            );
-
-            if (newkey != null) {
-              preferences.setString(Preferences.animebytesTorrentkey, newkey);
-            }
-          },
-        ),
-      ],
+          _Header("Display"),
+          ChoicePreference(
+            title: "Title language",
+            preferenceKey: Preferences.titleDisplayLanguage,
+            defaultValue: "romaji",
+            choices: ["english", "romaji", "kanji"],
+          ),
+        ],
+      ),
     );
   }
 }
 
-Future<String?> showInputDialog({
-  required BuildContext context,
-  required String title,
-  String? hintText,
-  String? initialValue,
-}) async {
-  final controller = TextEditingController(text: initialValue);
+class _Header extends StatelessWidget {
+  final String text;
 
-  return await showDialog<String>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text(title),
-        content: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: hintText,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text("OK"),
-          ),
-        ],
-      );
-    },
-  );
+  const _Header(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+    );
+  }
 }

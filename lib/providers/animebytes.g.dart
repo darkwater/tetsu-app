@@ -6,7 +6,7 @@ part of 'animebytes.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$abTorrentkeyHash() => r'861103bec421ab714c122258b621a26dc14c5b6b';
+String _$abTorrentkeyHash() => r'024e2548baad605338d0d1034cd8fe0f5b854d27';
 
 /// See also [abTorrentkey].
 @ProviderFor(abTorrentkey)
@@ -20,7 +20,7 @@ final abTorrentkeyProvider = StreamProvider<String>.internal(
 );
 
 typedef AbTorrentkeyRef = StreamProviderRef<String>;
-String _$abUsernameHash() => r'db8bdbd771fb230b597e4b84ad3700f10684570b';
+String _$abUsernameHash() => r'9d92b11b317a3dc5f59b67f1d0cf14f0dbe5a78c';
 
 /// See also [abUsername].
 @ProviderFor(abUsername)
@@ -48,7 +48,7 @@ final abClientProvider = AutoDisposeProvider<AnimebytesClient>.internal(
 );
 
 typedef AbClientRef = AutoDisposeProviderRef<AnimebytesClient>;
-String _$abSearchResultsHash() => r'3b182aeb540666bb92d71619272223f402542d9e';
+String _$abSearchResultsHash() => r'616f9636c8405db85ccc4e96c0a96c50f13d3484';
 
 /// Copied from Dart SDK
 class _SystemHash {

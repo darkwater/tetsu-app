@@ -7,7 +7,7 @@ part "torrents.g.dart";
 
 final transmission = TransmissionClient();
 
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<List<Torrent>> torrents(Ref ref) async* {
   while (true) {
     final response = await transmission.getTorrents();
@@ -30,7 +30,7 @@ Set<int> animebytesTorrentIds(AnimebytesTorrentIdsRef ref) {
       );
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<int> freeSpace(Ref ref) async {
   final response = await transmission.freeSpace("/data/torrents/anime");
   return response.data["arguments"]["size-bytes"];

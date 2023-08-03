@@ -625,6 +625,8 @@ mixin _$AnimebytesSearchResult {
   @JsonKey(name: 'DescriptionHTML')
   String? get descriptionHtml => throw _privateConstructorUsedError;
   int? get epCount => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _studioListFromJson)
+  List<String> get studioList => throw _privateConstructorUsedError;
   bool? get incomplete => throw _privateConstructorUsedError;
   bool? get ongoing => throw _privateConstructorUsedError;
   List<AnimebytesTorrent> get torrents => throw _privateConstructorUsedError;
@@ -653,6 +655,7 @@ abstract class $AnimebytesSearchResultCopyWith<$Res> {
       Map<String, String> links,
       @JsonKey(name: 'DescriptionHTML') String? descriptionHtml,
       int? epCount,
+      @JsonKey(fromJson: _studioListFromJson) List<String> studioList,
       bool? incomplete,
       bool? ongoing,
       List<AnimebytesTorrent> torrents});
@@ -682,6 +685,7 @@ class _$AnimebytesSearchResultCopyWithImpl<$Res,
     Object? links = null,
     Object? descriptionHtml = freezed,
     Object? epCount = freezed,
+    Object? studioList = null,
     Object? incomplete = freezed,
     Object? ongoing = freezed,
     Object? torrents = null,
@@ -727,6 +731,10 @@ class _$AnimebytesSearchResultCopyWithImpl<$Res,
           ? _value.epCount
           : epCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      studioList: null == studioList
+          ? _value.studioList
+          : studioList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       incomplete: freezed == incomplete
           ? _value.incomplete
           : incomplete // ignore: cast_nullable_to_non_nullable
@@ -763,6 +771,7 @@ abstract class _$$_AnimebytesSearchResultCopyWith<$Res>
       Map<String, String> links,
       @JsonKey(name: 'DescriptionHTML') String? descriptionHtml,
       int? epCount,
+      @JsonKey(fromJson: _studioListFromJson) List<String> studioList,
       bool? incomplete,
       bool? ongoing,
       List<AnimebytesTorrent> torrents});
@@ -790,6 +799,7 @@ class __$$_AnimebytesSearchResultCopyWithImpl<$Res>
     Object? links = null,
     Object? descriptionHtml = freezed,
     Object? epCount = freezed,
+    Object? studioList = null,
     Object? incomplete = freezed,
     Object? ongoing = freezed,
     Object? torrents = null,
@@ -835,6 +845,10 @@ class __$$_AnimebytesSearchResultCopyWithImpl<$Res>
           ? _value.epCount
           : epCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      studioList: null == studioList
+          ? _value._studioList
+          : studioList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       incomplete: freezed == incomplete
           ? _value.incomplete
           : incomplete // ignore: cast_nullable_to_non_nullable
@@ -867,10 +881,13 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
       required final Map<String, String> links,
       @JsonKey(name: 'DescriptionHTML') required this.descriptionHtml,
       required this.epCount,
+      @JsonKey(fromJson: _studioListFromJson)
+      required final List<String> studioList,
       required this.incomplete,
       required this.ongoing,
       required final List<AnimebytesTorrent> torrents})
       : _links = links,
+        _studioList = studioList,
         _torrents = torrents,
         super._();
 
@@ -907,6 +924,15 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
   final String? descriptionHtml;
   @override
   final int? epCount;
+  final List<String> _studioList;
+  @override
+  @JsonKey(fromJson: _studioListFromJson)
+  List<String> get studioList {
+    if (_studioList is EqualUnmodifiableListView) return _studioList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_studioList);
+  }
+
   @override
   final bool? incomplete;
   @override
@@ -921,7 +947,7 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
 
   @override
   String toString() {
-    return 'AnimebytesSearchResult(id: $id, categoryName: $categoryName, groupName: $groupName, seriesId: $seriesId, seriesName: $seriesName, year: $year, image: $image, links: $links, descriptionHtml: $descriptionHtml, epCount: $epCount, incomplete: $incomplete, ongoing: $ongoing, torrents: $torrents)';
+    return 'AnimebytesSearchResult(id: $id, categoryName: $categoryName, groupName: $groupName, seriesId: $seriesId, seriesName: $seriesName, year: $year, image: $image, links: $links, descriptionHtml: $descriptionHtml, epCount: $epCount, studioList: $studioList, incomplete: $incomplete, ongoing: $ongoing, torrents: $torrents)';
   }
 
   @override
@@ -944,6 +970,8 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
             (identical(other.descriptionHtml, descriptionHtml) ||
                 other.descriptionHtml == descriptionHtml) &&
             (identical(other.epCount, epCount) || other.epCount == epCount) &&
+            const DeepCollectionEquality()
+                .equals(other._studioList, _studioList) &&
             (identical(other.incomplete, incomplete) ||
                 other.incomplete == incomplete) &&
             (identical(other.ongoing, ongoing) || other.ongoing == ongoing) &&
@@ -964,6 +992,7 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
       const DeepCollectionEquality().hash(_links),
       descriptionHtml,
       epCount,
+      const DeepCollectionEquality().hash(_studioList),
       incomplete,
       ongoing,
       const DeepCollectionEquality().hash(_torrents));
@@ -996,6 +1025,8 @@ abstract class _AnimebytesSearchResult extends AnimebytesSearchResult {
       required final Map<String, String> links,
       @JsonKey(name: 'DescriptionHTML') required final String? descriptionHtml,
       required final int? epCount,
+      @JsonKey(fromJson: _studioListFromJson)
+      required final List<String> studioList,
       required final bool? incomplete,
       required final bool? ongoing,
       required final List<AnimebytesTorrent>
@@ -1028,6 +1059,9 @@ abstract class _AnimebytesSearchResult extends AnimebytesSearchResult {
   String? get descriptionHtml;
   @override
   int? get epCount;
+  @override
+  @JsonKey(fromJson: _studioListFromJson)
+  List<String> get studioList;
   @override
   bool? get incomplete;
   @override

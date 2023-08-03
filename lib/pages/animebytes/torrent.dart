@@ -20,126 +20,121 @@ class AnimebytesTorrentDialog extends ConsumerWidget {
 
     return LayoutBuilder(builder: (context, constraints) {
       return Dialog(
-        child: ClipRRect(
-          borderRadius:
-              (Theme.of(context).dialogTheme.shape as RoundedRectangleBorder?)
-                      ?.borderRadius ??
-                  BorderRadius.circular(28),
-          child: SizedBox(
-            width: constraints.maxWidth / 2,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    torrent.property,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+        clipBehavior: Clip.antiAlias,
+        child: SizedBox(
+          width: constraints.maxWidth / 2,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  torrent.property,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 4, right: 24),
-                  child: Row(
-                    children: [
-                      Spacer(),
-                      ...ref.watch(freeSpaceProvider).maybeWhen(
-                            data: (data) => [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "Total size: ${humanBytes(torrent.size)}",
-                                  ),
-                                  Text("Free space: ${humanBytes(data)}"),
-                                ],
-                              ),
-                            ],
-                            orElse: () => [],
-                          ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4, right: 24),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    ...ref.watch(freeSpaceProvider).maybeWhen(
+                          data: (data) => [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Total size: ${humanBytes(torrent.size)}",
+                                ),
+                                Text("Free space: ${humanBytes(data)}"),
+                              ],
+                            ),
+                          ],
+                          orElse: () => [],
+                        ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    if (torrent.rawDownMultiplier == 0) ...[
+                      Icon(Icons.currency_yen, color: Colors.green),
+                      SizedBox(width: 4),
+                      Text(
+                        "Freeleech",
+                        style: TextStyle(color: Colors.green),
+                      ),
+                      SizedBox(width: 16),
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      Spacer(),
-                      if (torrent.rawDownMultiplier == 0) ...[
-                        Icon(Icons.currency_yen, color: Colors.green),
-                        SizedBox(width: 4),
+                    if (transmissionTorrent != null)
+                      if (transmissionTorrent.percentDone == 1) ...[
+                        Icon(Icons.check_circle, color: Colors.green),
+                        SizedBox(width: 8),
                         Text(
-                          "Freeleech",
+                          "Downloaded",
                           style: TextStyle(color: Colors.green),
                         ),
                         SizedBox(width: 16),
-                      ],
-                      if (transmissionTorrent != null)
-                        if (transmissionTorrent.percentDone == 1) ...[
-                          Icon(Icons.check_circle, color: Colors.green),
-                          SizedBox(width: 8),
-                          Text(
-                            "Downloaded",
-                            style: TextStyle(color: Colors.green),
+                      ] else ...[
+                        SizedBox(width: 8),
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            value: transmissionTorrent.percentDone >= 0.01
+                                ? transmissionTorrent.percentDone
+                                : null,
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.2),
                           ),
-                          SizedBox(width: 16),
-                        ] else ...[
-                          SizedBox(width: 8),
-                          SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(
-                              value: transmissionTorrent.percentDone >= 0.01
-                                  ? transmissionTorrent.percentDone
-                                  : null,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withOpacity(0.2),
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Text(
-                            "Downloading...",
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                      .progressIndicatorTheme
-                                      .color ??
-                                  Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        ]
-                      else
-                        ElevatedButton.icon(
-                          icon: Icon(Icons.download),
-                          label: Text("Download"),
-                          onPressed: () async {
-                            await transmission.addTorrent(torrent.link);
-                            ref.invalidate(torrentsProvider);
-                          },
                         ),
-                    ],
-                  ),
+                        SizedBox(width: 16),
+                        Text(
+                          "Downloading...",
+                          style: TextStyle(
+                            color: Theme.of(context)
+                                    .progressIndicatorTheme
+                                    .color ??
+                                Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ]
+                    else
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.download),
+                        label: Text("Download"),
+                        onPressed: () async {
+                          await transmission.addTorrent(torrent.link);
+                          ref.invalidate(torrentsProvider);
+                        },
+                      ),
+                  ],
                 ),
-                SizedBox(
-                  height: constraints.maxHeight / 2,
-                  child: DataTable2(
-                    lmRatio: 3,
-                    columns: const [
-                      DataColumn2(label: Text("Filename"), size: ColumnSize.L),
-                      DataColumn2(label: Text("Size"), numeric: true),
-                    ],
-                    rows: torrent.fileList
-                        .map((file) => DataRow(
-                              cells: [
-                                DataCell(Text(file.filename)),
-                                DataCell(Text(humanBytes(file.size))),
-                              ],
-                            ))
-                        .toList(),
-                  ),
+              ),
+              SizedBox(
+                height: constraints.maxHeight / 2,
+                child: DataTable2(
+                  lmRatio: 3,
+                  columns: const [
+                    DataColumn2(label: Text("Filename"), size: ColumnSize.L),
+                    DataColumn2(label: Text("Size"), numeric: true),
+                  ],
+                  rows: torrent.fileList
+                      .map((file) => DataRow(
+                            cells: [
+                              DataCell(Text(file.filename)),
+                              DataCell(Text(humanBytes(file.size))),
+                            ],
+                          ))
+                      .toList(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );

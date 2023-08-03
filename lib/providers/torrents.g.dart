@@ -6,11 +6,11 @@ part of 'torrents.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$torrentsHash() => r'10c1c039dcb2fdbe1d2008f430138e8f4d079497';
+String _$torrentsHash() => r'93db38bc14631032b11b17d6afa0f00eeb738827';
 
 /// See also [torrents].
 @ProviderFor(torrents)
-final torrentsProvider = AutoDisposeStreamProvider<List<Torrent>>.internal(
+final torrentsProvider = StreamProvider<List<Torrent>>.internal(
   torrents,
   name: r'torrentsProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final torrentsProvider = AutoDisposeStreamProvider<List<Torrent>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef TorrentsRef = AutoDisposeStreamProviderRef<List<Torrent>>;
+typedef TorrentsRef = StreamProviderRef<List<Torrent>>;
 String _$animebytesTorrentIdsHash() =>
     r'f3c095121b750b3e704d7e757c6d96a494bd32ce';
 
@@ -36,11 +36,11 @@ final animebytesTorrentIdsProvider = AutoDisposeProvider<Set<int>>.internal(
 );
 
 typedef AnimebytesTorrentIdsRef = AutoDisposeProviderRef<Set<int>>;
-String _$freeSpaceHash() => r'4184aefcde4357439b5b34be404309f713613c68';
+String _$freeSpaceHash() => r'e1603e520ea58844045351e63668193fedef43f8';
 
 /// See also [freeSpace].
 @ProviderFor(freeSpace)
-final freeSpaceProvider = AutoDisposeFutureProvider<int>.internal(
+final freeSpaceProvider = FutureProvider<int>.internal(
   freeSpace,
   name: r'freeSpaceProvider',
   debugGetCreateSourceHash:
@@ -49,6 +49,6 @@ final freeSpaceProvider = AutoDisposeFutureProvider<int>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef FreeSpaceRef = AutoDisposeFutureProviderRef<int>;
+typedef FreeSpaceRef = FutureProviderRef<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

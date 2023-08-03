@@ -6,18 +6,20 @@ import "package:tetsu_app/pages/animebytes/group.dart";
 import "package:tetsu_app/pages/animebytes/main.dart";
 import "package:tetsu_app/pages/settings/main.dart";
 import "package:tetsu_app/pages/torrents/main.dart";
+import "package:tetsu_app/pages/watch/details.dart";
+import "package:tetsu_app/pages/watch/main.dart";
 
 final pages = [
-  // _Page(
-  //   label: "Watch",
-  //   path: "/watch",
-  //   icon: Icons.airplay_outlined,
-  //   selectedIcon: Icons.airplay,
-  //   main: (_) => AnimebytesMainPane(),
-  // ),
+  _Page(
+    label: "Watch",
+    path: "/",
+    icon: Icons.airplay_outlined,
+    selectedIcon: Icons.airplay,
+    main: (_) => WatchMainPane(),
+  ),
   _Page(
     label: "Airing",
-    path: "/",
+    path: "/airing",
     icon: Icons.live_tv_outlined,
     selectedIcon: Icons.live_tv,
     main: (_) => AiringMainPane(),
@@ -42,6 +44,23 @@ final pages = [
     icon: Icons.settings_outlined,
     selectedIcon: Icons.settings,
     main: (_) => SettingsMainPane(),
+  ),
+];
+
+final routes = [
+  GoRoute(
+    path: "/animebytes/:id",
+    builder: (context, state) => AnimebytesGroupPage(
+      int.parse(state.pathParameters["id"]!),
+    ),
+  ),
+  GoRoute(
+    path: "/watch/:aid",
+    builder: (context, state) => WatchDetailsPage(
+      int.parse(
+        state.pathParameters["aid"]!,
+      ),
+    ),
   ),
 ];
 
@@ -77,12 +96,7 @@ final router = GoRouter(
       },
       routes: pages.map((page) => page.route()).toList(),
     ),
-    GoRoute(
-      path: "/animebytes/:id",
-      builder: (context, state) => AnimebytesGroupPage(
-        int.parse(state.pathParameters["id"]!),
-      ),
-    ),
+    ...routes
   ],
 );
 

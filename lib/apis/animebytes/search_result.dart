@@ -131,6 +131,7 @@ class AnimebytesSearchResult with _$AnimebytesSearchResult {
     required Map<String, String> links,
     @JsonKey(name: 'DescriptionHTML') required String? descriptionHtml,
     required int? epCount,
+    @JsonKey(fromJson: _studioListFromJson) required List<String> studioList,
     required bool? incomplete,
     required bool? ongoing,
     required List<AnimebytesTorrent> torrents,
@@ -194,4 +195,11 @@ Map<String, String> _emptyMapIsList(Object? json) {
     return json.map((key, value) => MapEntry(key, value as String));
   }
   return {};
+}
+
+List<String> _studioListFromJson(Object? json) {
+  if (json is String) {
+    return json.split("|").map((e) => e.split("///").first).toList();
+  }
+  return [];
 }

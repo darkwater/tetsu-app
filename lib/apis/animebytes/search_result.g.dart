@@ -68,6 +68,7 @@ _$_AnimebytesSearchResult _$$_AnimebytesSearchResultFromJson(
       links: json['Links'] == null ? {} : _emptyMapIsList(json['Links']),
       descriptionHtml: json['DescriptionHTML'] as String?,
       epCount: json['EpCount'] as int?,
+      studioList: _studioListFromJson(json['StudioList']),
       incomplete: json['Incomplete'] as bool?,
       ongoing: json['Ongoing'] as bool?,
       torrents: (json['Torrents'] as List<dynamic>)
@@ -88,6 +89,7 @@ Map<String, dynamic> _$$_AnimebytesSearchResultToJson(
       'Links': instance.links,
       'DescriptionHTML': instance.descriptionHtml,
       'EpCount': instance.epCount,
+      'StudioList': instance.studioList,
       'Incomplete': instance.incomplete,
       'Ongoing': instance.ongoing,
       'Torrents': instance.torrents,

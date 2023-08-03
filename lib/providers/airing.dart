@@ -1,12 +1,9 @@
-import 'package:ferry/ferry.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tetsu_app/apis/anichart/__generated__/schema.schema.gql.dart';
 import 'package:tetsu_app/apis/anichart/client.dart';
 import 'package:tetsu_app/apis/anichart/queries/__generated__/airing.data.gql.dart';
 import 'package:tetsu_app/apis/anichart/queries/__generated__/airing.req.gql.dart';
-import 'package:tetsu_app/apis/anichart/queries/__generated__/airing.var.gql.dart';
-import 'package:tetsu_app/apis/animebytes/search_result.dart';
 
 part 'airing.g.dart';
 

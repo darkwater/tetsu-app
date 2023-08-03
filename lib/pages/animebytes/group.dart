@@ -96,7 +96,7 @@ class AnimebytesGroupPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ZoomableNetworkImage(
-                  tag: "ab-image-${group.id}",
+                  tag: "animebytes-${group.id}",
                   url: group.image!,
                 ),
                 Expanded(

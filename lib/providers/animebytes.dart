@@ -10,12 +10,12 @@ part 'animebytes.g.dart';
 
 @Riverpod(keepAlive: true)
 Stream<String> abTorrentkey(Ref ref) => preferences
-    .getString("animebytes_passkey", defaultValue: "")
+    .getString(Preferences.animebytesTorrentkey, defaultValue: "")
     .where((e) => e.isNotEmpty);
 
 @Riverpod(keepAlive: true)
 Stream<String> abUsername(Ref ref) => preferences
-    .getString("animebytes_username", defaultValue: "")
+    .getString(Preferences.animebytesUsername, defaultValue: "")
     .where((e) => e.isNotEmpty);
 
 @riverpod
@@ -40,7 +40,6 @@ Future<List<AnimebytesSearchResult>> abSearchResults(
 
   final client = ref.read(abClientProvider);
   final res = await client.search(query, filterParams);
-  print(res.data);
   final data = AnimebytesSearchResponse.fromJson(res.data!);
 
   for (final group in data.groups) {

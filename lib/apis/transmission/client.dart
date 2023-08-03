@@ -7,8 +7,8 @@ class TransmissionClient {
     BaseOptions options = BaseOptions(
       baseUrl: "https://torrents.fbk.red/",
       headers: {
-        "X-Transmission-Session-Id":
-            "", // Transmission requires a valid Session-Id
+        // Transmission requires a valid Session-Id
+        "X-Transmission-Session-Id": "",
       },
     );
 
