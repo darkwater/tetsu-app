@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tetsu_app/apis/tetsu/mpv/message.dart';
+import 'package:tetsu_app/providers/animebytes.dart';
+import 'package:tetsu_app/providers/mpv.dart';
 import 'package:tetsu_app/providers/tetsu.dart';
 import 'package:tetsu_app/utils.dart';
-import 'package:tetsu_app/widgets/image.dart';
+import 'package:tetsu_app/widgets/anime_card.dart';
 
 final _selectedCategoryProvider = StateProvider.autoDispose<int>((ref) => 1);
 
@@ -30,6 +34,53 @@ class WatchDetailsPage extends ConsumerWidget {
     final eProvider = ref.watch(tetsuEpisodesProvider(aid));
     final fProvider = ref.watch(tetsuFilesProvider(aid));
 
+    final header = AnimeCard(
+      imageTag: "anidb-${anime.aid}",
+      imageUrl: "https://cdn.anidb.net/images/main/${anime.picname}",
+      // actions: [
+      //   if (anime.links.animebytesId != null)
+      //     TextButton.icon(
+      //       icon: const Icon(Icons.download),
+      //       label: Text("Torrents"),
+      //       onPressed: () {
+      //         context.push("/animebytes/${anime.links.animebytesId}");
+      //       },
+      //     )
+      //   else
+      //     TextButton.icon(
+      //       icon: const Icon(Icons.refresh),
+      //       label: Text("Search AB"),
+      //       onPressed: () async {
+      //         print("searching");
+      //         final res = await ref.read(abSearchResultsProvider(
+      //           anime.romajiName.split(" ").take(2).join(" "),
+      //           {},
+      //         ).future);
+      //         print("${res.length} results");
+      //         ref.invalidate(tetsuAllAnimeProvider);
+      //       },
+      //     ),
+      //   if (anime.links.annId != null)
+      //     TextButton.icon(
+      //       onPressed: () {},
+      //       icon: const Icon(Icons.info_outline),
+      //       label: Text("ANN ${anime.links.annId}"),
+      //     ),
+      //   if (anime.links.malId != null)
+      //     TextButton.icon(
+      //       onPressed: () {},
+      //       icon: const Icon(Icons.info_outline),
+      //       label: Text("MAL ${anime.links.malId}"),
+      //     ),
+      //   if (anime.links.anilistId != null)
+      //     TextButton.icon(
+      //       onPressed: () {},
+      //       icon: const Icon(Icons.info_outline),
+      //       label: Text("AniList ${anime.links.anilistId}"),
+      //     ),
+      // ],
+    );
+
     if (eProvider.isLoading || fProvider.isLoading) {
       return Scaffold(
         appBar: AppBar(
@@ -39,8 +90,22 @@ class WatchDetailsPage extends ConsumerWidget {
             english: anime.englishName,
           )),
         ),
-        body: Center(
-          child: CircularProgressIndicator(),
+        body: Row(
+          children: [
+            SizedBox(
+              width: 240,
+              child: Column(
+                children: [
+                  header,
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          ],
         ),
       );
     }
@@ -49,11 +114,11 @@ class WatchDetailsPage extends ConsumerWidget {
     final files = fProvider.requireValue;
 
     final categories = {
-      1: "Regular",
-      2: "Special",
-      3: "Credit",
-      4: "Trailer",
-      5: "Parody",
+      1: "Episodes",
+      2: "Special eps",
+      3: "Credits",
+      4: "Trailers",
+      5: "Parodies",
       6: "Other",
     };
 
@@ -75,32 +140,82 @@ class WatchDetailsPage extends ConsumerWidget {
           english: anime.englishName,
         )),
       ),
-      body: ListView(
+      body: Row(
         children: [
           SizedBox(
-            height: 300,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            width: 240,
+            child: ListView(
               children: [
-                ZoomableNetworkImage(
-                  tag: "anidb-$aid",
-                  url: "https://cdn.anidb.net/images/main/${anime.picname}",
-                ),
+                header,
+                for (final cat in categories.entries)
+                  ListTile(
+                    leading: (cat.key == selectedCategory)
+                        ? Icon(Icons.movie)
+                        : Icon(Icons.movie_outlined),
+                    title: Text(cat.value),
+                    selected: cat.key == selectedCategory,
+                    onTap: () {
+                      ref.read(_selectedCategoryProvider.notifier).state =
+                          cat.key;
+                    },
+                  ),
               ],
             ),
           ),
-          if (categories.length != 1 ||
-              categories.keys.first != selectedCategory)
-            _TabBar(categories),
-          for (final (file, episode) in entries)
-            ListTile(
-              title: Text(prefTitle(
-                kanji: episode.kanji,
-                romaji: episode.romaji,
-                english: episode.eng,
-              )),
-              subtitle: Text(file.path),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await Future.wait([
+                  ref.refresh(tetsuEpisodesProvider(aid).future),
+                  ref.refresh(tetsuFilesProvider(aid).future),
+                ]);
+              },
+              child: ListView(
+                children: [
+                  // SizedBox(
+                  //   height: 300,
+                  //   child: Row(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       ZoomableNetworkImage(
+                  //         tag: "anidb-$aid",
+                  //         url: "https://cdn.anidb.net/images/main/${anime.picname}",
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // header,
+                  // if (categories.length != 1 ||
+                  //     categories.keys.first != selectedCategory)
+                  //   _TabBar(categories),
+                  for (final (file, episode) in entries)
+                    ListTile(
+                      leading: SizedBox(
+                        width: 34,
+                        child: Text(
+                          episode.epno.replaceFirst(RegExp(r"^0"), ""),
+                          textAlign: TextAlign.end,
+                          textScaleFactor: 1.5,
+                        ),
+                      ),
+                      title: Text(prefTitle(
+                        kanji: episode.kanji,
+                        romaji: episode.romaji,
+                        english: episode.eng,
+                        fallback: file.path.split("/").last,
+                      )),
+                      subtitle: Text(file.path),
+                      onTap: () async {
+                        final mpv = ref.read(mpvProvider);
+                        mpv.sendControl(ControlMessage.start());
+                        await Future.delayed(Duration(seconds: 1));
+                        mpv.send(MpvRequest(command: ["loadfile", file.path]));
+                      },
+                    ),
+                ],
+              ),
             ),
+          ),
         ],
       ),
     );

@@ -101,7 +101,7 @@ class AiringMainPane extends ConsumerWidget {
                     ),
                     subtitle: studio,
                     actions: actions,
-                    child: child,
+                    body: child,
                   );
                 },
               );

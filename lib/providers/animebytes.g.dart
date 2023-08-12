@@ -48,7 +48,7 @@ final abClientProvider = AutoDisposeProvider<AnimebytesClient>.internal(
 );
 
 typedef AbClientRef = AutoDisposeProviderRef<AnimebytesClient>;
-String _$abSearchResultsHash() => r'616f9636c8405db85ccc4e96c0a96c50f13d3484';
+String _$abSearchResultsHash() => r'8eaf5ecf4d26a2142bd95d1da0184e97ba8a6463';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -158,6 +158,88 @@ class AbSearchResultsProvider
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, query.hashCode);
     hash = _SystemHash.combine(hash, filters.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$abGroupHash() => r'ed0f2c63a8f802829b7ed2241a2be469f76d0979';
+typedef AbGroupRef = AutoDisposeFutureProviderRef<AnimebytesSearchResult>;
+
+/// See also [abGroup].
+@ProviderFor(abGroup)
+const abGroupProvider = AbGroupFamily();
+
+/// See also [abGroup].
+class AbGroupFamily extends Family<AsyncValue<AnimebytesSearchResult>> {
+  /// See also [abGroup].
+  const AbGroupFamily();
+
+  /// See also [abGroup].
+  AbGroupProvider call(
+    int groupId,
+  ) {
+    return AbGroupProvider(
+      groupId,
+    );
+  }
+
+  @override
+  AbGroupProvider getProviderOverride(
+    covariant AbGroupProvider provider,
+  ) {
+    return call(
+      provider.groupId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'abGroupProvider';
+}
+
+/// See also [abGroup].
+class AbGroupProvider
+    extends AutoDisposeFutureProvider<AnimebytesSearchResult> {
+  /// See also [abGroup].
+  AbGroupProvider(
+    this.groupId,
+  ) : super.internal(
+          (ref) => abGroup(
+            ref,
+            groupId,
+          ),
+          from: abGroupProvider,
+          name: r'abGroupProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$abGroupHash,
+          dependencies: AbGroupFamily._dependencies,
+          allTransitiveDependencies: AbGroupFamily._allTransitiveDependencies,
+        );
+
+  final int groupId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AbGroupProvider && other.groupId == groupId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, groupId.hashCode);
 
     return _SystemHash.finish(hash);
   }

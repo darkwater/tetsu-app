@@ -5,6 +5,7 @@ import 'package:tetsu_app/apis/animebytes/client.dart';
 import 'package:tetsu_app/apis/animebytes/search_result.dart';
 import 'package:tetsu_app/main.dart';
 import 'package:tetsu_app/preferences.dart';
+import 'package:tetsu_app/providers/tetsu.dart';
 
 part 'animebytes.g.dart';
 
@@ -38,9 +39,8 @@ Future<List<AnimebytesSearchResult>> abSearchResults(
     filters.map((e) => MapEntry(e, "1")),
   );
 
-  final client = ref.read(abClientProvider);
-  final res = await client.search(query, filterParams);
-  final data = AnimebytesSearchResponse.fromJson(res.data!);
+  final res = await tetsu.animebytesSearch(query, filterParams);
+  final data = AnimebytesSearchResponse.fromJson(res);
 
   for (final group in data.groups) {
     preferences.setCustomValue(
@@ -51,4 +51,9 @@ Future<List<AnimebytesSearchResult>> abSearchResults(
   }
 
   return data.groups;
+}
+
+@riverpod
+Future<AnimebytesSearchResult> abGroup(Ref ref, int groupId) async {
+  return await tetsu.animebytesGroup(groupId);
 }

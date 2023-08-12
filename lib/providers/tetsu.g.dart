@@ -21,7 +21,7 @@ final tetsuAllAnimeProvider = FutureProvider<List<TetsuAnime>>.internal(
 );
 
 typedef TetsuAllAnimeRef = FutureProviderRef<List<TetsuAnime>>;
-String _$tetsuAnimeHash() => r'c7a7bd6088e02e03a3c0899cffc8c4fc8a219e05';
+String _$tetsuAnimeHash() => r'5434ef688459e6602b100e5a303a072b8a03d224';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -284,6 +284,103 @@ class TetsuFilesProvider extends FutureProvider<List<TetsuFile>> {
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, aid.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$tetsuSettingsHash() => r'bc689166a5e56d1ae94b7b340d71c02169ad949d';
+
+/// See also [tetsuSettings].
+@ProviderFor(tetsuSettings)
+final tetsuSettingsProvider = FutureProvider<Map<String, dynamic>>.internal(
+  tetsuSettings,
+  name: r'tetsuSettingsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$tetsuSettingsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef TetsuSettingsRef = FutureProviderRef<Map<String, dynamic>>;
+String _$tetsuSettingValueHash() => r'63107f0d01f9a008c0ce1ad8f5e0a35f24f6ef7e';
+typedef TetsuSettingValueRef = FutureProviderRef<dynamic>;
+
+/// See also [tetsuSettingValue].
+@ProviderFor(tetsuSettingValue)
+const tetsuSettingValueProvider = TetsuSettingValueFamily();
+
+/// See also [tetsuSettingValue].
+class TetsuSettingValueFamily extends Family<AsyncValue<dynamic>> {
+  /// See also [tetsuSettingValue].
+  const TetsuSettingValueFamily();
+
+  /// See also [tetsuSettingValue].
+  TetsuSettingValueProvider call(
+    String key,
+  ) {
+    return TetsuSettingValueProvider(
+      key,
+    );
+  }
+
+  @override
+  TetsuSettingValueProvider getProviderOverride(
+    covariant TetsuSettingValueProvider provider,
+  ) {
+    return call(
+      provider.key,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'tetsuSettingValueProvider';
+}
+
+/// See also [tetsuSettingValue].
+class TetsuSettingValueProvider extends FutureProvider<dynamic> {
+  /// See also [tetsuSettingValue].
+  TetsuSettingValueProvider(
+    this.key,
+  ) : super.internal(
+          (ref) => tetsuSettingValue(
+            ref,
+            key,
+          ),
+          from: tetsuSettingValueProvider,
+          name: r'tetsuSettingValueProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$tetsuSettingValueHash,
+          dependencies: TetsuSettingValueFamily._dependencies,
+          allTransitiveDependencies:
+              TetsuSettingValueFamily._allTransitiveDependencies,
+        );
+
+  final String key;
+
+  @override
+  bool operator ==(Object other) {
+    return other is TetsuSettingValueProvider && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, key.hashCode);
 
     return _SystemHash.finish(hash);
   }

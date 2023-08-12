@@ -16,7 +16,7 @@ Future<List<TetsuAnime>> tetsuAllAnime(Ref ref) async {
 
 @Riverpod(keepAlive: true)
 Future<TetsuAnime> tetsuAnime(Ref ref, int aid) async {
-  final all = await ref.read(tetsuAllAnimeProvider.future);
+  final all = await ref.watch(tetsuAllAnimeProvider.future);
   final anime = all.where((e) => e.aid == aid).firstOrNull;
 
   if (anime != null) {
@@ -34,4 +34,15 @@ Future<List<TetsuEpisode>> tetsuEpisodes(Ref ref, int aid) async {
 @Riverpod(keepAlive: true)
 Future<List<TetsuFile>> tetsuFiles(Ref ref, int aid) async {
   return await tetsu.getFiles(aid);
+}
+
+@Riverpod(keepAlive: true)
+Future<Map<String, dynamic>> tetsuSettings(Ref ref) async {
+  return await tetsu.settings();
+}
+
+@Riverpod(keepAlive: true)
+Future<dynamic> tetsuSettingValue(Ref ref, String key) async {
+  final settings = await ref.watch(tetsuSettingsProvider.future);
+  return settings[key];
 }

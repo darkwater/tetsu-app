@@ -15,16 +15,16 @@ class SettingsMainPane extends ConsumerWidget {
         title: const Text("Settings"),
       ),
       body: ListView(
-        children: const [
+        children: [
           _Header("AnimeBytes"),
           InputPreference(
             title: "Username",
-            preferenceKey: Preferences.animebytesUsername,
+            remoteKey: "animebytes_username",
             hintText: "Enter your username",
           ),
           InputPreference(
             title: "Torrent key",
-            preferenceKey: Preferences.animebytesTorrentkey,
+            remoteKey: "animebytes_torrentkey",
             hintText: "Enter your torrent key",
             semiConceal: true,
           ),
@@ -33,7 +33,20 @@ class SettingsMainPane extends ConsumerWidget {
             title: "Title language",
             preferenceKey: Preferences.titleDisplayLanguage,
             defaultValue: "romaji",
-            choices: ["english", "romaji", "kanji"],
+            choices: const ["kanji", "romaji", "english"],
+          ),
+          _Header("Users"),
+          ListTile(
+            leading: Icon(Icons.person, color: Colors.red),
+            title: Text("dark"),
+          ),
+          ListTile(
+            leading: Icon(Icons.person, color: Colors.deepPurple[300]),
+            title: Text("arena"),
+          ),
+          ListTile(
+            leading: Icon(Icons.add),
+            title: Text("Add user"),
           ),
         ],
       ),

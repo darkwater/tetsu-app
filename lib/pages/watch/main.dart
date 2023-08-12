@@ -18,37 +18,45 @@ class WatchMainPane extends ConsumerWidget {
       ),
       body: anime.when(
         data: (animes) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                  childAspectRatio: 5 / 7,
-                ),
-                itemCount: animes.length,
-                itemBuilder: (context, index) {
-                  final anime = animes[index];
+          return RefreshIndicator(
+            onRefresh: () => ref.refresh(tetsuAllAnimeProvider.future),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300,
+                    childAspectRatio: 5 / 7,
+                  ),
+                  itemCount: animes.length,
+                  itemBuilder: (context, index) {
+                    final anime = animes[index];
 
-                  return AnimeCard(
-                    onTap: () {
-                      context.push("/watch/${anime.aid}");
-                    },
-                    imageTag: "anidb-${anime.aid}",
-                    imageUrl:
-                        "https://cdn.anidb.net/images/main/${anime.picname}",
-                    imageZoomable: false,
-                    title: prefTitle(
-                      kanji: anime.kanjiName,
-                      romaji: anime.romajiName,
-                      english: anime.englishName,
-                    ),
-                    actions: const [],
-                    progress: 0.4,
-                    downloaded: 0.8,
-                  );
-                },
-              );
-            },
+                    // preload this provider, so that the image will
+                    // immediately be there on the details page
+                    ref.read(tetsuAnimeProvider(anime.aid));
+
+                    return AnimeCard(
+                      key: ValueKey(anime.aid),
+                      onTap: () {
+                        context.push("/watch/${anime.aid}");
+                      },
+                      imageTag: "anidb-${anime.aid}",
+                      imageUrl:
+                          "https://cdn.anidb.net/images/main/${anime.picname}",
+                      imageZoomable: false,
+                      title: prefTitle(
+                        kanji: anime.kanjiName,
+                        romaji: anime.romajiName,
+                        english: anime.englishName,
+                      ),
+                      actions: const [],
+                      progress: 0.4,
+                      downloaded: 0.8,
+                    );
+                  },
+                );
+              },
+            ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -58,6 +66,13 @@ class WatchMainPane extends ConsumerWidget {
             children: [
               Text(err.toString()),
               Text(stack.toString()),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  ref.invalidate(tetsuAllAnimeProvider);
+                },
+                child: const Text("Retry"),
+              ),
             ],
           ),
         ),

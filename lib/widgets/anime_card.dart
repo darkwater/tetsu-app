@@ -7,30 +7,46 @@ class AnimeCard extends ConsumerWidget {
   final String imageTag;
   final String? imageUrl;
   final bool imageZoomable;
-  final String title;
+  final String? title;
   final String? subtitle;
   final List<Widget> actions;
   final Function()? onTap;
   final double? progress;
   final double? downloaded;
-  final Widget? child;
+  final Widget? body;
 
   const AnimeCard({
     super.key,
     required this.imageTag,
     required this.imageUrl,
-    required this.title,
+    this.title,
     this.imageZoomable = true,
     this.subtitle,
     this.actions = const [],
     this.onTap,
     this.progress,
     this.downloaded,
-    this.child,
+    this.body,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final leftSide = AspectRatio(
+      aspectRatio: 5 / 7,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: _LeftSide(
+          imageTag: imageTag,
+          imageUrl: imageUrl,
+          imageZoomable: imageZoomable,
+          title: title,
+          subtitle: subtitle,
+          progress: progress,
+          downloaded: downloaded,
+        ),
+      ),
+    );
+
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -38,35 +54,21 @@ class AnimeCard extends ConsumerWidget {
           horizontal: 10,
           vertical: 14,
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AspectRatio(
-              aspectRatio: 5 / 7,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: _LeftSide(
-                  imageTag: imageTag,
-                  imageUrl: imageUrl,
-                  imageZoomable: imageZoomable,
-                  title: title,
-                  subtitle: subtitle,
-                  progress: progress,
-                  downloaded: downloaded,
-                ),
+        child: (body == null && actions.isEmpty)
+            ? leftSide
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  leftSide,
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _RightSide(
+                      actions: actions,
+                      child: body,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            if (child != null) ...[
-              const SizedBox(width: 16),
-              Expanded(
-                child: _RightSide(
-                  actions: actions,
-                  child: child,
-                ),
-              ),
-            ],
-          ],
-        ),
       ),
     );
   }
@@ -76,7 +78,7 @@ class _LeftSide extends ConsumerWidget {
   final String imageTag;
   final String? imageUrl;
   final bool imageZoomable;
-  final String title;
+  final String? title;
   final String? subtitle;
   final double? progress;
   final double? downloaded;
@@ -118,67 +120,97 @@ class _LeftSide extends ConsumerWidget {
                   color: Colors.grey,
                 ),
         ),
-        Positioned.fill(
-          top: null,
-          child: Material(
-            color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      if (subtitle != null) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          subtitle!,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ]
-                    ],
-                  ),
-                ),
-                if (progress != null)
-                  SizedBox(
-                    height: 4,
-                    child: Stack(
+        if (title != null)
+          Positioned.fill(
+            top: null,
+            child: Material(
+              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Positioned.fill(
-                          child: LinearProgressIndicator(
-                            value: downloaded ?? 1,
-                            backgroundColor: Colors.transparent,
-                            valueColor: AlwaysStoppedAnimation<Color?>(
-                              Theme.of(context).colorScheme.surfaceVariant,
+                        Text(
+                          title!,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        if (subtitle != null) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            subtitle!,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ),
-                        Positioned.fill(
-                          child: LinearProgressIndicator(
-                            value: progress,
-                            backgroundColor: Colors.transparent,
-                          ),
-                        ),
+                        ]
                       ],
                     ),
                   ),
-              ],
+                  if (progress != null)
+                    SizedBox(
+                      height: 3,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: LinearProgressIndicator(
+                              value: downloaded ?? 1,
+                              backgroundColor: Colors.transparent,
+                              valueColor: AlwaysStoppedAnimation<Color?>(
+                                Theme.of(context).colorScheme.surfaceVariant,
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: LinearProgressIndicator(
+                              value: progress,
+                              backgroundColor: Colors.transparent,
+                              valueColor: AlwaysStoppedAnimation<Color?>(
+                                Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (progress != null)
+                    SizedBox(
+                      height: 3,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: LinearProgressIndicator(
+                              value: downloaded ?? 1,
+                              backgroundColor: Colors.transparent,
+                              valueColor: AlwaysStoppedAnimation<Color?>(
+                                Theme.of(context).colorScheme.surfaceVariant,
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: LinearProgressIndicator(
+                              value: progress,
+                              backgroundColor: Colors.transparent,
+                              valueColor: AlwaysStoppedAnimation<Color?>(
+                                Colors.deepPurple[300],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
       ],
     );
   }

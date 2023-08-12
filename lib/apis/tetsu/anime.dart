@@ -33,8 +33,25 @@ class TetsuAnime with _$TetsuAnime {
     required int otherCount,
     required int trailerCount,
     required int parodyCount,
+    required Links links,
   }) = _TetsuAnime;
 
   factory TetsuAnime.fromJson(Map<String, Object?> json) =>
       _$TetsuAnimeFromJson(json);
+}
+
+@freezed
+class Links with _$Links {
+  const Links._();
+
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory Links({
+    int? animebytesId,
+    int? anidbId,
+    int? annId,
+    int? anilistId,
+    int? malId,
+  }) = _Links;
+
+  factory Links.fromJson(Map<String, Object?> json) => _$LinksFromJson(json);
 }

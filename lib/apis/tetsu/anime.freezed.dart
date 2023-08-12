@@ -42,6 +42,7 @@ mixin _$TetsuAnime {
   int get otherCount => throw _privateConstructorUsedError;
   int get trailerCount => throw _privateConstructorUsedError;
   int get parodyCount => throw _privateConstructorUsedError;
+  Links get links => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +78,10 @@ abstract class $TetsuAnimeCopyWith<$Res> {
       int creditsCount,
       int otherCount,
       int trailerCount,
-      int parodyCount});
+      int parodyCount,
+      Links links});
+
+  $LinksCopyWith<$Res> get links;
 }
 
 /// @nodoc
@@ -115,6 +119,7 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
     Object? otherCount = null,
     Object? trailerCount = null,
     Object? parodyCount = null,
+    Object? links = null,
   }) {
     return _then(_value.copyWith(
       aid: null == aid
@@ -205,7 +210,19 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
           ? _value.parodyCount
           : parodyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      links: null == links
+          ? _value.links
+          : links // ignore: cast_nullable_to_non_nullable
+              as Links,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LinksCopyWith<$Res> get links {
+    return $LinksCopyWith<$Res>(_value.links, (value) {
+      return _then(_value.copyWith(links: value) as $Val);
+    });
   }
 }
 
@@ -239,7 +256,11 @@ abstract class _$$_TetsuAnimeCopyWith<$Res>
       int creditsCount,
       int otherCount,
       int trailerCount,
-      int parodyCount});
+      int parodyCount,
+      Links links});
+
+  @override
+  $LinksCopyWith<$Res> get links;
 }
 
 /// @nodoc
@@ -275,6 +296,7 @@ class __$$_TetsuAnimeCopyWithImpl<$Res>
     Object? otherCount = null,
     Object? trailerCount = null,
     Object? parodyCount = null,
+    Object? links = null,
   }) {
     return _then(_$_TetsuAnime(
       aid: null == aid
@@ -365,6 +387,10 @@ class __$$_TetsuAnimeCopyWithImpl<$Res>
           ? _value.parodyCount
           : parodyCount // ignore: cast_nullable_to_non_nullable
               as int,
+      links: null == links
+          ? _value.links
+          : links // ignore: cast_nullable_to_non_nullable
+              as Links,
     ));
   }
 }
@@ -395,7 +421,8 @@ class _$_TetsuAnime extends _TetsuAnime {
       required this.creditsCount,
       required this.otherCount,
       required this.trailerCount,
-      required this.parodyCount})
+      required this.parodyCount,
+      required this.links})
       : _relatedAidList = relatedAidList,
         _relatedAidType = relatedAidType,
         _shortNameList = shortNameList,
@@ -473,10 +500,12 @@ class _$_TetsuAnime extends _TetsuAnime {
   final int trailerCount;
   @override
   final int parodyCount;
+  @override
+  final Links links;
 
   @override
   String toString() {
-    return 'TetsuAnime(aid: $aid, dateflags: $dateflags, year: $year, atype: $atype, relatedAidList: $relatedAidList, relatedAidType: $relatedAidType, romajiName: $romajiName, kanjiName: $kanjiName, englishName: $englishName, shortNameList: $shortNameList, episodes: $episodes, specialEpCount: $specialEpCount, airDate: $airDate, endDate: $endDate, picname: $picname, nsfw: $nsfw, characteridList: $characteridList, specialsCount: $specialsCount, creditsCount: $creditsCount, otherCount: $otherCount, trailerCount: $trailerCount, parodyCount: $parodyCount)';
+    return 'TetsuAnime(aid: $aid, dateflags: $dateflags, year: $year, atype: $atype, relatedAidList: $relatedAidList, relatedAidType: $relatedAidType, romajiName: $romajiName, kanjiName: $kanjiName, englishName: $englishName, shortNameList: $shortNameList, episodes: $episodes, specialEpCount: $specialEpCount, airDate: $airDate, endDate: $endDate, picname: $picname, nsfw: $nsfw, characteridList: $characteridList, specialsCount: $specialsCount, creditsCount: $creditsCount, otherCount: $otherCount, trailerCount: $trailerCount, parodyCount: $parodyCount, links: $links)';
   }
 
   @override
@@ -520,7 +549,8 @@ class _$_TetsuAnime extends _TetsuAnime {
             (identical(other.trailerCount, trailerCount) ||
                 other.trailerCount == trailerCount) &&
             (identical(other.parodyCount, parodyCount) ||
-                other.parodyCount == parodyCount));
+                other.parodyCount == parodyCount) &&
+            (identical(other.links, links) || other.links == links));
   }
 
   @JsonKey(ignore: true)
@@ -548,7 +578,8 @@ class _$_TetsuAnime extends _TetsuAnime {
         creditsCount,
         otherCount,
         trailerCount,
-        parodyCount
+        parodyCount,
+        links
       ]);
 
   @JsonKey(ignore: true)
@@ -588,7 +619,8 @@ abstract class _TetsuAnime extends TetsuAnime {
       required final int creditsCount,
       required final int otherCount,
       required final int trailerCount,
-      required final int parodyCount}) = _$_TetsuAnime;
+      required final int parodyCount,
+      required final Links links}) = _$_TetsuAnime;
   const _TetsuAnime._() : super._();
 
   factory _TetsuAnime.fromJson(Map<String, dynamic> json) =
@@ -639,7 +671,224 @@ abstract class _TetsuAnime extends TetsuAnime {
   @override
   int get parodyCount;
   @override
+  Links get links;
+  @override
   @JsonKey(ignore: true)
   _$$_TetsuAnimeCopyWith<_$_TetsuAnime> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Links _$LinksFromJson(Map<String, dynamic> json) {
+  return _Links.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Links {
+  int? get animebytesId => throw _privateConstructorUsedError;
+  int? get anidbId => throw _privateConstructorUsedError;
+  int? get annId => throw _privateConstructorUsedError;
+  int? get anilistId => throw _privateConstructorUsedError;
+  int? get malId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LinksCopyWith<Links> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LinksCopyWith<$Res> {
+  factory $LinksCopyWith(Links value, $Res Function(Links) then) =
+      _$LinksCopyWithImpl<$Res, Links>;
+  @useResult
+  $Res call(
+      {int? animebytesId,
+      int? anidbId,
+      int? annId,
+      int? anilistId,
+      int? malId});
+}
+
+/// @nodoc
+class _$LinksCopyWithImpl<$Res, $Val extends Links>
+    implements $LinksCopyWith<$Res> {
+  _$LinksCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? animebytesId = freezed,
+    Object? anidbId = freezed,
+    Object? annId = freezed,
+    Object? anilistId = freezed,
+    Object? malId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      animebytesId: freezed == animebytesId
+          ? _value.animebytesId
+          : animebytesId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anidbId: freezed == anidbId
+          ? _value.anidbId
+          : anidbId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      annId: freezed == annId
+          ? _value.annId
+          : annId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anilistId: freezed == anilistId
+          ? _value.anilistId
+          : anilistId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      malId: freezed == malId
+          ? _value.malId
+          : malId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_LinksCopyWith<$Res> implements $LinksCopyWith<$Res> {
+  factory _$$_LinksCopyWith(_$_Links value, $Res Function(_$_Links) then) =
+      __$$_LinksCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? animebytesId,
+      int? anidbId,
+      int? annId,
+      int? anilistId,
+      int? malId});
+}
+
+/// @nodoc
+class __$$_LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res, _$_Links>
+    implements _$$_LinksCopyWith<$Res> {
+  __$$_LinksCopyWithImpl(_$_Links _value, $Res Function(_$_Links) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? animebytesId = freezed,
+    Object? anidbId = freezed,
+    Object? annId = freezed,
+    Object? anilistId = freezed,
+    Object? malId = freezed,
+  }) {
+    return _then(_$_Links(
+      animebytesId: freezed == animebytesId
+          ? _value.animebytesId
+          : animebytesId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anidbId: freezed == anidbId
+          ? _value.anidbId
+          : anidbId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      annId: freezed == annId
+          ? _value.annId
+          : annId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anilistId: freezed == anilistId
+          ? _value.anilistId
+          : anilistId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      malId: freezed == malId
+          ? _value.malId
+          : malId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$_Links extends _Links {
+  const _$_Links(
+      {this.animebytesId, this.anidbId, this.annId, this.anilistId, this.malId})
+      : super._();
+
+  factory _$_Links.fromJson(Map<String, dynamic> json) =>
+      _$$_LinksFromJson(json);
+
+  @override
+  final int? animebytesId;
+  @override
+  final int? anidbId;
+  @override
+  final int? annId;
+  @override
+  final int? anilistId;
+  @override
+  final int? malId;
+
+  @override
+  String toString() {
+    return 'Links(animebytesId: $animebytesId, anidbId: $anidbId, annId: $annId, anilistId: $anilistId, malId: $malId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Links &&
+            (identical(other.animebytesId, animebytesId) ||
+                other.animebytesId == animebytesId) &&
+            (identical(other.anidbId, anidbId) || other.anidbId == anidbId) &&
+            (identical(other.annId, annId) || other.annId == annId) &&
+            (identical(other.anilistId, anilistId) ||
+                other.anilistId == anilistId) &&
+            (identical(other.malId, malId) || other.malId == malId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, animebytesId, anidbId, annId, anilistId, malId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LinksCopyWith<_$_Links> get copyWith =>
+      __$$_LinksCopyWithImpl<_$_Links>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LinksToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Links extends Links {
+  const factory _Links(
+      {final int? animebytesId,
+      final int? anidbId,
+      final int? annId,
+      final int? anilistId,
+      final int? malId}) = _$_Links;
+  const _Links._() : super._();
+
+  factory _Links.fromJson(Map<String, dynamic> json) = _$_Links.fromJson;
+
+  @override
+  int? get animebytesId;
+  @override
+  int? get anidbId;
+  @override
+  int? get annId;
+  @override
+  int? get anilistId;
+  @override
+  int? get malId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LinksCopyWith<_$_Links> get copyWith =>
       throw _privateConstructorUsedError;
 }

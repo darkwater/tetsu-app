@@ -17,7 +17,16 @@ String humanBytes(int bytes) {
   return "${(bytes / 1024 / 1024 / 1024).toStringAsFixed(1)} GB";
 }
 
-String prefTitle({String? kanji, String? romaji, String? english}) {
+String prefTitle({
+  String? kanji,
+  String? romaji,
+  String? english,
+  String fallback = "",
+}) {
+  if (kanji != null && kanji.isEmpty) kanji = null;
+  if (romaji != null && romaji.isEmpty) romaji = null;
+  if (english != null && english.isEmpty) english = null;
+
   final language = preferences
       .getString(
         Preferences.titleDisplayLanguage,
@@ -26,12 +35,12 @@ String prefTitle({String? kanji, String? romaji, String? english}) {
       .getValue();
 
   if (language == "kanji") {
-    return kanji ?? romaji ?? english ?? "";
+    return kanji ?? romaji ?? english ?? fallback;
   }
 
   if (language == "english") {
-    return english ?? romaji ?? kanji ?? "";
+    return english ?? romaji ?? kanji ?? fallback;
   }
 
-  return romaji ?? kanji ?? english ?? "";
+  return romaji ?? kanji ?? english ?? fallback;
 }

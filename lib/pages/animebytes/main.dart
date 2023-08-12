@@ -88,7 +88,7 @@ class AnimebytesMainPane extends ConsumerWidget {
       print(results.stackTrace);
     }
 
-    if (results.hasValue && results.value!.isEmpty) {
+    if (results.hasValue && results.value!.isEmpty || results.hasError) {
       return Scaffold(
         appBar: AppBar(
           title: const Text("AnimeBytes"),
@@ -233,7 +233,7 @@ class AnimebytesMainPane extends ConsumerWidget {
                       },
                     )
                 ],
-                child: _ResultChild(result),
+                body: _ResultChild(result),
               );
             },
           );

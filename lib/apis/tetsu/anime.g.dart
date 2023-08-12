@@ -38,6 +38,7 @@ _$_TetsuAnime _$$_TetsuAnimeFromJson(Map<String, dynamic> json) =>
       otherCount: json['other_count'] as int,
       trailerCount: json['trailer_count'] as int,
       parodyCount: json['parody_count'] as int,
+      links: Links.fromJson(json['links'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_TetsuAnimeToJson(_$_TetsuAnime instance) =>
@@ -64,4 +65,21 @@ Map<String, dynamic> _$$_TetsuAnimeToJson(_$_TetsuAnime instance) =>
       'other_count': instance.otherCount,
       'trailer_count': instance.trailerCount,
       'parody_count': instance.parodyCount,
+      'links': instance.links,
+    };
+
+_$_Links _$$_LinksFromJson(Map<String, dynamic> json) => _$_Links(
+      animebytesId: json['animebytes_id'] as int?,
+      anidbId: json['anidb_id'] as int?,
+      annId: json['ann_id'] as int?,
+      anilistId: json['anilist_id'] as int?,
+      malId: json['mal_id'] as int?,
+    );
+
+Map<String, dynamic> _$$_LinksToJson(_$_Links instance) => <String, dynamic>{
+      'animebytes_id': instance.animebytesId,
+      'anidb_id': instance.anidbId,
+      'ann_id': instance.annId,
+      'anilist_id': instance.anilistId,
+      'mal_id': instance.malId,
     };

@@ -49,6 +49,8 @@ dependencies:
   ferry: ^0.14.2+1
   gql_http_link: ^1.0.1
   html: ^0.15.4
+  web_socket_channel: ^2.4.0
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

@@ -1,20 +1,24 @@
 import "package:adaptive_navigation/adaptive_navigation.dart";
 import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:go_router/go_router.dart";
+import "package:tetsu_app/apis/tetsu/mpv/message.dart";
 import "package:tetsu_app/pages/airing/main.dart";
 import "package:tetsu_app/pages/animebytes/group.dart";
 import "package:tetsu_app/pages/animebytes/main.dart";
+import "package:tetsu_app/pages/mpv/main.dart";
 import "package:tetsu_app/pages/settings/main.dart";
 import "package:tetsu_app/pages/torrents/main.dart";
 import "package:tetsu_app/pages/watch/details.dart";
 import "package:tetsu_app/pages/watch/main.dart";
+import "package:tetsu_app/providers/mpv.dart";
 
 final pages = [
   _Page(
     label: "Watch",
     path: "/",
-    icon: Icons.airplay_outlined,
-    selectedIcon: Icons.airplay,
+    icon: Icons.folder_outlined,
+    selectedIcon: Icons.folder,
     main: (_) => WatchMainPane(),
   ),
   _Page(
@@ -62,6 +66,10 @@ final routes = [
       ),
     ),
   ),
+  GoRoute(
+    path: "/mpv",
+    builder: (context, state) => MpvMainPage(),
+  ),
 ];
 
 final router = GoRouter(
@@ -69,29 +77,49 @@ final router = GoRouter(
   routes: [
     ShellRoute(
       builder: (context, state, child) {
+        print(state.fullPath);
+
         final selectedIndex = pages
             .asMap()
             .entries
             .firstWhere((entry) => entry.value.path == state.matchedLocation)
             .key;
 
-        return AdaptiveNavigationScaffold(
-          // appBar: AppBar(
-          //   title: Text(pages[selectedIndex].label),
-          // ),
-          // appBarBreakpoint: Breakpoints.smallAndUp,
-          // internalAnimations: false,
-          destinations: pages
-              .asMap()
-              .entries
-              .map((entry) =>
-                  entry.value.destination(selectedIndex == entry.key))
-              .toList(),
-          selectedIndex: selectedIndex,
-          onDestinationSelected: (index) => context.go(pages[index].path),
-          // ref.read(selectedIndexProvider.notifier).state = index,
-          body: child,
-          // smallBody: _pages[selectedIndex].small ?? _pages[selectedIndex].main,
+        return Consumer(
+          child: child,
+          builder: (context, ref, child) => AdaptiveNavigationScaffold(
+            // appBar: AppBar(
+            //   title: Text(pages[selectedIndex].label),
+            // ),
+            // appBarBreakpoint: Breakpoints.smallAndUp,
+            // internalAnimations: false,
+            destinations: pages
+                .asMap()
+                .entries
+                .map((entry) =>
+                    entry.value.destination(selectedIndex == entry.key))
+                .toList(),
+            selectedIndex: selectedIndex,
+            onDestinationSelected: (index) => context.go(pages[index].path),
+            // ref.read(selectedIndexProvider.notifier).state = index,
+            body: child!,
+            // smallBody: _pages[selectedIndex].small ?? _pages[selectedIndex].main,
+            // floatingActionButton: ref.watch(mpvIsRunningProvider).isLoading
+            //     ? null
+            //     : FloatingActionButton(
+            //         onPressed: () => context.go("/transmission"),
+            //         child: Icon(Icons.airplay),
+            //       ),
+            floatingActionButton: ref.watch(mpvIsRunningProvider)
+                ? FloatingActionButton(
+                    child: Icon(Icons.airplay),
+                    onPressed: () {
+                      final mpv = ref.read(mpvProvider);
+                      mpv.sendControl(ControlMessage.stop());
+                    },
+                  )
+                : null,
+          ),
         );
       },
       routes: pages.map((page) => page.route()).toList(),
