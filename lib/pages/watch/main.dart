@@ -50,8 +50,8 @@ class WatchMainPane extends ConsumerWidget {
                         english: anime.englishName,
                       ),
                       actions: const [],
-                      progress: 0.4,
-                      downloaded: 0.8,
+                      progress: anime.watchProgress?.animeProgress,
+                      downloaded: 1.0,
                     );
                   },
                 );

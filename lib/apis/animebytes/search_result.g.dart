@@ -6,13 +6,13 @@ part of 'search_result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AnimebytesSearchResponse _$$_AnimebytesSearchResponseFromJson(
+_$AnimebytesSearchResponseImpl _$$AnimebytesSearchResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnimebytesSearchResponse(
-      results: json['Results'] as int,
+    _$AnimebytesSearchResponseImpl(
+      results: (json['Results'] as num).toInt(),
       pagination:
           Pagination.fromJson(json['Pagination'] as Map<String, dynamic>),
-      matches: json['Matches'] as int,
+      matches: (json['Matches'] as num).toInt(),
       groups: (json['Groups'] as List<dynamic>?)
               ?.map((e) =>
                   AnimebytesSearchResult.fromJson(e as Map<String, dynamic>))
@@ -20,8 +20,8 @@ _$_AnimebytesSearchResponse _$$_AnimebytesSearchResponseFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_AnimebytesSearchResponseToJson(
-        _$_AnimebytesSearchResponse instance) =>
+Map<String, dynamic> _$$AnimebytesSearchResponseImplToJson(
+        _$AnimebytesSearchResponseImpl instance) =>
     <String, dynamic>{
       'Results': instance.results,
       'Pagination': instance.pagination,
@@ -29,45 +29,46 @@ Map<String, dynamic> _$$_AnimebytesSearchResponseToJson(
       'Groups': instance.groups,
     };
 
-_$_Pagination _$$_PaginationFromJson(Map<String, dynamic> json) =>
-    _$_Pagination(
-      current: json['Current'] as int,
+_$PaginationImpl _$$PaginationImplFromJson(Map<String, dynamic> json) =>
+    _$PaginationImpl(
+      current: (json['Current'] as num).toInt(),
       max: (json['Max'] as num).toDouble(),
       limit: Limit.fromJson(json['Limit'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PaginationToJson(_$_Pagination instance) =>
+Map<String, dynamic> _$$PaginationImplToJson(_$PaginationImpl instance) =>
     <String, dynamic>{
       'Current': instance.current,
       'Max': instance.max,
       'Limit': instance.limit,
     };
 
-_$_Limit _$$_LimitFromJson(Map<String, dynamic> json) => _$_Limit(
-      min: json['Min'] as int,
-      coerced: json['Coerced'] as int,
-      max: json['Max'] as int,
+_$LimitImpl _$$LimitImplFromJson(Map<String, dynamic> json) => _$LimitImpl(
+      min: (json['Min'] as num).toInt(),
+      coerced: (json['Coerced'] as num).toInt(),
+      max: (json['Max'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$_LimitToJson(_$_Limit instance) => <String, dynamic>{
+Map<String, dynamic> _$$LimitImplToJson(_$LimitImpl instance) =>
+    <String, dynamic>{
       'Min': instance.min,
       'Coerced': instance.coerced,
       'Max': instance.max,
     };
 
-_$_AnimebytesSearchResult _$$_AnimebytesSearchResultFromJson(
+_$AnimebytesSearchResultImpl _$$AnimebytesSearchResultImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnimebytesSearchResult(
-      id: json['ID'] as int,
+    _$AnimebytesSearchResultImpl(
+      id: (json['ID'] as num).toInt(),
       categoryName: json['CategoryName'] as String,
       groupName: json['GroupName'] as String,
-      seriesId: json['SeriesId'] as int?,
+      seriesId: (json['SeriesId'] as num?)?.toInt(),
       seriesName: json['SeriesName'] as String,
       year: json['Year'] as String?,
       image: json['Image'] as String?,
       links: json['Links'] == null ? {} : _emptyMapIsList(json['Links']),
       descriptionHtml: json['DescriptionHTML'] as String?,
-      epCount: json['EpCount'] as int?,
+      epCount: (json['EpCount'] as num?)?.toInt(),
       studioList: _studioListFromJson(json['StudioList']),
       incomplete: json['Incomplete'] as bool?,
       ongoing: json['Ongoing'] as bool?,
@@ -76,8 +77,8 @@ _$_AnimebytesSearchResult _$$_AnimebytesSearchResultFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_AnimebytesSearchResultToJson(
-        _$_AnimebytesSearchResult instance) =>
+Map<String, dynamic> _$$AnimebytesSearchResultImplToJson(
+        _$AnimebytesSearchResultImpl instance) =>
     <String, dynamic>{
       'ID': instance.id,
       'CategoryName': instance.categoryName,
@@ -95,28 +96,29 @@ Map<String, dynamic> _$$_AnimebytesSearchResultToJson(
       'Torrents': instance.torrents,
     };
 
-_$_AnimebytesTorrent _$$_AnimebytesTorrentFromJson(Map<String, dynamic> json) =>
-    _$_AnimebytesTorrent(
-      id: json['ID'] as int,
+_$AnimebytesTorrentImpl _$$AnimebytesTorrentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AnimebytesTorrentImpl(
+      id: (json['ID'] as num).toInt(),
       editionData: json['EditionData'],
       rawDownMultiplier: (json['RawDownMultiplier'] as num).toDouble(),
       rawUpMultiplier: (json['RawUpMultiplier'] as num).toDouble(),
       link: json['Link'] as String,
       property: json['Property'] as String,
-      snatched: json['Snatched'] as int,
-      seeders: json['Seeders'] as int,
-      leechers: json['Leechers'] as int,
-      status: json['Status'] as int,
-      size: json['Size'] as int,
-      fileCount: json['FileCount'] as int,
+      snatched: (json['Snatched'] as num).toInt(),
+      seeders: (json['Seeders'] as num).toInt(),
+      leechers: (json['Leechers'] as num).toInt(),
+      status: (json['Status'] as num).toInt(),
+      size: (json['Size'] as num).toInt(),
+      fileCount: (json['FileCount'] as num).toInt(),
       fileList: (json['FileList'] as List<dynamic>)
           .map((e) => AnimebytesTorrentFile.fromJson(e as Map<String, dynamic>))
           .toList(),
       uploadTime: DateTime.parse(json['UploadTime'] as String),
     );
 
-Map<String, dynamic> _$$_AnimebytesTorrentToJson(
-        _$_AnimebytesTorrent instance) =>
+Map<String, dynamic> _$$AnimebytesTorrentImplToJson(
+        _$AnimebytesTorrentImpl instance) =>
     <String, dynamic>{
       'ID': instance.id,
       'EditionData': instance.editionData,
@@ -134,15 +136,15 @@ Map<String, dynamic> _$$_AnimebytesTorrentToJson(
       'UploadTime': instance.uploadTime.toIso8601String(),
     };
 
-_$_AnimebytesTorrentFile _$$_AnimebytesTorrentFileFromJson(
+_$AnimebytesTorrentFileImpl _$$AnimebytesTorrentFileImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnimebytesTorrentFile(
+    _$AnimebytesTorrentFileImpl(
       filename: json['filename'] as String,
-      size: json['size'] as int,
+      size: (json['size'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$_AnimebytesTorrentFileToJson(
-        _$_AnimebytesTorrentFile instance) =>
+Map<String, dynamic> _$$AnimebytesTorrentFileImplToJson(
+        _$AnimebytesTorrentFileImpl instance) =>
     <String, dynamic>{
       'filename': instance.filename,
       'size': instance.size,

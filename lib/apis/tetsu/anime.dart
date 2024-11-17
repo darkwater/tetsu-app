@@ -34,6 +34,7 @@ class TetsuAnime with _$TetsuAnime {
     required int trailerCount,
     required int parodyCount,
     required Links links,
+    required WatchProgress? watchProgress,
   }) = _TetsuAnime;
 
   factory TetsuAnime.fromJson(Map<String, Object?> json) =>
@@ -54,4 +55,20 @@ class Links with _$Links {
   }) = _Links;
 
   factory Links.fromJson(Map<String, Object?> json) => _$LinksFromJson(json);
+}
+
+@freezed
+class WatchProgress with _$WatchProgress {
+  const WatchProgress._();
+
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory WatchProgress({
+    required int lastEid,
+    required double episodeProgress,
+    required double animeProgress,
+    required DateTime lastUpdated,
+  }) = _WatchProgress;
+
+  factory WatchProgress.fromJson(Map<String, Object?> json) =>
+      _$WatchProgressFromJson(json);
 }

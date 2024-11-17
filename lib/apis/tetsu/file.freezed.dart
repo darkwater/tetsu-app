@@ -12,7 +12,7 @@ part of 'file.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TetsuFile _$TetsuFileFromJson(Map<String, dynamic> json) {
   return _TetsuFile.fromJson(json);
@@ -42,8 +42,12 @@ mixin _$TetsuFile {
   String get description => throw _privateConstructorUsedError;
   DateTime get airedDate => throw _privateConstructorUsedError;
 
+  /// Serializes this TetsuFile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TetsuFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TetsuFileCopyWith<TetsuFile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -87,6 +91,8 @@ class _$TetsuFileCopyWithImpl<$Res, $Val extends TetsuFile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TetsuFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -202,10 +208,11 @@ class _$TetsuFileCopyWithImpl<$Res, $Val extends TetsuFile>
 }
 
 /// @nodoc
-abstract class _$$_TetsuFileCopyWith<$Res> implements $TetsuFileCopyWith<$Res> {
-  factory _$$_TetsuFileCopyWith(
-          _$_TetsuFile value, $Res Function(_$_TetsuFile) then) =
-      __$$_TetsuFileCopyWithImpl<$Res>;
+abstract class _$$TetsuFileImplCopyWith<$Res>
+    implements $TetsuFileCopyWith<$Res> {
+  factory _$$TetsuFileImplCopyWith(
+          _$TetsuFileImpl value, $Res Function(_$TetsuFileImpl) then) =
+      __$$TetsuFileImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -233,13 +240,15 @@ abstract class _$$_TetsuFileCopyWith<$Res> implements $TetsuFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TetsuFileCopyWithImpl<$Res>
-    extends _$TetsuFileCopyWithImpl<$Res, _$_TetsuFile>
-    implements _$$_TetsuFileCopyWith<$Res> {
-  __$$_TetsuFileCopyWithImpl(
-      _$_TetsuFile _value, $Res Function(_$_TetsuFile) _then)
+class __$$TetsuFileImplCopyWithImpl<$Res>
+    extends _$TetsuFileCopyWithImpl<$Res, _$TetsuFileImpl>
+    implements _$$TetsuFileImplCopyWith<$Res> {
+  __$$TetsuFileImplCopyWithImpl(
+      _$TetsuFileImpl _value, $Res Function(_$TetsuFileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TetsuFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -265,7 +274,7 @@ class __$$_TetsuFileCopyWithImpl<$Res>
     Object? description = null,
     Object? airedDate = null,
   }) {
-    return _then(_$_TetsuFile(
+    return _then(_$TetsuFileImpl(
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -357,8 +366,8 @@ class __$$_TetsuFileCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_TetsuFile extends _TetsuFile {
-  const _$_TetsuFile(
+class _$TetsuFileImpl extends _TetsuFile {
+  const _$TetsuFileImpl(
       {required this.path,
       required this.fid,
       required this.aid,
@@ -387,8 +396,8 @@ class _$_TetsuFile extends _TetsuFile {
         _videoResolution = videoResolution,
         super._();
 
-  factory _$_TetsuFile.fromJson(Map<String, dynamic> json) =>
-      _$$_TetsuFileFromJson(json);
+  factory _$TetsuFileImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TetsuFileImplFromJson(json);
 
   @override
   final String path;
@@ -470,10 +479,10 @@ class _$_TetsuFile extends _TetsuFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TetsuFile &&
+            other is _$TetsuFileImpl &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.fid, fid) || other.fid == fid) &&
             (identical(other.aid, aid) || other.aid == aid) &&
@@ -508,7 +517,7 @@ class _$_TetsuFile extends _TetsuFile {
                 other.airedDate == airedDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -535,15 +544,17 @@ class _$_TetsuFile extends _TetsuFile {
         airedDate
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TetsuFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TetsuFileCopyWith<_$_TetsuFile> get copyWith =>
-      __$$_TetsuFileCopyWithImpl<_$_TetsuFile>(this, _$identity);
+  _$$TetsuFileImplCopyWith<_$TetsuFileImpl> get copyWith =>
+      __$$TetsuFileImplCopyWithImpl<_$TetsuFileImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TetsuFileToJson(
+    return _$$TetsuFileImplToJson(
       this,
     );
   }
@@ -571,11 +582,11 @@ abstract class _TetsuFile extends TetsuFile {
       required final String subLanguage,
       required final int lengthInSeconds,
       required final String description,
-      required final DateTime airedDate}) = _$_TetsuFile;
+      required final DateTime airedDate}) = _$TetsuFileImpl;
   const _TetsuFile._() : super._();
 
   factory _TetsuFile.fromJson(Map<String, dynamic> json) =
-      _$_TetsuFile.fromJson;
+      _$TetsuFileImpl.fromJson;
 
   @override
   String get path;
@@ -619,8 +630,11 @@ abstract class _TetsuFile extends TetsuFile {
   String get description;
   @override
   DateTime get airedDate;
+
+  /// Create a copy of TetsuFile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TetsuFileCopyWith<_$_TetsuFile> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TetsuFileImplCopyWith<_$TetsuFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

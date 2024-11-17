@@ -12,7 +12,7 @@ part of 'anime.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TetsuAnime _$TetsuAnimeFromJson(Map<String, dynamic> json) {
   return _TetsuAnime.fromJson(json);
@@ -43,9 +43,14 @@ mixin _$TetsuAnime {
   int get trailerCount => throw _privateConstructorUsedError;
   int get parodyCount => throw _privateConstructorUsedError;
   Links get links => throw _privateConstructorUsedError;
+  WatchProgress? get watchProgress => throw _privateConstructorUsedError;
 
+  /// Serializes this TetsuAnime to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TetsuAnimeCopyWith<TetsuAnime> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -79,9 +84,11 @@ abstract class $TetsuAnimeCopyWith<$Res> {
       int otherCount,
       int trailerCount,
       int parodyCount,
-      Links links});
+      Links links,
+      WatchProgress? watchProgress});
 
   $LinksCopyWith<$Res> get links;
+  $WatchProgressCopyWith<$Res>? get watchProgress;
 }
 
 /// @nodoc
@@ -94,6 +101,8 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,6 +129,7 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
     Object? trailerCount = null,
     Object? parodyCount = null,
     Object? links = null,
+    Object? watchProgress = freezed,
   }) {
     return _then(_value.copyWith(
       aid: null == aid
@@ -214,9 +224,15 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as Links,
+      watchProgress: freezed == watchProgress
+          ? _value.watchProgress
+          : watchProgress // ignore: cast_nullable_to_non_nullable
+              as WatchProgress?,
     ) as $Val);
   }
 
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LinksCopyWith<$Res> get links {
@@ -224,14 +240,28 @@ class _$TetsuAnimeCopyWithImpl<$Res, $Val extends TetsuAnime>
       return _then(_value.copyWith(links: value) as $Val);
     });
   }
+
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WatchProgressCopyWith<$Res>? get watchProgress {
+    if (_value.watchProgress == null) {
+      return null;
+    }
+
+    return $WatchProgressCopyWith<$Res>(_value.watchProgress!, (value) {
+      return _then(_value.copyWith(watchProgress: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_TetsuAnimeCopyWith<$Res>
+abstract class _$$TetsuAnimeImplCopyWith<$Res>
     implements $TetsuAnimeCopyWith<$Res> {
-  factory _$$_TetsuAnimeCopyWith(
-          _$_TetsuAnime value, $Res Function(_$_TetsuAnime) then) =
-      __$$_TetsuAnimeCopyWithImpl<$Res>;
+  factory _$$TetsuAnimeImplCopyWith(
+          _$TetsuAnimeImpl value, $Res Function(_$TetsuAnimeImpl) then) =
+      __$$TetsuAnimeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -257,20 +287,25 @@ abstract class _$$_TetsuAnimeCopyWith<$Res>
       int otherCount,
       int trailerCount,
       int parodyCount,
-      Links links});
+      Links links,
+      WatchProgress? watchProgress});
 
   @override
   $LinksCopyWith<$Res> get links;
+  @override
+  $WatchProgressCopyWith<$Res>? get watchProgress;
 }
 
 /// @nodoc
-class __$$_TetsuAnimeCopyWithImpl<$Res>
-    extends _$TetsuAnimeCopyWithImpl<$Res, _$_TetsuAnime>
-    implements _$$_TetsuAnimeCopyWith<$Res> {
-  __$$_TetsuAnimeCopyWithImpl(
-      _$_TetsuAnime _value, $Res Function(_$_TetsuAnime) _then)
+class __$$TetsuAnimeImplCopyWithImpl<$Res>
+    extends _$TetsuAnimeCopyWithImpl<$Res, _$TetsuAnimeImpl>
+    implements _$$TetsuAnimeImplCopyWith<$Res> {
+  __$$TetsuAnimeImplCopyWithImpl(
+      _$TetsuAnimeImpl _value, $Res Function(_$TetsuAnimeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -297,8 +332,9 @@ class __$$_TetsuAnimeCopyWithImpl<$Res>
     Object? trailerCount = null,
     Object? parodyCount = null,
     Object? links = null,
+    Object? watchProgress = freezed,
   }) {
-    return _then(_$_TetsuAnime(
+    return _then(_$TetsuAnimeImpl(
       aid: null == aid
           ? _value.aid
           : aid // ignore: cast_nullable_to_non_nullable
@@ -391,6 +427,10 @@ class __$$_TetsuAnimeCopyWithImpl<$Res>
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
               as Links,
+      watchProgress: freezed == watchProgress
+          ? _value.watchProgress
+          : watchProgress // ignore: cast_nullable_to_non_nullable
+              as WatchProgress?,
     ));
   }
 }
@@ -398,8 +438,8 @@ class __$$_TetsuAnimeCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_TetsuAnime extends _TetsuAnime {
-  const _$_TetsuAnime(
+class _$TetsuAnimeImpl extends _TetsuAnime {
+  const _$TetsuAnimeImpl(
       {required this.aid,
       required this.dateflags,
       required this.year,
@@ -422,15 +462,16 @@ class _$_TetsuAnime extends _TetsuAnime {
       required this.otherCount,
       required this.trailerCount,
       required this.parodyCount,
-      required this.links})
+      required this.links,
+      required this.watchProgress})
       : _relatedAidList = relatedAidList,
         _relatedAidType = relatedAidType,
         _shortNameList = shortNameList,
         _characteridList = characteridList,
         super._();
 
-  factory _$_TetsuAnime.fromJson(Map<String, dynamic> json) =>
-      _$$_TetsuAnimeFromJson(json);
+  factory _$TetsuAnimeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TetsuAnimeImplFromJson(json);
 
   @override
   final int aid;
@@ -502,17 +543,19 @@ class _$_TetsuAnime extends _TetsuAnime {
   final int parodyCount;
   @override
   final Links links;
+  @override
+  final WatchProgress? watchProgress;
 
   @override
   String toString() {
-    return 'TetsuAnime(aid: $aid, dateflags: $dateflags, year: $year, atype: $atype, relatedAidList: $relatedAidList, relatedAidType: $relatedAidType, romajiName: $romajiName, kanjiName: $kanjiName, englishName: $englishName, shortNameList: $shortNameList, episodes: $episodes, specialEpCount: $specialEpCount, airDate: $airDate, endDate: $endDate, picname: $picname, nsfw: $nsfw, characteridList: $characteridList, specialsCount: $specialsCount, creditsCount: $creditsCount, otherCount: $otherCount, trailerCount: $trailerCount, parodyCount: $parodyCount, links: $links)';
+    return 'TetsuAnime(aid: $aid, dateflags: $dateflags, year: $year, atype: $atype, relatedAidList: $relatedAidList, relatedAidType: $relatedAidType, romajiName: $romajiName, kanjiName: $kanjiName, englishName: $englishName, shortNameList: $shortNameList, episodes: $episodes, specialEpCount: $specialEpCount, airDate: $airDate, endDate: $endDate, picname: $picname, nsfw: $nsfw, characteridList: $characteridList, specialsCount: $specialsCount, creditsCount: $creditsCount, otherCount: $otherCount, trailerCount: $trailerCount, parodyCount: $parodyCount, links: $links, watchProgress: $watchProgress)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TetsuAnime &&
+            other is _$TetsuAnimeImpl &&
             (identical(other.aid, aid) || other.aid == aid) &&
             (identical(other.dateflags, dateflags) ||
                 other.dateflags == dateflags) &&
@@ -550,10 +593,12 @@ class _$_TetsuAnime extends _TetsuAnime {
                 other.trailerCount == trailerCount) &&
             (identical(other.parodyCount, parodyCount) ||
                 other.parodyCount == parodyCount) &&
-            (identical(other.links, links) || other.links == links));
+            (identical(other.links, links) || other.links == links) &&
+            (identical(other.watchProgress, watchProgress) ||
+                other.watchProgress == watchProgress));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -579,18 +624,21 @@ class _$_TetsuAnime extends _TetsuAnime {
         otherCount,
         trailerCount,
         parodyCount,
-        links
+        links,
+        watchProgress
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TetsuAnimeCopyWith<_$_TetsuAnime> get copyWith =>
-      __$$_TetsuAnimeCopyWithImpl<_$_TetsuAnime>(this, _$identity);
+  _$$TetsuAnimeImplCopyWith<_$TetsuAnimeImpl> get copyWith =>
+      __$$TetsuAnimeImplCopyWithImpl<_$TetsuAnimeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TetsuAnimeToJson(
+    return _$$TetsuAnimeImplToJson(
       this,
     );
   }
@@ -620,11 +668,12 @@ abstract class _TetsuAnime extends TetsuAnime {
       required final int otherCount,
       required final int trailerCount,
       required final int parodyCount,
-      required final Links links}) = _$_TetsuAnime;
+      required final Links links,
+      required final WatchProgress? watchProgress}) = _$TetsuAnimeImpl;
   const _TetsuAnime._() : super._();
 
   factory _TetsuAnime.fromJson(Map<String, dynamic> json) =
-      _$_TetsuAnime.fromJson;
+      _$TetsuAnimeImpl.fromJson;
 
   @override
   int get aid;
@@ -673,8 +722,13 @@ abstract class _TetsuAnime extends TetsuAnime {
   @override
   Links get links;
   @override
-  @JsonKey(ignore: true)
-  _$$_TetsuAnimeCopyWith<_$_TetsuAnime> get copyWith =>
+  WatchProgress? get watchProgress;
+
+  /// Create a copy of TetsuAnime
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TetsuAnimeImplCopyWith<_$TetsuAnimeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -690,8 +744,12 @@ mixin _$Links {
   int? get anilistId => throw _privateConstructorUsedError;
   int? get malId => throw _privateConstructorUsedError;
 
+  /// Serializes this Links to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LinksCopyWith<Links> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -718,6 +776,8 @@ class _$LinksCopyWithImpl<$Res, $Val extends Links>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -753,9 +813,10 @@ class _$LinksCopyWithImpl<$Res, $Val extends Links>
 }
 
 /// @nodoc
-abstract class _$$_LinksCopyWith<$Res> implements $LinksCopyWith<$Res> {
-  factory _$$_LinksCopyWith(_$_Links value, $Res Function(_$_Links) then) =
-      __$$_LinksCopyWithImpl<$Res>;
+abstract class _$$LinksImplCopyWith<$Res> implements $LinksCopyWith<$Res> {
+  factory _$$LinksImplCopyWith(
+          _$LinksImpl value, $Res Function(_$LinksImpl) then) =
+      __$$LinksImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -767,11 +828,15 @@ abstract class _$$_LinksCopyWith<$Res> implements $LinksCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res, _$_Links>
-    implements _$$_LinksCopyWith<$Res> {
-  __$$_LinksCopyWithImpl(_$_Links _value, $Res Function(_$_Links) _then)
+class __$$LinksImplCopyWithImpl<$Res>
+    extends _$LinksCopyWithImpl<$Res, _$LinksImpl>
+    implements _$$LinksImplCopyWith<$Res> {
+  __$$LinksImplCopyWithImpl(
+      _$LinksImpl _value, $Res Function(_$LinksImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -781,7 +846,7 @@ class __$$_LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res, _$_Links>
     Object? anilistId = freezed,
     Object? malId = freezed,
   }) {
-    return _then(_$_Links(
+    return _then(_$LinksImpl(
       animebytesId: freezed == animebytesId
           ? _value.animebytesId
           : animebytesId // ignore: cast_nullable_to_non_nullable
@@ -809,13 +874,13 @@ class __$$_LinksCopyWithImpl<$Res> extends _$LinksCopyWithImpl<$Res, _$_Links>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_Links extends _Links {
-  const _$_Links(
+class _$LinksImpl extends _Links {
+  const _$LinksImpl(
       {this.animebytesId, this.anidbId, this.annId, this.anilistId, this.malId})
       : super._();
 
-  factory _$_Links.fromJson(Map<String, dynamic> json) =>
-      _$$_LinksFromJson(json);
+  factory _$LinksImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LinksImplFromJson(json);
 
   @override
   final int? animebytesId;
@@ -834,10 +899,10 @@ class _$_Links extends _Links {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Links &&
+            other is _$LinksImpl &&
             (identical(other.animebytesId, animebytesId) ||
                 other.animebytesId == animebytesId) &&
             (identical(other.anidbId, anidbId) || other.anidbId == anidbId) &&
@@ -847,20 +912,22 @@ class _$_Links extends _Links {
             (identical(other.malId, malId) || other.malId == malId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, animebytesId, anidbId, annId, anilistId, malId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LinksCopyWith<_$_Links> get copyWith =>
-      __$$_LinksCopyWithImpl<_$_Links>(this, _$identity);
+  _$$LinksImplCopyWith<_$LinksImpl> get copyWith =>
+      __$$LinksImplCopyWithImpl<_$LinksImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LinksToJson(
+    return _$$LinksImplToJson(
       this,
     );
   }
@@ -872,10 +939,10 @@ abstract class _Links extends Links {
       final int? anidbId,
       final int? annId,
       final int? anilistId,
-      final int? malId}) = _$_Links;
+      final int? malId}) = _$LinksImpl;
   const _Links._() : super._();
 
-  factory _Links.fromJson(Map<String, dynamic> json) = _$_Links.fromJson;
+  factory _Links.fromJson(Map<String, dynamic> json) = _$LinksImpl.fromJson;
 
   @override
   int? get animebytesId;
@@ -887,8 +954,231 @@ abstract class _Links extends Links {
   int? get anilistId;
   @override
   int? get malId;
+
+  /// Create a copy of Links
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_LinksCopyWith<_$_Links> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LinksImplCopyWith<_$LinksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WatchProgress _$WatchProgressFromJson(Map<String, dynamic> json) {
+  return _WatchProgress.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WatchProgress {
+  int get lastEid => throw _privateConstructorUsedError;
+  double get episodeProgress => throw _privateConstructorUsedError;
+  double get animeProgress => throw _privateConstructorUsedError;
+  DateTime get lastUpdated => throw _privateConstructorUsedError;
+
+  /// Serializes this WatchProgress to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of WatchProgress
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WatchProgressCopyWith<WatchProgress> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WatchProgressCopyWith<$Res> {
+  factory $WatchProgressCopyWith(
+          WatchProgress value, $Res Function(WatchProgress) then) =
+      _$WatchProgressCopyWithImpl<$Res, WatchProgress>;
+  @useResult
+  $Res call(
+      {int lastEid,
+      double episodeProgress,
+      double animeProgress,
+      DateTime lastUpdated});
+}
+
+/// @nodoc
+class _$WatchProgressCopyWithImpl<$Res, $Val extends WatchProgress>
+    implements $WatchProgressCopyWith<$Res> {
+  _$WatchProgressCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WatchProgress
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lastEid = null,
+    Object? episodeProgress = null,
+    Object? animeProgress = null,
+    Object? lastUpdated = null,
+  }) {
+    return _then(_value.copyWith(
+      lastEid: null == lastEid
+          ? _value.lastEid
+          : lastEid // ignore: cast_nullable_to_non_nullable
+              as int,
+      episodeProgress: null == episodeProgress
+          ? _value.episodeProgress
+          : episodeProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      animeProgress: null == animeProgress
+          ? _value.animeProgress
+          : animeProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WatchProgressImplCopyWith<$Res>
+    implements $WatchProgressCopyWith<$Res> {
+  factory _$$WatchProgressImplCopyWith(
+          _$WatchProgressImpl value, $Res Function(_$WatchProgressImpl) then) =
+      __$$WatchProgressImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int lastEid,
+      double episodeProgress,
+      double animeProgress,
+      DateTime lastUpdated});
+}
+
+/// @nodoc
+class __$$WatchProgressImplCopyWithImpl<$Res>
+    extends _$WatchProgressCopyWithImpl<$Res, _$WatchProgressImpl>
+    implements _$$WatchProgressImplCopyWith<$Res> {
+  __$$WatchProgressImplCopyWithImpl(
+      _$WatchProgressImpl _value, $Res Function(_$WatchProgressImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WatchProgress
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lastEid = null,
+    Object? episodeProgress = null,
+    Object? animeProgress = null,
+    Object? lastUpdated = null,
+  }) {
+    return _then(_$WatchProgressImpl(
+      lastEid: null == lastEid
+          ? _value.lastEid
+          : lastEid // ignore: cast_nullable_to_non_nullable
+              as int,
+      episodeProgress: null == episodeProgress
+          ? _value.episodeProgress
+          : episodeProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      animeProgress: null == animeProgress
+          ? _value.animeProgress
+          : animeProgress // ignore: cast_nullable_to_non_nullable
+              as double,
+      lastUpdated: null == lastUpdated
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$WatchProgressImpl extends _WatchProgress {
+  const _$WatchProgressImpl(
+      {required this.lastEid,
+      required this.episodeProgress,
+      required this.animeProgress,
+      required this.lastUpdated})
+      : super._();
+
+  factory _$WatchProgressImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WatchProgressImplFromJson(json);
+
+  @override
+  final int lastEid;
+  @override
+  final double episodeProgress;
+  @override
+  final double animeProgress;
+  @override
+  final DateTime lastUpdated;
+
+  @override
+  String toString() {
+    return 'WatchProgress(lastEid: $lastEid, episodeProgress: $episodeProgress, animeProgress: $animeProgress, lastUpdated: $lastUpdated)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WatchProgressImpl &&
+            (identical(other.lastEid, lastEid) || other.lastEid == lastEid) &&
+            (identical(other.episodeProgress, episodeProgress) ||
+                other.episodeProgress == episodeProgress) &&
+            (identical(other.animeProgress, animeProgress) ||
+                other.animeProgress == animeProgress) &&
+            (identical(other.lastUpdated, lastUpdated) ||
+                other.lastUpdated == lastUpdated));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, lastEid, episodeProgress, animeProgress, lastUpdated);
+
+  /// Create a copy of WatchProgress
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WatchProgressImplCopyWith<_$WatchProgressImpl> get copyWith =>
+      __$$WatchProgressImplCopyWithImpl<_$WatchProgressImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WatchProgressImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WatchProgress extends WatchProgress {
+  const factory _WatchProgress(
+      {required final int lastEid,
+      required final double episodeProgress,
+      required final double animeProgress,
+      required final DateTime lastUpdated}) = _$WatchProgressImpl;
+  const _WatchProgress._() : super._();
+
+  factory _WatchProgress.fromJson(Map<String, dynamic> json) =
+      _$WatchProgressImpl.fromJson;
+
+  @override
+  int get lastEid;
+  @override
+  double get episodeProgress;
+  @override
+  double get animeProgress;
+  @override
+  DateTime get lastUpdated;
+
+  /// Create a copy of WatchProgress
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WatchProgressImplCopyWith<_$WatchProgressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

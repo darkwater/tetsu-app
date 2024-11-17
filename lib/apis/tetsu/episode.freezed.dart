@@ -12,7 +12,7 @@ part of 'episode.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TetsuEpisode _$TetsuEpisodeFromJson(Map<String, dynamic> json) {
   return _TetsuEpisode.fromJson(json);
@@ -32,8 +32,12 @@ mixin _$TetsuEpisode {
   DateTime get aired => throw _privateConstructorUsedError;
   int get etype => throw _privateConstructorUsedError;
 
+  /// Serializes this TetsuEpisode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TetsuEpisode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TetsuEpisodeCopyWith<TetsuEpisode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,6 +72,8 @@ class _$TetsuEpisodeCopyWithImpl<$Res, $Val extends TetsuEpisode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TetsuEpisode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,11 +139,11 @@ class _$TetsuEpisodeCopyWithImpl<$Res, $Val extends TetsuEpisode>
 }
 
 /// @nodoc
-abstract class _$$_TetsuEpisodeCopyWith<$Res>
+abstract class _$$TetsuEpisodeImplCopyWith<$Res>
     implements $TetsuEpisodeCopyWith<$Res> {
-  factory _$$_TetsuEpisodeCopyWith(
-          _$_TetsuEpisode value, $Res Function(_$_TetsuEpisode) then) =
-      __$$_TetsuEpisodeCopyWithImpl<$Res>;
+  factory _$$TetsuEpisodeImplCopyWith(
+          _$TetsuEpisodeImpl value, $Res Function(_$TetsuEpisodeImpl) then) =
+      __$$TetsuEpisodeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -155,13 +161,15 @@ abstract class _$$_TetsuEpisodeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TetsuEpisodeCopyWithImpl<$Res>
-    extends _$TetsuEpisodeCopyWithImpl<$Res, _$_TetsuEpisode>
-    implements _$$_TetsuEpisodeCopyWith<$Res> {
-  __$$_TetsuEpisodeCopyWithImpl(
-      _$_TetsuEpisode _value, $Res Function(_$_TetsuEpisode) _then)
+class __$$TetsuEpisodeImplCopyWithImpl<$Res>
+    extends _$TetsuEpisodeCopyWithImpl<$Res, _$TetsuEpisodeImpl>
+    implements _$$TetsuEpisodeImplCopyWith<$Res> {
+  __$$TetsuEpisodeImplCopyWithImpl(
+      _$TetsuEpisodeImpl _value, $Res Function(_$TetsuEpisodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TetsuEpisode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,7 +185,7 @@ class __$$_TetsuEpisodeCopyWithImpl<$Res>
     Object? aired = null,
     Object? etype = null,
   }) {
-    return _then(_$_TetsuEpisode(
+    return _then(_$TetsuEpisodeImpl(
       eid: null == eid
           ? _value.eid
           : eid // ignore: cast_nullable_to_non_nullable
@@ -229,8 +237,8 @@ class __$$_TetsuEpisodeCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_TetsuEpisode extends _TetsuEpisode {
-  const _$_TetsuEpisode(
+class _$TetsuEpisodeImpl extends _TetsuEpisode {
+  const _$TetsuEpisodeImpl(
       {required this.eid,
       required this.aid,
       required this.length,
@@ -244,8 +252,8 @@ class _$_TetsuEpisode extends _TetsuEpisode {
       required this.etype})
       : super._();
 
-  factory _$_TetsuEpisode.fromJson(Map<String, dynamic> json) =>
-      _$$_TetsuEpisodeFromJson(json);
+  factory _$TetsuEpisodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TetsuEpisodeImplFromJson(json);
 
   @override
   final int eid;
@@ -276,10 +284,10 @@ class _$_TetsuEpisode extends _TetsuEpisode {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TetsuEpisode &&
+            other is _$TetsuEpisodeImpl &&
             (identical(other.eid, eid) || other.eid == eid) &&
             (identical(other.aid, aid) || other.aid == aid) &&
             (identical(other.length, length) || other.length == length) &&
@@ -293,20 +301,22 @@ class _$_TetsuEpisode extends _TetsuEpisode {
             (identical(other.etype, etype) || other.etype == etype));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, eid, aid, length, rating, votes,
       epno, eng, romaji, kanji, aired, etype);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TetsuEpisode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TetsuEpisodeCopyWith<_$_TetsuEpisode> get copyWith =>
-      __$$_TetsuEpisodeCopyWithImpl<_$_TetsuEpisode>(this, _$identity);
+  _$$TetsuEpisodeImplCopyWith<_$TetsuEpisodeImpl> get copyWith =>
+      __$$TetsuEpisodeImplCopyWithImpl<_$TetsuEpisodeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TetsuEpisodeToJson(
+    return _$$TetsuEpisodeImplToJson(
       this,
     );
   }
@@ -324,11 +334,11 @@ abstract class _TetsuEpisode extends TetsuEpisode {
       required final String romaji,
       required final String kanji,
       required final DateTime aired,
-      required final int etype}) = _$_TetsuEpisode;
+      required final int etype}) = _$TetsuEpisodeImpl;
   const _TetsuEpisode._() : super._();
 
   factory _TetsuEpisode.fromJson(Map<String, dynamic> json) =
-      _$_TetsuEpisode.fromJson;
+      _$TetsuEpisodeImpl.fromJson;
 
   @override
   int get eid;
@@ -352,8 +362,11 @@ abstract class _TetsuEpisode extends TetsuEpisode {
   DateTime get aired;
   @override
   int get etype;
+
+  /// Create a copy of TetsuEpisode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TetsuEpisodeCopyWith<_$_TetsuEpisode> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TetsuEpisodeImplCopyWith<_$TetsuEpisodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -19,6 +19,8 @@ final abTorrentkeyProvider = StreamProvider<String>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AbTorrentkeyRef = StreamProviderRef<String>;
 String _$abUsernameHash() => r'9d92b11b317a3dc5f59b67f1d0cf14f0dbe5a78c';
 
@@ -33,6 +35,8 @@ final abUsernameProvider = StreamProvider<String>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AbUsernameRef = StreamProviderRef<String>;
 String _$abClientHash() => r'1a37e2c1b4c4c59bad498600571b5ef838354f78';
 
@@ -47,6 +51,8 @@ final abClientProvider = AutoDisposeProvider<AnimebytesClient>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AbClientRef = AutoDisposeProviderRef<AnimebytesClient>;
 String _$abSearchResultsHash() => r'8eaf5ecf4d26a2142bd95d1da0184e97ba8a6463';
 
@@ -70,8 +76,6 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
-
-typedef AbSearchResultsRef = FutureProviderRef<List<AnimebytesSearchResult>>;
 
 /// See also [abSearchResults].
 @ProviderFor(abSearchResults)
@@ -124,11 +128,11 @@ class AbSearchResultsProvider
     extends FutureProvider<List<AnimebytesSearchResult>> {
   /// See also [abSearchResults].
   AbSearchResultsProvider(
-    this.query,
-    this.filters,
-  ) : super.internal(
+    String query,
+    Set<String> filters,
+  ) : this._internal(
           (ref) => abSearchResults(
-            ref,
+            ref as AbSearchResultsRef,
             query,
             filters,
           ),
@@ -141,10 +145,48 @@ class AbSearchResultsProvider
           dependencies: AbSearchResultsFamily._dependencies,
           allTransitiveDependencies:
               AbSearchResultsFamily._allTransitiveDependencies,
+          query: query,
+          filters: filters,
         );
+
+  AbSearchResultsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.query,
+    required this.filters,
+  }) : super.internal();
 
   final String query;
   final Set<String> filters;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<AnimebytesSearchResult>> Function(AbSearchResultsRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: AbSearchResultsProvider._internal(
+        (ref) => create(ref as AbSearchResultsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        query: query,
+        filters: filters,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<List<AnimebytesSearchResult>> createElement() {
+    return _AbSearchResultsProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -163,8 +205,28 @@ class AbSearchResultsProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin AbSearchResultsRef on FutureProviderRef<List<AnimebytesSearchResult>> {
+  /// The parameter `query` of this provider.
+  String get query;
+
+  /// The parameter `filters` of this provider.
+  Set<String> get filters;
+}
+
+class _AbSearchResultsProviderElement
+    extends FutureProviderElement<List<AnimebytesSearchResult>>
+    with AbSearchResultsRef {
+  _AbSearchResultsProviderElement(super.provider);
+
+  @override
+  String get query => (origin as AbSearchResultsProvider).query;
+  @override
+  Set<String> get filters => (origin as AbSearchResultsProvider).filters;
+}
+
 String _$abGroupHash() => r'ed0f2c63a8f802829b7ed2241a2be469f76d0979';
-typedef AbGroupRef = AutoDisposeFutureProviderRef<AnimebytesSearchResult>;
 
 /// See also [abGroup].
 @ProviderFor(abGroup)
@@ -213,10 +275,10 @@ class AbGroupProvider
     extends AutoDisposeFutureProvider<AnimebytesSearchResult> {
   /// See also [abGroup].
   AbGroupProvider(
-    this.groupId,
-  ) : super.internal(
+    int groupId,
+  ) : this._internal(
           (ref) => abGroup(
-            ref,
+            ref as AbGroupRef,
             groupId,
           ),
           from: abGroupProvider,
@@ -227,9 +289,43 @@ class AbGroupProvider
                   : _$abGroupHash,
           dependencies: AbGroupFamily._dependencies,
           allTransitiveDependencies: AbGroupFamily._allTransitiveDependencies,
+          groupId: groupId,
         );
 
+  AbGroupProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.groupId,
+  }) : super.internal();
+
   final int groupId;
+
+  @override
+  Override overrideWith(
+    FutureOr<AnimebytesSearchResult> Function(AbGroupRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: AbGroupProvider._internal(
+        (ref) => create(ref as AbGroupRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        groupId: groupId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<AnimebytesSearchResult> createElement() {
+    return _AbGroupProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -244,5 +340,21 @@ class AbGroupProvider
     return _SystemHash.finish(hash);
   }
 }
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin AbGroupRef on AutoDisposeFutureProviderRef<AnimebytesSearchResult> {
+  /// The parameter `groupId` of this provider.
+  int get groupId;
+}
+
+class _AbGroupProviderElement
+    extends AutoDisposeFutureProviderElement<AnimebytesSearchResult>
+    with AbGroupRef {
+  _AbGroupProviderElement(super.provider);
+
+  @override
+  int get groupId => (origin as AbGroupProvider).groupId;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

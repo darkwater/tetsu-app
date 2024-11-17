@@ -12,7 +12,7 @@ part of 'torrent.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Torrent _$TorrentFromJson(Map<String, dynamic> json) {
   return _Torrent.fromJson(json);
@@ -32,8 +32,12 @@ mixin _$Torrent {
   @JsonKey(fromJson: _dateFromJson)
   DateTime get dateCreated => throw _privateConstructorUsedError;
 
+  /// Serializes this Torrent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Torrent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TorrentCopyWith<Torrent> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,6 +69,8 @@ class _$TorrentCopyWithImpl<$Res, $Val extends Torrent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Torrent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,10 +131,10 @@ class _$TorrentCopyWithImpl<$Res, $Val extends Torrent>
 }
 
 /// @nodoc
-abstract class _$$_TorrentCopyWith<$Res> implements $TorrentCopyWith<$Res> {
-  factory _$$_TorrentCopyWith(
-          _$_Torrent value, $Res Function(_$_Torrent) then) =
-      __$$_TorrentCopyWithImpl<$Res>;
+abstract class _$$TorrentImplCopyWith<$Res> implements $TorrentCopyWith<$Res> {
+  factory _$$TorrentImplCopyWith(
+          _$TorrentImpl value, $Res Function(_$TorrentImpl) then) =
+      __$$TorrentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -145,12 +151,15 @@ abstract class _$$_TorrentCopyWith<$Res> implements $TorrentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TorrentCopyWithImpl<$Res>
-    extends _$TorrentCopyWithImpl<$Res, _$_Torrent>
-    implements _$$_TorrentCopyWith<$Res> {
-  __$$_TorrentCopyWithImpl(_$_Torrent _value, $Res Function(_$_Torrent) _then)
+class __$$TorrentImplCopyWithImpl<$Res>
+    extends _$TorrentCopyWithImpl<$Res, _$TorrentImpl>
+    implements _$$TorrentImplCopyWith<$Res> {
+  __$$TorrentImplCopyWithImpl(
+      _$TorrentImpl _value, $Res Function(_$TorrentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Torrent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,7 +174,7 @@ class __$$_TorrentCopyWithImpl<$Res>
     Object? comment = freezed,
     Object? dateCreated = null,
   }) {
-    return _then(_$_Torrent(
+    return _then(_$TorrentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -212,8 +221,8 @@ class __$$_TorrentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Torrent extends _Torrent {
-  const _$_Torrent(
+class _$TorrentImpl extends _Torrent {
+  const _$TorrentImpl(
       {required this.id,
       required this.name,
       required this.status,
@@ -226,8 +235,8 @@ class _$_Torrent extends _Torrent {
       @JsonKey(fromJson: _dateFromJson) required this.dateCreated})
       : super._();
 
-  factory _$_Torrent.fromJson(Map<String, dynamic> json) =>
-      _$$_TorrentFromJson(json);
+  factory _$TorrentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TorrentImplFromJson(json);
 
   @override
   final int id;
@@ -257,10 +266,10 @@ class _$_Torrent extends _Torrent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Torrent &&
+            other is _$TorrentImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.status, status) || other.status == status) &&
@@ -279,20 +288,22 @@ class _$_Torrent extends _Torrent {
                 other.dateCreated == dateCreated));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, status, downloadDir,
       totalSize, percentDone, rateDownload, rateUpload, comment, dateCreated);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Torrent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TorrentCopyWith<_$_Torrent> get copyWith =>
-      __$$_TorrentCopyWithImpl<_$_Torrent>(this, _$identity);
+  _$$TorrentImplCopyWith<_$TorrentImpl> get copyWith =>
+      __$$TorrentImplCopyWithImpl<_$TorrentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TorrentToJson(
+    return _$$TorrentImplToJson(
       this,
     );
   }
@@ -310,10 +321,10 @@ abstract class _Torrent extends Torrent {
       required final double rateUpload,
       required final String? comment,
       @JsonKey(fromJson: _dateFromJson)
-      required final DateTime dateCreated}) = _$_Torrent;
+      required final DateTime dateCreated}) = _$TorrentImpl;
   const _Torrent._() : super._();
 
-  factory _Torrent.fromJson(Map<String, dynamic> json) = _$_Torrent.fromJson;
+  factory _Torrent.fromJson(Map<String, dynamic> json) = _$TorrentImpl.fromJson;
 
   @override
   int get id;
@@ -336,8 +347,11 @@ abstract class _Torrent extends Torrent {
   @override
   @JsonKey(fromJson: _dateFromJson)
   DateTime get dateCreated;
+
+  /// Create a copy of Torrent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TorrentCopyWith<_$_Torrent> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TorrentImplCopyWith<_$TorrentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

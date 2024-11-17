@@ -37,6 +37,10 @@ static void my_application_activate(GApplication* application) {
     }
   }
 #endif
+  const gchar *hyprland = g_getenv("HYPRLAND_INSTANCE_SIGNATURE");
+  if (hyprland != NULL) {
+    use_header_bar = FALSE;
+  }
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));

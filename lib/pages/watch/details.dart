@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tetsu_app/apis/tetsu/mpv/message.dart';
-import 'package:tetsu_app/providers/animebytes.dart';
 import 'package:tetsu_app/providers/mpv.dart';
 import 'package:tetsu_app/providers/tetsu.dart';
 import 'package:tetsu_app/utils.dart';
@@ -19,7 +17,7 @@ class WatchDetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final aProvider = ref.watch(tetsuAnimeProvider(aid));
 
-    if (aProvider.isLoading) {
+    if (!aProvider.hasValue && aProvider.isLoading) {
       return Scaffold(
         appBar: AppBar(
           title: const Text("Details"),
@@ -195,7 +193,7 @@ class WatchDetailsPage extends ConsumerWidget {
                         child: Text(
                           episode.epno.replaceFirst(RegExp(r"^0"), ""),
                           textAlign: TextAlign.end,
-                          textScaleFactor: 1.5,
+                          textScaler: TextScaler.linear(1.5),
                         ),
                       ),
                       title: Text(prefTitle(
@@ -211,6 +209,19 @@ class WatchDetailsPage extends ConsumerWidget {
                         await Future.delayed(Duration(seconds: 1));
                         mpv.send(MpvRequest(command: ["loadfile", file.path]));
                       },
+                      selected: anime.watchProgress?.lastEid == episode.eid,
+                      trailing: PopupMenuButton(
+                        icon: Icon(Icons.more_vert),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            child: Text("Mark as watched"),
+                            onTap: () async {
+                              await tetsu.setWatchProgress(file.path, 1.0);
+                              ref.invalidate(tetsuAllAnimeProvider);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                 ],
               ),

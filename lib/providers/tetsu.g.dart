@@ -20,6 +20,8 @@ final tetsuAllAnimeProvider = FutureProvider<List<TetsuAnime>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef TetsuAllAnimeRef = FutureProviderRef<List<TetsuAnime>>;
 String _$tetsuAnimeHash() => r'5434ef688459e6602b100e5a303a072b8a03d224';
 
@@ -43,8 +45,6 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
-
-typedef TetsuAnimeRef = FutureProviderRef<TetsuAnime>;
 
 /// See also [tetsuAnime].
 @ProviderFor(tetsuAnime)
@@ -92,10 +92,10 @@ class TetsuAnimeFamily extends Family<AsyncValue<TetsuAnime>> {
 class TetsuAnimeProvider extends FutureProvider<TetsuAnime> {
   /// See also [tetsuAnime].
   TetsuAnimeProvider(
-    this.aid,
-  ) : super.internal(
+    int aid,
+  ) : this._internal(
           (ref) => tetsuAnime(
-            ref,
+            ref as TetsuAnimeRef,
             aid,
           ),
           from: tetsuAnimeProvider,
@@ -107,9 +107,43 @@ class TetsuAnimeProvider extends FutureProvider<TetsuAnime> {
           dependencies: TetsuAnimeFamily._dependencies,
           allTransitiveDependencies:
               TetsuAnimeFamily._allTransitiveDependencies,
+          aid: aid,
         );
 
+  TetsuAnimeProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.aid,
+  }) : super.internal();
+
   final int aid;
+
+  @override
+  Override overrideWith(
+    FutureOr<TetsuAnime> Function(TetsuAnimeRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TetsuAnimeProvider._internal(
+        (ref) => create(ref as TetsuAnimeRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        aid: aid,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<TetsuAnime> createElement() {
+    return _TetsuAnimeProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -125,8 +159,22 @@ class TetsuAnimeProvider extends FutureProvider<TetsuAnime> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin TetsuAnimeRef on FutureProviderRef<TetsuAnime> {
+  /// The parameter `aid` of this provider.
+  int get aid;
+}
+
+class _TetsuAnimeProviderElement extends FutureProviderElement<TetsuAnime>
+    with TetsuAnimeRef {
+  _TetsuAnimeProviderElement(super.provider);
+
+  @override
+  int get aid => (origin as TetsuAnimeProvider).aid;
+}
+
 String _$tetsuEpisodesHash() => r'68969e8214c3d1ea0fa74d98f667af3f91c707aa';
-typedef TetsuEpisodesRef = FutureProviderRef<List<TetsuEpisode>>;
 
 /// See also [tetsuEpisodes].
 @ProviderFor(tetsuEpisodes)
@@ -174,10 +222,10 @@ class TetsuEpisodesFamily extends Family<AsyncValue<List<TetsuEpisode>>> {
 class TetsuEpisodesProvider extends FutureProvider<List<TetsuEpisode>> {
   /// See also [tetsuEpisodes].
   TetsuEpisodesProvider(
-    this.aid,
-  ) : super.internal(
+    int aid,
+  ) : this._internal(
           (ref) => tetsuEpisodes(
-            ref,
+            ref as TetsuEpisodesRef,
             aid,
           ),
           from: tetsuEpisodesProvider,
@@ -189,9 +237,43 @@ class TetsuEpisodesProvider extends FutureProvider<List<TetsuEpisode>> {
           dependencies: TetsuEpisodesFamily._dependencies,
           allTransitiveDependencies:
               TetsuEpisodesFamily._allTransitiveDependencies,
+          aid: aid,
         );
 
+  TetsuEpisodesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.aid,
+  }) : super.internal();
+
   final int aid;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<TetsuEpisode>> Function(TetsuEpisodesRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TetsuEpisodesProvider._internal(
+        (ref) => create(ref as TetsuEpisodesRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        aid: aid,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<List<TetsuEpisode>> createElement() {
+    return _TetsuEpisodesProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -207,8 +289,22 @@ class TetsuEpisodesProvider extends FutureProvider<List<TetsuEpisode>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin TetsuEpisodesRef on FutureProviderRef<List<TetsuEpisode>> {
+  /// The parameter `aid` of this provider.
+  int get aid;
+}
+
+class _TetsuEpisodesProviderElement
+    extends FutureProviderElement<List<TetsuEpisode>> with TetsuEpisodesRef {
+  _TetsuEpisodesProviderElement(super.provider);
+
+  @override
+  int get aid => (origin as TetsuEpisodesProvider).aid;
+}
+
 String _$tetsuFilesHash() => r'78d4c3b9fe6924d1e8ea735b507a2d3fe5d75ce6';
-typedef TetsuFilesRef = FutureProviderRef<List<TetsuFile>>;
 
 /// See also [tetsuFiles].
 @ProviderFor(tetsuFiles)
@@ -256,10 +352,10 @@ class TetsuFilesFamily extends Family<AsyncValue<List<TetsuFile>>> {
 class TetsuFilesProvider extends FutureProvider<List<TetsuFile>> {
   /// See also [tetsuFiles].
   TetsuFilesProvider(
-    this.aid,
-  ) : super.internal(
+    int aid,
+  ) : this._internal(
           (ref) => tetsuFiles(
-            ref,
+            ref as TetsuFilesRef,
             aid,
           ),
           from: tetsuFilesProvider,
@@ -271,9 +367,43 @@ class TetsuFilesProvider extends FutureProvider<List<TetsuFile>> {
           dependencies: TetsuFilesFamily._dependencies,
           allTransitiveDependencies:
               TetsuFilesFamily._allTransitiveDependencies,
+          aid: aid,
         );
 
+  TetsuFilesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.aid,
+  }) : super.internal();
+
   final int aid;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<TetsuFile>> Function(TetsuFilesRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TetsuFilesProvider._internal(
+        (ref) => create(ref as TetsuFilesRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        aid: aid,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<List<TetsuFile>> createElement() {
+    return _TetsuFilesProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -287,6 +417,21 @@ class TetsuFilesProvider extends FutureProvider<List<TetsuFile>> {
 
     return _SystemHash.finish(hash);
   }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin TetsuFilesRef on FutureProviderRef<List<TetsuFile>> {
+  /// The parameter `aid` of this provider.
+  int get aid;
+}
+
+class _TetsuFilesProviderElement extends FutureProviderElement<List<TetsuFile>>
+    with TetsuFilesRef {
+  _TetsuFilesProviderElement(super.provider);
+
+  @override
+  int get aid => (origin as TetsuFilesProvider).aid;
 }
 
 String _$tetsuSettingsHash() => r'bc689166a5e56d1ae94b7b340d71c02169ad949d';
@@ -303,9 +448,10 @@ final tetsuSettingsProvider = FutureProvider<Map<String, dynamic>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef TetsuSettingsRef = FutureProviderRef<Map<String, dynamic>>;
 String _$tetsuSettingValueHash() => r'63107f0d01f9a008c0ce1ad8f5e0a35f24f6ef7e';
-typedef TetsuSettingValueRef = FutureProviderRef<dynamic>;
 
 /// See also [tetsuSettingValue].
 @ProviderFor(tetsuSettingValue)
@@ -353,10 +499,10 @@ class TetsuSettingValueFamily extends Family<AsyncValue<dynamic>> {
 class TetsuSettingValueProvider extends FutureProvider<dynamic> {
   /// See also [tetsuSettingValue].
   TetsuSettingValueProvider(
-    this.key,
-  ) : super.internal(
+    String key,
+  ) : this._internal(
           (ref) => tetsuSettingValue(
-            ref,
+            ref as TetsuSettingValueRef,
             key,
           ),
           from: tetsuSettingValueProvider,
@@ -368,9 +514,43 @@ class TetsuSettingValueProvider extends FutureProvider<dynamic> {
           dependencies: TetsuSettingValueFamily._dependencies,
           allTransitiveDependencies:
               TetsuSettingValueFamily._allTransitiveDependencies,
+          key: key,
         );
 
+  TetsuSettingValueProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.key,
+  }) : super.internal();
+
   final String key;
+
+  @override
+  Override overrideWith(
+    FutureOr<dynamic> Function(TetsuSettingValueRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: TetsuSettingValueProvider._internal(
+        (ref) => create(ref as TetsuSettingValueRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        key: key,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<dynamic> createElement() {
+    return _TetsuSettingValueProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -385,5 +565,20 @@ class TetsuSettingValueProvider extends FutureProvider<dynamic> {
     return _SystemHash.finish(hash);
   }
 }
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin TetsuSettingValueRef on FutureProviderRef<dynamic> {
+  /// The parameter `key` of this provider.
+  String get key;
+}
+
+class _TetsuSettingValueProviderElement extends FutureProviderElement<dynamic>
+    with TetsuSettingValueRef {
+  _TetsuSettingValueProviderElement(super.provider);
+
+  @override
+  String get key => (origin as TetsuSettingValueProvider).key;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

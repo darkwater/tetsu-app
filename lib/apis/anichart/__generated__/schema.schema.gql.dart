@@ -5,7 +5,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:gql_code_builder/src/serializers/default_scalar_serializer.dart'
+import 'package:gql_code_builder_serializers/gql_code_builder_serializers.dart'
     as _i2;
 import 'package:tetsu_app/apis/anichart/__generated__/serializers.gql.dart'
     as _i1;
@@ -22,7 +22,9 @@ class GActivitySort extends EnumClass {
   static const GActivitySort PINNED = _$gActivitySortPINNED;
 
   static Serializer<GActivitySort> get serializer => _$gActivitySortSerializer;
+
   static BuiltSet<GActivitySort> get values => _$gActivitySortValues;
+
   static GActivitySort valueOf(String name) => _$gActivitySortValueOf(name);
 }
 
@@ -40,7 +42,9 @@ class GActivityType extends EnumClass {
   static const GActivityType MEDIA_LIST = _$gActivityTypeMEDIA_LIST;
 
   static Serializer<GActivityType> get serializer => _$gActivityTypeSerializer;
+
   static BuiltSet<GActivityType> get values => _$gActivityTypeValues;
+
   static GActivityType valueOf(String name) => _$gActivityTypeValueOf(name);
 }
 
@@ -49,7 +53,7 @@ abstract class GAiringScheduleInput
   GAiringScheduleInput._();
 
   factory GAiringScheduleInput(
-          [Function(GAiringScheduleInputBuilder b) updates]) =
+          [void Function(GAiringScheduleInputBuilder b) updates]) =
       _$GAiringScheduleInput;
 
   int? get airingAt;
@@ -57,10 +61,12 @@ abstract class GAiringScheduleInput
   int? get timeUntilAiring;
   static Serializer<GAiringScheduleInput> get serializer =>
       _$gAiringScheduleInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GAiringScheduleInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GAiringScheduleInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GAiringScheduleInput.serializer,
@@ -88,7 +94,9 @@ class GAiringSort extends EnumClass {
   static const GAiringSort EPISODE_DESC = _$gAiringSortEPISODE_DESC;
 
   static Serializer<GAiringSort> get serializer => _$gAiringSortSerializer;
+
   static BuiltSet<GAiringSort> get values => _$gAiringSortValues;
+
   static GAiringSort valueOf(String name) => _$gAiringSortValueOf(name);
 }
 
@@ -97,17 +105,19 @@ abstract class GAniChartHighlightInput
   GAniChartHighlightInput._();
 
   factory GAniChartHighlightInput(
-          [Function(GAniChartHighlightInputBuilder b) updates]) =
+          [void Function(GAniChartHighlightInputBuilder b) updates]) =
       _$GAniChartHighlightInput;
 
   int? get mediaId;
   String? get highlight;
   static Serializer<GAniChartHighlightInput> get serializer =>
       _$gAniChartHighlightInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GAniChartHighlightInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GAniChartHighlightInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GAniChartHighlightInput.serializer,
@@ -120,7 +130,8 @@ abstract class GCharacterNameInput
   GCharacterNameInput._();
 
   factory GCharacterNameInput(
-      [Function(GCharacterNameInputBuilder b) updates]) = _$GCharacterNameInput;
+          [void Function(GCharacterNameInputBuilder b) updates]) =
+      _$GCharacterNameInput;
 
   String? get first;
   String? get middle;
@@ -130,10 +141,12 @@ abstract class GCharacterNameInput
   BuiltList<String?>? get alternativeSpoiler;
   static Serializer<GCharacterNameInput> get serializer =>
       _$gCharacterNameInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GCharacterNameInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GCharacterNameInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GCharacterNameInput.serializer,
@@ -152,7 +165,9 @@ class GCharacterRole extends EnumClass {
 
   static Serializer<GCharacterRole> get serializer =>
       _$gCharacterRoleSerializer;
+
   static BuiltSet<GCharacterRole> get values => _$gCharacterRoleValues;
+
   static GCharacterRole valueOf(String name) => _$gCharacterRoleValueOf(name);
 }
 
@@ -177,7 +192,9 @@ class GCharacterSort extends EnumClass {
 
   static Serializer<GCharacterSort> get serializer =>
       _$gCharacterSortSerializer;
+
   static BuiltSet<GCharacterSort> get values => _$gCharacterSortValues;
+
   static GCharacterSort valueOf(String name) => _$gCharacterSortValueOf(name);
 }
 
@@ -206,8 +223,10 @@ class GExternalLinkMediaType extends EnumClass {
 
   static Serializer<GExternalLinkMediaType> get serializer =>
       _$gExternalLinkMediaTypeSerializer;
+
   static BuiltSet<GExternalLinkMediaType> get values =>
       _$gExternalLinkMediaTypeValues;
+
   static GExternalLinkMediaType valueOf(String name) =>
       _$gExternalLinkMediaTypeValueOf(name);
 }
@@ -223,7 +242,9 @@ class GExternalLinkType extends EnumClass {
 
   static Serializer<GExternalLinkType> get serializer =>
       _$gExternalLinkTypeSerializer;
+
   static BuiltSet<GExternalLinkType> get values => _$gExternalLinkTypeValues;
+
   static GExternalLinkType valueOf(String name) =>
       _$gExternalLinkTypeValueOf(name);
 }
@@ -232,7 +253,7 @@ abstract class GFuzzyDateInput
     implements Built<GFuzzyDateInput, GFuzzyDateInputBuilder> {
   GFuzzyDateInput._();
 
-  factory GFuzzyDateInput([Function(GFuzzyDateInputBuilder b) updates]) =
+  factory GFuzzyDateInput([void Function(GFuzzyDateInputBuilder b) updates]) =
       _$GFuzzyDateInput;
 
   int? get year;
@@ -240,10 +261,12 @@ abstract class GFuzzyDateInput
   int? get day;
   static Serializer<GFuzzyDateInput> get serializer =>
       _$gFuzzyDateInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GFuzzyDateInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GFuzzyDateInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GFuzzyDateInput.serializer,
@@ -289,7 +312,9 @@ class GLikeableType extends EnumClass {
   static const GLikeableType ACTIVITY_REPLY = _$gLikeableTypeACTIVITY_REPLY;
 
   static Serializer<GLikeableType> get serializer => _$gLikeableTypeSerializer;
+
   static BuiltSet<GLikeableType> get values => _$gLikeableTypeValues;
+
   static GLikeableType valueOf(String name) => _$gLikeableTypeValueOf(name);
 }
 
@@ -299,17 +324,19 @@ abstract class GListActivityOptionInput
   GListActivityOptionInput._();
 
   factory GListActivityOptionInput(
-          [Function(GListActivityOptionInputBuilder b) updates]) =
+          [void Function(GListActivityOptionInputBuilder b) updates]) =
       _$GListActivityOptionInput;
 
   bool? get disabled;
   GMediaListStatus? get type;
   static Serializer<GListActivityOptionInput> get serializer =>
       _$gListActivityOptionInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GListActivityOptionInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GListActivityOptionInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GListActivityOptionInput.serializer,
@@ -322,7 +349,7 @@ abstract class GMediaExternalLinkInput
   GMediaExternalLinkInput._();
 
   factory GMediaExternalLinkInput(
-          [Function(GMediaExternalLinkInputBuilder b) updates]) =
+          [void Function(GMediaExternalLinkInputBuilder b) updates]) =
       _$GMediaExternalLinkInput;
 
   int get id;
@@ -330,10 +357,12 @@ abstract class GMediaExternalLinkInput
   String get site;
   static Serializer<GMediaExternalLinkInput> get serializer =>
       _$gMediaExternalLinkInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GMediaExternalLinkInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GMediaExternalLinkInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GMediaExternalLinkInput.serializer,
@@ -365,7 +394,9 @@ class GMediaFormat extends EnumClass {
   static const GMediaFormat ONE_SHOT = _$gMediaFormatONE_SHOT;
 
   static Serializer<GMediaFormat> get serializer => _$gMediaFormatSerializer;
+
   static BuiltSet<GMediaFormat> get values => _$gMediaFormatValues;
+
   static GMediaFormat valueOf(String name) => _$gMediaFormatValueOf(name);
 }
 
@@ -374,7 +405,7 @@ abstract class GMediaListOptionsInput
   GMediaListOptionsInput._();
 
   factory GMediaListOptionsInput(
-          [Function(GMediaListOptionsInputBuilder b) updates]) =
+          [void Function(GMediaListOptionsInputBuilder b) updates]) =
       _$GMediaListOptionsInput;
 
   BuiltList<String?>? get sectionOrder;
@@ -385,10 +416,12 @@ abstract class GMediaListOptionsInput
   String? get theme;
   static Serializer<GMediaListOptionsInput> get serializer =>
       _$gMediaListOptionsInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GMediaListOptionsInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GMediaListOptionsInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GMediaListOptionsInput.serializer,
@@ -473,7 +506,9 @@ class GMediaListSort extends EnumClass {
 
   static Serializer<GMediaListSort> get serializer =>
       _$gMediaListSortSerializer;
+
   static BuiltSet<GMediaListSort> get values => _$gMediaListSortValues;
+
   static GMediaListSort valueOf(String name) => _$gMediaListSortValueOf(name);
 }
 
@@ -494,7 +529,9 @@ class GMediaListStatus extends EnumClass {
 
   static Serializer<GMediaListStatus> get serializer =>
       _$gMediaListStatusSerializer;
+
   static BuiltSet<GMediaListStatus> get values => _$gMediaListStatusValues;
+
   static GMediaListStatus valueOf(String name) =>
       _$gMediaListStatusValueOf(name);
 }
@@ -508,7 +545,9 @@ class GMediaRankType extends EnumClass {
 
   static Serializer<GMediaRankType> get serializer =>
       _$gMediaRankTypeSerializer;
+
   static BuiltSet<GMediaRankType> get values => _$gMediaRankTypeValues;
+
   static GMediaRankType valueOf(String name) => _$gMediaRankTypeValueOf(name);
 }
 
@@ -543,7 +582,9 @@ class GMediaRelation extends EnumClass {
 
   static Serializer<GMediaRelation> get serializer =>
       _$gMediaRelationSerializer;
+
   static BuiltSet<GMediaRelation> get values => _$gMediaRelationValues;
+
   static GMediaRelation valueOf(String name) => _$gMediaRelationValueOf(name);
 }
 
@@ -559,7 +600,9 @@ class GMediaSeason extends EnumClass {
   static const GMediaSeason FALL = _$gMediaSeasonFALL;
 
   static Serializer<GMediaSeason> get serializer => _$gMediaSeasonSerializer;
+
   static BuiltSet<GMediaSeason> get values => _$gMediaSeasonValues;
+
   static GMediaSeason valueOf(String name) => _$gMediaSeasonValueOf(name);
 }
 
@@ -641,7 +684,9 @@ class GMediaSort extends EnumClass {
   static const GMediaSort FAVOURITES_DESC = _$gMediaSortFAVOURITES_DESC;
 
   static Serializer<GMediaSort> get serializer => _$gMediaSortSerializer;
+
   static BuiltSet<GMediaSort> get values => _$gMediaSortValues;
+
   static GMediaSort valueOf(String name) => _$gMediaSortValueOf(name);
 }
 
@@ -680,7 +725,9 @@ class GMediaSource extends EnumClass {
   static const GMediaSource PICTURE_BOOK = _$gMediaSourcePICTURE_BOOK;
 
   static Serializer<GMediaSource> get serializer => _$gMediaSourceSerializer;
+
   static BuiltSet<GMediaSource> get values => _$gMediaSourceValues;
+
   static GMediaSource valueOf(String name) => _$gMediaSourceValueOf(name);
 }
 
@@ -698,7 +745,9 @@ class GMediaStatus extends EnumClass {
   static const GMediaStatus HIATUS = _$gMediaStatusHIATUS;
 
   static Serializer<GMediaStatus> get serializer => _$gMediaStatusSerializer;
+
   static BuiltSet<GMediaStatus> get values => _$gMediaStatusValues;
+
   static GMediaStatus valueOf(String name) => _$gMediaStatusValueOf(name);
 }
 
@@ -706,7 +755,7 @@ abstract class GMediaTitleInput
     implements Built<GMediaTitleInput, GMediaTitleInputBuilder> {
   GMediaTitleInput._();
 
-  factory GMediaTitleInput([Function(GMediaTitleInputBuilder b) updates]) =
+  factory GMediaTitleInput([void Function(GMediaTitleInputBuilder b) updates]) =
       _$GMediaTitleInput;
 
   String? get romaji;
@@ -714,10 +763,12 @@ abstract class GMediaTitleInput
   String? get native;
   static Serializer<GMediaTitleInput> get serializer =>
       _$gMediaTitleInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GMediaTitleInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GMediaTitleInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GMediaTitleInput.serializer,
@@ -759,7 +810,9 @@ class GMediaTrendSort extends EnumClass {
 
   static Serializer<GMediaTrendSort> get serializer =>
       _$gMediaTrendSortSerializer;
+
   static BuiltSet<GMediaTrendSort> get values => _$gMediaTrendSortValues;
+
   static GMediaTrendSort valueOf(String name) => _$gMediaTrendSortValueOf(name);
 }
 
@@ -771,7 +824,9 @@ class GMediaType extends EnumClass {
   static const GMediaType MANGA = _$gMediaTypeMANGA;
 
   static Serializer<GMediaType> get serializer => _$gMediaTypeSerializer;
+
   static BuiltSet<GMediaType> get values => _$gMediaTypeValues;
+
   static GMediaType valueOf(String name) => _$gMediaTypeValueOf(name);
 }
 
@@ -796,7 +851,9 @@ class GModActionType extends EnumClass {
 
   static Serializer<GModActionType> get serializer =>
       _$gModActionTypeSerializer;
+
   static BuiltSet<GModActionType> get values => _$gModActionTypeValues;
+
   static GModActionType valueOf(String name) => _$gModActionTypeValueOf(name);
 }
 
@@ -830,7 +887,9 @@ class GModRole extends EnumClass {
   static const GModRole RETIRED = _$gModRoleRETIRED;
 
   static Serializer<GModRole> get serializer => _$gModRoleSerializer;
+
   static BuiltSet<GModRole> get values => _$gModRoleValues;
+
   static GModRole valueOf(String name) => _$gModRoleValueOf(name);
 }
 
@@ -840,17 +899,19 @@ abstract class GNotificationOptionInput
   GNotificationOptionInput._();
 
   factory GNotificationOptionInput(
-          [Function(GNotificationOptionInputBuilder b) updates]) =
+          [void Function(GNotificationOptionInputBuilder b) updates]) =
       _$GNotificationOptionInput;
 
   GNotificationType? get type;
   bool? get enabled;
   static Serializer<GNotificationOptionInput> get serializer =>
       _$gNotificationOptionInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GNotificationOptionInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GNotificationOptionInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GNotificationOptionInput.serializer,
@@ -910,7 +971,9 @@ class GNotificationType extends EnumClass {
 
   static Serializer<GNotificationType> get serializer =>
       _$gNotificationTypeSerializer;
+
   static BuiltSet<GNotificationType> get values => _$gNotificationTypeValues;
+
   static GNotificationType valueOf(String name) =>
       _$gNotificationTypeValueOf(name);
 }
@@ -928,8 +991,10 @@ class GRecommendationRating extends EnumClass {
 
   static Serializer<GRecommendationRating> get serializer =>
       _$gRecommendationRatingSerializer;
+
   static BuiltSet<GRecommendationRating> get values =>
       _$gRecommendationRatingValues;
+
   static GRecommendationRating valueOf(String name) =>
       _$gRecommendationRatingValueOf(name);
 }
@@ -948,8 +1013,10 @@ class GRecommendationSort extends EnumClass {
 
   static Serializer<GRecommendationSort> get serializer =>
       _$gRecommendationSortSerializer;
+
   static BuiltSet<GRecommendationSort> get values =>
       _$gRecommendationSortValues;
+
   static GRecommendationSort valueOf(String name) =>
       _$gRecommendationSortValueOf(name);
 }
@@ -964,7 +1031,9 @@ class GReviewRating extends EnumClass {
   static const GReviewRating DOWN_VOTE = _$gReviewRatingDOWN_VOTE;
 
   static Serializer<GReviewRating> get serializer => _$gReviewRatingSerializer;
+
   static BuiltSet<GReviewRating> get values => _$gReviewRatingValues;
+
   static GReviewRating valueOf(String name) => _$gReviewRatingValueOf(name);
 }
 
@@ -992,7 +1061,9 @@ class GReviewSort extends EnumClass {
   static const GReviewSort UPDATED_AT_DESC = _$gReviewSortUPDATED_AT_DESC;
 
   static Serializer<GReviewSort> get serializer => _$gReviewSortSerializer;
+
   static BuiltSet<GReviewSort> get values => _$gReviewSortValues;
+
   static GReviewSort valueOf(String name) => _$gReviewSortValueOf(name);
 }
 
@@ -1005,8 +1076,10 @@ class GRevisionHistoryAction extends EnumClass {
 
   static Serializer<GRevisionHistoryAction> get serializer =>
       _$gRevisionHistoryActionSerializer;
+
   static BuiltSet<GRevisionHistoryAction> get values =>
       _$gRevisionHistoryActionValues;
+
   static GRevisionHistoryAction valueOf(String name) =>
       _$gRevisionHistoryActionValueOf(name);
 }
@@ -1025,7 +1098,9 @@ class GScoreFormat extends EnumClass {
   static const GScoreFormat POINT_3 = _$gScoreFormatPOINT_3;
 
   static Serializer<GScoreFormat> get serializer => _$gScoreFormatSerializer;
+
   static BuiltSet<GScoreFormat> get values => _$gScoreFormatValues;
+
   static GScoreFormat valueOf(String name) => _$gScoreFormatValueOf(name);
 }
 
@@ -1046,7 +1121,9 @@ class GSiteTrendSort extends EnumClass {
 
   static Serializer<GSiteTrendSort> get serializer =>
       _$gSiteTrendSortSerializer;
+
   static BuiltSet<GSiteTrendSort> get values => _$gSiteTrendSortValues;
+
   static GSiteTrendSort valueOf(String name) => _$gSiteTrendSortValueOf(name);
 }
 
@@ -1075,7 +1152,9 @@ class GStaffLanguage extends EnumClass {
 
   static Serializer<GStaffLanguage> get serializer =>
       _$gStaffLanguageSerializer;
+
   static BuiltSet<GStaffLanguage> get values => _$gStaffLanguageValues;
+
   static GStaffLanguage valueOf(String name) => _$gStaffLanguageValueOf(name);
 }
 
@@ -1083,7 +1162,7 @@ abstract class GStaffNameInput
     implements Built<GStaffNameInput, GStaffNameInputBuilder> {
   GStaffNameInput._();
 
-  factory GStaffNameInput([Function(GStaffNameInputBuilder b) updates]) =
+  factory GStaffNameInput([void Function(GStaffNameInputBuilder b) updates]) =
       _$GStaffNameInput;
 
   String? get first;
@@ -1093,10 +1172,12 @@ abstract class GStaffNameInput
   BuiltList<String?>? get alternative;
   static Serializer<GStaffNameInput> get serializer =>
       _$gStaffNameInputSerializer;
+
   Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
         GStaffNameInput.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GStaffNameInput? fromJson(Map<String, dynamic> json) =>
       _i1.serializers.deserializeWith(
         GStaffNameInput.serializer,
@@ -1128,7 +1209,9 @@ class GStaffSort extends EnumClass {
   static const GStaffSort RELEVANCE = _$gStaffSortRELEVANCE;
 
   static Serializer<GStaffSort> get serializer => _$gStaffSortSerializer;
+
   static BuiltSet<GStaffSort> get values => _$gStaffSortValues;
+
   static GStaffSort valueOf(String name) => _$gStaffSortValueOf(name);
 }
 
@@ -1150,7 +1233,9 @@ class GStudioSort extends EnumClass {
   static const GStudioSort FAVOURITES_DESC = _$gStudioSortFAVOURITES_DESC;
 
   static Serializer<GStudioSort> get serializer => _$gStudioSortSerializer;
+
   static BuiltSet<GStudioSort> get values => _$gStudioSortValues;
+
   static GStudioSort valueOf(String name) => _$gStudioSortValueOf(name);
 }
 
@@ -1163,7 +1248,9 @@ class GSubmissionSort extends EnumClass {
 
   static Serializer<GSubmissionSort> get serializer =>
       _$gSubmissionSortSerializer;
+
   static BuiltSet<GSubmissionSort> get values => _$gSubmissionSortValues;
+
   static GSubmissionSort valueOf(String name) => _$gSubmissionSortValueOf(name);
 }
 
@@ -1181,7 +1268,9 @@ class GSubmissionStatus extends EnumClass {
 
   static Serializer<GSubmissionStatus> get serializer =>
       _$gSubmissionStatusSerializer;
+
   static BuiltSet<GSubmissionStatus> get values => _$gSubmissionStatusValues;
+
   static GSubmissionStatus valueOf(String name) =>
       _$gSubmissionStatusValueOf(name);
 }
@@ -1195,7 +1284,9 @@ class GThreadCommentSort extends EnumClass {
 
   static Serializer<GThreadCommentSort> get serializer =>
       _$gThreadCommentSortSerializer;
+
   static BuiltSet<GThreadCommentSort> get values => _$gThreadCommentSortValues;
+
   static GThreadCommentSort valueOf(String name) =>
       _$gThreadCommentSortValueOf(name);
 }
@@ -1236,7 +1327,9 @@ class GThreadSort extends EnumClass {
   static const GThreadSort SEARCH_MATCH = _$gThreadSortSEARCH_MATCH;
 
   static Serializer<GThreadSort> get serializer => _$gThreadSortSerializer;
+
   static BuiltSet<GThreadSort> get values => _$gThreadSortValues;
+
   static GThreadSort valueOf(String name) => _$gThreadSortValueOf(name);
 }
 
@@ -1262,7 +1355,9 @@ class GUserSort extends EnumClass {
   static const GUserSort SEARCH_MATCH = _$gUserSortSEARCH_MATCH;
 
   static Serializer<GUserSort> get serializer => _$gUserSortSerializer;
+
   static BuiltSet<GUserSort> get values => _$gUserSortValues;
+
   static GUserSort valueOf(String name) => _$gUserSortValueOf(name);
 }
 
@@ -1278,8 +1373,10 @@ class GUserStaffNameLanguage extends EnumClass {
 
   static Serializer<GUserStaffNameLanguage> get serializer =>
       _$gUserStaffNameLanguageSerializer;
+
   static BuiltSet<GUserStaffNameLanguage> get values =>
       _$gUserStaffNameLanguageValues;
+
   static GUserStaffNameLanguage valueOf(String name) =>
       _$gUserStaffNameLanguageValueOf(name);
 }
@@ -1307,8 +1404,10 @@ class GUserStatisticsSort extends EnumClass {
 
   static Serializer<GUserStatisticsSort> get serializer =>
       _$gUserStatisticsSortSerializer;
+
   static BuiltSet<GUserStatisticsSort> get values =>
       _$gUserStatisticsSortValues;
+
   static GUserStatisticsSort valueOf(String name) =>
       _$gUserStatisticsSortValueOf(name);
 }
@@ -1333,7 +1432,9 @@ class GUserTitleLanguage extends EnumClass {
 
   static Serializer<GUserTitleLanguage> get serializer =>
       _$gUserTitleLanguageSerializer;
+
   static BuiltSet<GUserTitleLanguage> get values => _$gUserTitleLanguageValues;
+
   static GUserTitleLanguage valueOf(String name) =>
       _$gUserTitleLanguageValueOf(name);
 }

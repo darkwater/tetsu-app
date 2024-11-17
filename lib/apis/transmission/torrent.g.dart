@@ -6,20 +6,21 @@ part of 'torrent.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Torrent _$$_TorrentFromJson(Map<String, dynamic> json) => _$_Torrent(
-      id: json['id'] as int,
+_$TorrentImpl _$$TorrentImplFromJson(Map<String, dynamic> json) =>
+    _$TorrentImpl(
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      status: json['status'] as int,
+      status: (json['status'] as num).toInt(),
       downloadDir: json['downloadDir'] as String,
-      totalSize: json['totalSize'] as int,
+      totalSize: (json['totalSize'] as num).toInt(),
       percentDone: (json['percentDone'] as num).toDouble(),
       rateDownload: (json['rateDownload'] as num).toDouble(),
       rateUpload: (json['rateUpload'] as num).toDouble(),
       comment: json['comment'] as String?,
-      dateCreated: _dateFromJson(json['dateCreated'] as int),
+      dateCreated: _dateFromJson((json['dateCreated'] as num).toInt()),
     );
 
-Map<String, dynamic> _$$_TorrentToJson(_$_Torrent instance) =>
+Map<String, dynamic> _$$TorrentImplToJson(_$TorrentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

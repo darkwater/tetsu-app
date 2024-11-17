@@ -23,7 +23,7 @@ abstract class GAlAiringReq
         _i1.OperationRequest<_i2.GAlAiringData, _i3.GAlAiringVars> {
   GAlAiringReq._();
 
-  factory GAlAiringReq([Function(GAlAiringReqBuilder b) updates]) =
+  factory GAlAiringReq([void Function(GAlAiringReqBuilder b) updates]) =
       _$GAlAiringReq;
 
   static void _initializeBuilder(GAlAiringReqBuilder b) => b
@@ -32,6 +32,7 @@ abstract class GAlAiringReq
       operationName: 'AlAiring',
     )
     ..executeOnListen = true;
+
   @override
   _i3.GAlAiringVars get vars;
   @override
@@ -40,7 +41,9 @@ abstract class GAlAiringReq
   _i4.Request get execRequest => _i4.Request(
         operation: operation,
         variables: vars.toJson(),
+        context: context ?? const _i4.Context(),
       );
+
   @override
   String? get requestId;
   @override
@@ -60,13 +63,30 @@ abstract class GAlAiringReq
   @override
   bool get executeOnListen;
   @override
+  @BuiltValueField(serialize: false)
+  _i4.Context? get context;
+  @override
   _i2.GAlAiringData? parseData(Map<String, dynamic> json) =>
       _i2.GAlAiringData.fromJson(json);
+
+  @override
+  Map<String, dynamic> varsToJson() => vars.toJson();
+
+  @override
+  Map<String, dynamic> dataToJson(_i2.GAlAiringData data) => data.toJson();
+
+  @override
+  _i1.OperationRequest<_i2.GAlAiringData, _i3.GAlAiringVars> transformOperation(
+          _i4.Operation Function(_i4.Operation) transform) =>
+      this.rebuild((b) => b..operation = transform(operation));
+
   static Serializer<GAlAiringReq> get serializer => _$gAlAiringReqSerializer;
+
   Map<String, dynamic> toJson() => (_i6.serializers.serializeWith(
         GAlAiringReq.serializer,
         this,
       ) as Map<String, dynamic>);
+
   static GAlAiringReq? fromJson(Map<String, dynamic> json) =>
       _i6.serializers.deserializeWith(
         GAlAiringReq.serializer,

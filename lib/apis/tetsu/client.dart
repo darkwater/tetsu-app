@@ -1,6 +1,8 @@
 import "dart:convert";
+import "dart:io";
 
 import "package:dio/dio.dart";
+import "package:flutter/foundation.dart";
 import "package:tetsu_app/apis/animebytes/search_result.dart";
 import "package:web_socket_channel/web_socket_channel.dart";
 
@@ -17,7 +19,20 @@ class TetsuClient {
       baseUrl: "https://tetsu.fbk.red/",
     );
 
+    if (kDebugMode && _isTetsuProcessRunning()) {
+      options.baseUrl = "http://localhost:5352/";
+    }
+
     dio = Dio(options);
+  }
+
+  bool _isTetsuProcessRunning() {
+    try {
+      final result = Process.runSync('pidof', ['tetsu']);
+      return result.exitCode == 0;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<List<TetsuAnime>> getAllAnime() async {
@@ -42,6 +57,16 @@ class TetsuClient {
   Future<List<TetsuFile>> getFiles(int aid) async {
     Response response = await dio.get("/anime/$aid/files");
     return response.data.map<TetsuFile>((e) => TetsuFile.fromJson(e)).toList();
+  }
+
+  Future<void> setWatchProgress(String filepath, double progress) async {
+    await dio.post(
+      "/report-progress",
+      data: {
+        "filepath": filepath,
+        "progress": progress,
+      },
+    );
   }
 
   MpvClient mpv() {

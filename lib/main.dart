@@ -25,10 +25,6 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: "Tetsu",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.lightBlue,
           brightness: Brightness.dark,

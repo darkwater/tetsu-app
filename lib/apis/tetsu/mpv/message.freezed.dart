@@ -12,7 +12,7 @@ part of 'message.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 WsMpvMessage _$WsMpvMessageFromJson(Map<String, dynamic> json) {
   switch (json['kind']) {
@@ -68,6 +68,8 @@ mixin _$WsMpvMessage {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this WsMpvMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -87,13 +89,16 @@ class _$WsMpvMessageCopyWithImpl<$Res, $Val extends WsMpvMessage>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$WsMpvMessageControlCopyWith<$Res> {
-  factory _$$WsMpvMessageControlCopyWith(_$WsMpvMessageControl value,
-          $Res Function(_$WsMpvMessageControl) then) =
-      __$$WsMpvMessageControlCopyWithImpl<$Res>;
+abstract class _$$WsMpvMessageControlImplCopyWith<$Res> {
+  factory _$$WsMpvMessageControlImplCopyWith(_$WsMpvMessageControlImpl value,
+          $Res Function(_$WsMpvMessageControlImpl) then) =
+      __$$WsMpvMessageControlImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ControlMessage data});
 
@@ -101,19 +106,21 @@ abstract class _$$WsMpvMessageControlCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$WsMpvMessageControlCopyWithImpl<$Res>
-    extends _$WsMpvMessageCopyWithImpl<$Res, _$WsMpvMessageControl>
-    implements _$$WsMpvMessageControlCopyWith<$Res> {
-  __$$WsMpvMessageControlCopyWithImpl(
-      _$WsMpvMessageControl _value, $Res Function(_$WsMpvMessageControl) _then)
+class __$$WsMpvMessageControlImplCopyWithImpl<$Res>
+    extends _$WsMpvMessageCopyWithImpl<$Res, _$WsMpvMessageControlImpl>
+    implements _$$WsMpvMessageControlImplCopyWith<$Res> {
+  __$$WsMpvMessageControlImplCopyWithImpl(_$WsMpvMessageControlImpl _value,
+      $Res Function(_$WsMpvMessageControlImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$WsMpvMessageControl(
+    return _then(_$WsMpvMessageControlImpl(
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -121,6 +128,8 @@ class __$$WsMpvMessageControlCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ControlMessageCopyWith<$Res> get data {
@@ -132,13 +141,13 @@ class __$$WsMpvMessageControlCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WsMpvMessageControl extends WsMpvMessageControl {
-  const _$WsMpvMessageControl(this.data, {final String? $type})
+class _$WsMpvMessageControlImpl extends WsMpvMessageControl {
+  const _$WsMpvMessageControlImpl(this.data, {final String? $type})
       : $type = $type ?? 'Control',
         super._();
 
-  factory _$WsMpvMessageControl.fromJson(Map<String, dynamic> json) =>
-      _$$WsMpvMessageControlFromJson(json);
+  factory _$WsMpvMessageControlImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WsMpvMessageControlImplFromJson(json);
 
   @override
   final ControlMessage data;
@@ -152,22 +161,24 @@ class _$WsMpvMessageControl extends WsMpvMessageControl {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WsMpvMessageControl &&
+            other is _$WsMpvMessageControlImpl &&
             (identical(other.data, data) || other.data == data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, data);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$WsMpvMessageControlCopyWith<_$WsMpvMessageControl> get copyWith =>
-      __$$WsMpvMessageControlCopyWithImpl<_$WsMpvMessageControl>(
+  _$$WsMpvMessageControlImplCopyWith<_$WsMpvMessageControlImpl> get copyWith =>
+      __$$WsMpvMessageControlImplCopyWithImpl<_$WsMpvMessageControlImpl>(
           this, _$identity);
 
   @override
@@ -234,7 +245,7 @@ class _$WsMpvMessageControl extends WsMpvMessageControl {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WsMpvMessageControlToJson(
+    return _$$WsMpvMessageControlImplToJson(
       this,
     );
   }
@@ -242,42 +253,47 @@ class _$WsMpvMessageControl extends WsMpvMessageControl {
 
 abstract class WsMpvMessageControl extends WsMpvMessage {
   const factory WsMpvMessageControl(final ControlMessage data) =
-      _$WsMpvMessageControl;
+      _$WsMpvMessageControlImpl;
   const WsMpvMessageControl._() : super._();
 
   factory WsMpvMessageControl.fromJson(Map<String, dynamic> json) =
-      _$WsMpvMessageControl.fromJson;
+      _$WsMpvMessageControlImpl.fromJson;
 
   @override
   ControlMessage get data;
-  @JsonKey(ignore: true)
-  _$$WsMpvMessageControlCopyWith<_$WsMpvMessageControl> get copyWith =>
+
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WsMpvMessageControlImplCopyWith<_$WsMpvMessageControlImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$WsMpvMessageMpvCopyWith<$Res> {
-  factory _$$WsMpvMessageMpvCopyWith(
-          _$WsMpvMessageMpv value, $Res Function(_$WsMpvMessageMpv) then) =
-      __$$WsMpvMessageMpvCopyWithImpl<$Res>;
+abstract class _$$WsMpvMessageMpvImplCopyWith<$Res> {
+  factory _$$WsMpvMessageMpvImplCopyWith(_$WsMpvMessageMpvImpl value,
+          $Res Function(_$WsMpvMessageMpvImpl) then) =
+      __$$WsMpvMessageMpvImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Map<String, Object?> data});
 }
 
 /// @nodoc
-class __$$WsMpvMessageMpvCopyWithImpl<$Res>
-    extends _$WsMpvMessageCopyWithImpl<$Res, _$WsMpvMessageMpv>
-    implements _$$WsMpvMessageMpvCopyWith<$Res> {
-  __$$WsMpvMessageMpvCopyWithImpl(
-      _$WsMpvMessageMpv _value, $Res Function(_$WsMpvMessageMpv) _then)
+class __$$WsMpvMessageMpvImplCopyWithImpl<$Res>
+    extends _$WsMpvMessageCopyWithImpl<$Res, _$WsMpvMessageMpvImpl>
+    implements _$$WsMpvMessageMpvImplCopyWith<$Res> {
+  __$$WsMpvMessageMpvImplCopyWithImpl(
+      _$WsMpvMessageMpvImpl _value, $Res Function(_$WsMpvMessageMpvImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$WsMpvMessageMpv(
+    return _then(_$WsMpvMessageMpvImpl(
       null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -288,15 +304,15 @@ class __$$WsMpvMessageMpvCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WsMpvMessageMpv extends WsMpvMessageMpv {
-  const _$WsMpvMessageMpv(final Map<String, Object?> data,
+class _$WsMpvMessageMpvImpl extends WsMpvMessageMpv {
+  const _$WsMpvMessageMpvImpl(final Map<String, Object?> data,
       {final String? $type})
       : _data = data,
         $type = $type ?? 'Mpv',
         super._();
 
-  factory _$WsMpvMessageMpv.fromJson(Map<String, dynamic> json) =>
-      _$$WsMpvMessageMpvFromJson(json);
+  factory _$WsMpvMessageMpvImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WsMpvMessageMpvImplFromJson(json);
 
   final Map<String, Object?> _data;
   @override
@@ -315,23 +331,26 @@ class _$WsMpvMessageMpv extends WsMpvMessageMpv {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WsMpvMessageMpv &&
+            other is _$WsMpvMessageMpvImpl &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$WsMpvMessageMpvCopyWith<_$WsMpvMessageMpv> get copyWith =>
-      __$$WsMpvMessageMpvCopyWithImpl<_$WsMpvMessageMpv>(this, _$identity);
+  _$$WsMpvMessageMpvImplCopyWith<_$WsMpvMessageMpvImpl> get copyWith =>
+      __$$WsMpvMessageMpvImplCopyWithImpl<_$WsMpvMessageMpvImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -397,7 +416,7 @@ class _$WsMpvMessageMpv extends WsMpvMessageMpv {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WsMpvMessageMpvToJson(
+    return _$$WsMpvMessageMpvImplToJson(
       this,
     );
   }
@@ -405,16 +424,19 @@ class _$WsMpvMessageMpv extends WsMpvMessageMpv {
 
 abstract class WsMpvMessageMpv extends WsMpvMessage {
   const factory WsMpvMessageMpv(final Map<String, Object?> data) =
-      _$WsMpvMessageMpv;
+      _$WsMpvMessageMpvImpl;
   const WsMpvMessageMpv._() : super._();
 
   factory WsMpvMessageMpv.fromJson(Map<String, dynamic> json) =
-      _$WsMpvMessageMpv.fromJson;
+      _$WsMpvMessageMpvImpl.fromJson;
 
   @override
   Map<String, Object?> get data;
-  @JsonKey(ignore: true)
-  _$$WsMpvMessageMpvCopyWith<_$WsMpvMessageMpv> get copyWith =>
+
+  /// Create a copy of WsMpvMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WsMpvMessageMpvImplCopyWith<_$WsMpvMessageMpvImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -487,6 +509,8 @@ mixin _$ControlMessage {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ControlMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -506,33 +530,40 @@ class _$ControlMessageCopyWithImpl<$Res, $Val extends ControlMessage>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$ControlMessageStartedCopyWith<$Res> {
-  factory _$$ControlMessageStartedCopyWith(_$ControlMessageStarted value,
-          $Res Function(_$ControlMessageStarted) then) =
-      __$$ControlMessageStartedCopyWithImpl<$Res>;
+abstract class _$$ControlMessageStartedImplCopyWith<$Res> {
+  factory _$$ControlMessageStartedImplCopyWith(
+          _$ControlMessageStartedImpl value,
+          $Res Function(_$ControlMessageStartedImpl) then) =
+      __$$ControlMessageStartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ControlMessageStartedCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStarted>
-    implements _$$ControlMessageStartedCopyWith<$Res> {
-  __$$ControlMessageStartedCopyWithImpl(_$ControlMessageStarted _value,
-      $Res Function(_$ControlMessageStarted) _then)
+class __$$ControlMessageStartedImplCopyWithImpl<$Res>
+    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStartedImpl>
+    implements _$$ControlMessageStartedImplCopyWith<$Res> {
+  __$$ControlMessageStartedImplCopyWithImpl(_$ControlMessageStartedImpl _value,
+      $Res Function(_$ControlMessageStartedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ControlMessageStarted extends ControlMessageStarted {
-  const _$ControlMessageStarted({final String? $type})
+class _$ControlMessageStartedImpl extends ControlMessageStarted {
+  const _$ControlMessageStartedImpl({final String? $type})
       : $type = $type ?? 'Started',
         super._();
 
-  factory _$ControlMessageStarted.fromJson(Map<String, dynamic> json) =>
-      _$$ControlMessageStartedFromJson(json);
+  factory _$ControlMessageStartedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ControlMessageStartedImplFromJson(json);
 
   @JsonKey(name: 'kind')
   final String $type;
@@ -543,12 +574,13 @@ class _$ControlMessageStarted extends ControlMessageStarted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ControlMessageStarted);
+        (other.runtimeType == runtimeType &&
+            other is _$ControlMessageStartedImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -628,45 +660,48 @@ class _$ControlMessageStarted extends ControlMessageStarted {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ControlMessageStartedToJson(
+    return _$$ControlMessageStartedImplToJson(
       this,
     );
   }
 }
 
 abstract class ControlMessageStarted extends ControlMessage {
-  const factory ControlMessageStarted() = _$ControlMessageStarted;
+  const factory ControlMessageStarted() = _$ControlMessageStartedImpl;
   const ControlMessageStarted._() : super._();
 
   factory ControlMessageStarted.fromJson(Map<String, dynamic> json) =
-      _$ControlMessageStarted.fromJson;
+      _$ControlMessageStartedImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$ControlMessageStartCopyWith<$Res> {
-  factory _$$ControlMessageStartCopyWith(_$ControlMessageStart value,
-          $Res Function(_$ControlMessageStart) then) =
-      __$$ControlMessageStartCopyWithImpl<$Res>;
+abstract class _$$ControlMessageStartImplCopyWith<$Res> {
+  factory _$$ControlMessageStartImplCopyWith(_$ControlMessageStartImpl value,
+          $Res Function(_$ControlMessageStartImpl) then) =
+      __$$ControlMessageStartImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ControlMessageStartCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStart>
-    implements _$$ControlMessageStartCopyWith<$Res> {
-  __$$ControlMessageStartCopyWithImpl(
-      _$ControlMessageStart _value, $Res Function(_$ControlMessageStart) _then)
+class __$$ControlMessageStartImplCopyWithImpl<$Res>
+    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStartImpl>
+    implements _$$ControlMessageStartImplCopyWith<$Res> {
+  __$$ControlMessageStartImplCopyWithImpl(_$ControlMessageStartImpl _value,
+      $Res Function(_$ControlMessageStartImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ControlMessageStart extends ControlMessageStart {
-  const _$ControlMessageStart({final String? $type})
+class _$ControlMessageStartImpl extends ControlMessageStart {
+  const _$ControlMessageStartImpl({final String? $type})
       : $type = $type ?? 'Start',
         super._();
 
-  factory _$ControlMessageStart.fromJson(Map<String, dynamic> json) =>
-      _$$ControlMessageStartFromJson(json);
+  factory _$ControlMessageStartImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ControlMessageStartImplFromJson(json);
 
   @JsonKey(name: 'kind')
   final String $type;
@@ -677,12 +712,13 @@ class _$ControlMessageStart extends ControlMessageStart {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ControlMessageStart);
+        (other.runtimeType == runtimeType &&
+            other is _$ControlMessageStartImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -762,45 +798,49 @@ class _$ControlMessageStart extends ControlMessageStart {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ControlMessageStartToJson(
+    return _$$ControlMessageStartImplToJson(
       this,
     );
   }
 }
 
 abstract class ControlMessageStart extends ControlMessage {
-  const factory ControlMessageStart() = _$ControlMessageStart;
+  const factory ControlMessageStart() = _$ControlMessageStartImpl;
   const ControlMessageStart._() : super._();
 
   factory ControlMessageStart.fromJson(Map<String, dynamic> json) =
-      _$ControlMessageStart.fromJson;
+      _$ControlMessageStartImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$ControlMessageStoppedCopyWith<$Res> {
-  factory _$$ControlMessageStoppedCopyWith(_$ControlMessageStopped value,
-          $Res Function(_$ControlMessageStopped) then) =
-      __$$ControlMessageStoppedCopyWithImpl<$Res>;
+abstract class _$$ControlMessageStoppedImplCopyWith<$Res> {
+  factory _$$ControlMessageStoppedImplCopyWith(
+          _$ControlMessageStoppedImpl value,
+          $Res Function(_$ControlMessageStoppedImpl) then) =
+      __$$ControlMessageStoppedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ControlMessageStoppedCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStopped>
-    implements _$$ControlMessageStoppedCopyWith<$Res> {
-  __$$ControlMessageStoppedCopyWithImpl(_$ControlMessageStopped _value,
-      $Res Function(_$ControlMessageStopped) _then)
+class __$$ControlMessageStoppedImplCopyWithImpl<$Res>
+    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStoppedImpl>
+    implements _$$ControlMessageStoppedImplCopyWith<$Res> {
+  __$$ControlMessageStoppedImplCopyWithImpl(_$ControlMessageStoppedImpl _value,
+      $Res Function(_$ControlMessageStoppedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ControlMessageStopped extends ControlMessageStopped {
-  const _$ControlMessageStopped({final String? $type})
+class _$ControlMessageStoppedImpl extends ControlMessageStopped {
+  const _$ControlMessageStoppedImpl({final String? $type})
       : $type = $type ?? 'Stopped',
         super._();
 
-  factory _$ControlMessageStopped.fromJson(Map<String, dynamic> json) =>
-      _$$ControlMessageStoppedFromJson(json);
+  factory _$ControlMessageStoppedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ControlMessageStoppedImplFromJson(json);
 
   @JsonKey(name: 'kind')
   final String $type;
@@ -811,12 +851,13 @@ class _$ControlMessageStopped extends ControlMessageStopped {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ControlMessageStopped);
+        (other.runtimeType == runtimeType &&
+            other is _$ControlMessageStoppedImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -896,45 +937,48 @@ class _$ControlMessageStopped extends ControlMessageStopped {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ControlMessageStoppedToJson(
+    return _$$ControlMessageStoppedImplToJson(
       this,
     );
   }
 }
 
 abstract class ControlMessageStopped extends ControlMessage {
-  const factory ControlMessageStopped() = _$ControlMessageStopped;
+  const factory ControlMessageStopped() = _$ControlMessageStoppedImpl;
   const ControlMessageStopped._() : super._();
 
   factory ControlMessageStopped.fromJson(Map<String, dynamic> json) =
-      _$ControlMessageStopped.fromJson;
+      _$ControlMessageStoppedImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$ControlMessageStopCopyWith<$Res> {
-  factory _$$ControlMessageStopCopyWith(_$ControlMessageStop value,
-          $Res Function(_$ControlMessageStop) then) =
-      __$$ControlMessageStopCopyWithImpl<$Res>;
+abstract class _$$ControlMessageStopImplCopyWith<$Res> {
+  factory _$$ControlMessageStopImplCopyWith(_$ControlMessageStopImpl value,
+          $Res Function(_$ControlMessageStopImpl) then) =
+      __$$ControlMessageStopImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ControlMessageStopCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStop>
-    implements _$$ControlMessageStopCopyWith<$Res> {
-  __$$ControlMessageStopCopyWithImpl(
-      _$ControlMessageStop _value, $Res Function(_$ControlMessageStop) _then)
+class __$$ControlMessageStopImplCopyWithImpl<$Res>
+    extends _$ControlMessageCopyWithImpl<$Res, _$ControlMessageStopImpl>
+    implements _$$ControlMessageStopImplCopyWith<$Res> {
+  __$$ControlMessageStopImplCopyWithImpl(_$ControlMessageStopImpl _value,
+      $Res Function(_$ControlMessageStopImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ControlMessageStop extends ControlMessageStop {
-  const _$ControlMessageStop({final String? $type})
+class _$ControlMessageStopImpl extends ControlMessageStop {
+  const _$ControlMessageStopImpl({final String? $type})
       : $type = $type ?? 'Stop',
         super._();
 
-  factory _$ControlMessageStop.fromJson(Map<String, dynamic> json) =>
-      _$$ControlMessageStopFromJson(json);
+  factory _$ControlMessageStopImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ControlMessageStopImplFromJson(json);
 
   @JsonKey(name: 'kind')
   final String $type;
@@ -945,12 +989,12 @@ class _$ControlMessageStop extends ControlMessageStop {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ControlMessageStop);
+        (other.runtimeType == runtimeType && other is _$ControlMessageStopImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -1030,18 +1074,18 @@ class _$ControlMessageStop extends ControlMessageStop {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ControlMessageStopToJson(
+    return _$$ControlMessageStopImplToJson(
       this,
     );
   }
 }
 
 abstract class ControlMessageStop extends ControlMessage {
-  const factory ControlMessageStop() = _$ControlMessageStop;
+  const factory ControlMessageStop() = _$ControlMessageStopImpl;
   const ControlMessageStop._() : super._();
 
   factory ControlMessageStop.fromJson(Map<String, dynamic> json) =
-      _$ControlMessageStop.fromJson;
+      _$ControlMessageStopImpl.fromJson;
 }
 
 MpvRequest _$MpvRequestFromJson(Map<String, dynamic> json) {
@@ -1054,8 +1098,12 @@ mixin _$MpvRequest {
   int? get requestId => throw _privateConstructorUsedError;
   bool? get async => throw _privateConstructorUsedError;
 
+  /// Serializes this MpvRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MpvRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MpvRequestCopyWith<MpvRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1079,6 +1127,8 @@ class _$MpvRequestCopyWithImpl<$Res, $Val extends MpvRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MpvRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1104,24 +1154,26 @@ class _$MpvRequestCopyWithImpl<$Res, $Val extends MpvRequest>
 }
 
 /// @nodoc
-abstract class _$$_MpvRequestCopyWith<$Res>
+abstract class _$$MpvRequestImplCopyWith<$Res>
     implements $MpvRequestCopyWith<$Res> {
-  factory _$$_MpvRequestCopyWith(
-          _$_MpvRequest value, $Res Function(_$_MpvRequest) then) =
-      __$$_MpvRequestCopyWithImpl<$Res>;
+  factory _$$MpvRequestImplCopyWith(
+          _$MpvRequestImpl value, $Res Function(_$MpvRequestImpl) then) =
+      __$$MpvRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<dynamic> command, int? requestId, bool? async});
 }
 
 /// @nodoc
-class __$$_MpvRequestCopyWithImpl<$Res>
-    extends _$MpvRequestCopyWithImpl<$Res, _$_MpvRequest>
-    implements _$$_MpvRequestCopyWith<$Res> {
-  __$$_MpvRequestCopyWithImpl(
-      _$_MpvRequest _value, $Res Function(_$_MpvRequest) _then)
+class __$$MpvRequestImplCopyWithImpl<$Res>
+    extends _$MpvRequestCopyWithImpl<$Res, _$MpvRequestImpl>
+    implements _$$MpvRequestImplCopyWith<$Res> {
+  __$$MpvRequestImplCopyWithImpl(
+      _$MpvRequestImpl _value, $Res Function(_$MpvRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MpvRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1129,7 +1181,7 @@ class __$$_MpvRequestCopyWithImpl<$Res>
     Object? requestId = freezed,
     Object? async = freezed,
   }) {
-    return _then(_$_MpvRequest(
+    return _then(_$MpvRequestImpl(
       command: null == command
           ? _value._command
           : command // ignore: cast_nullable_to_non_nullable
@@ -1149,14 +1201,14 @@ class __$$_MpvRequestCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, includeIfNull: false)
-class _$_MpvRequest extends _MpvRequest {
-  const _$_MpvRequest(
+class _$MpvRequestImpl extends _MpvRequest {
+  const _$MpvRequestImpl(
       {required final List<dynamic> command, this.requestId, this.async})
       : _command = command,
         super._();
 
-  factory _$_MpvRequest.fromJson(Map<String, dynamic> json) =>
-      _$$_MpvRequestFromJson(json);
+  factory _$MpvRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MpvRequestImplFromJson(json);
 
   final List<dynamic> _command;
   @override
@@ -1177,30 +1229,32 @@ class _$_MpvRequest extends _MpvRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MpvRequest &&
+            other is _$MpvRequestImpl &&
             const DeepCollectionEquality().equals(other._command, _command) &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             (identical(other.async, async) || other.async == async));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_command), requestId, async);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MpvRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MpvRequestCopyWith<_$_MpvRequest> get copyWith =>
-      __$$_MpvRequestCopyWithImpl<_$_MpvRequest>(this, _$identity);
+  _$$MpvRequestImplCopyWith<_$MpvRequestImpl> get copyWith =>
+      __$$MpvRequestImplCopyWithImpl<_$MpvRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MpvRequestToJson(
+    return _$$MpvRequestImplToJson(
       this,
     );
   }
@@ -1210,11 +1264,11 @@ abstract class _MpvRequest extends MpvRequest {
   const factory _MpvRequest(
       {required final List<dynamic> command,
       final int? requestId,
-      final bool? async}) = _$_MpvRequest;
+      final bool? async}) = _$MpvRequestImpl;
   const _MpvRequest._() : super._();
 
   factory _MpvRequest.fromJson(Map<String, dynamic> json) =
-      _$_MpvRequest.fromJson;
+      _$MpvRequestImpl.fromJson;
 
   @override
   List<dynamic> get command;
@@ -1222,9 +1276,12 @@ abstract class _MpvRequest extends MpvRequest {
   int? get requestId;
   @override
   bool? get async;
+
+  /// Create a copy of MpvRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_MpvRequestCopyWith<_$_MpvRequest> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MpvRequestImplCopyWith<_$MpvRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1238,8 +1295,12 @@ mixin _$MpvResponse {
   String? get error => throw _privateConstructorUsedError;
   Object? get data => throw _privateConstructorUsedError;
 
+  /// Serializes this MpvResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MpvResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MpvResponseCopyWith<MpvResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1263,6 +1324,8 @@ class _$MpvResponseCopyWithImpl<$Res, $Val extends MpvResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MpvResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1285,24 +1348,26 @@ class _$MpvResponseCopyWithImpl<$Res, $Val extends MpvResponse>
 }
 
 /// @nodoc
-abstract class _$$_MpvResponseCopyWith<$Res>
+abstract class _$$MpvResponseImplCopyWith<$Res>
     implements $MpvResponseCopyWith<$Res> {
-  factory _$$_MpvResponseCopyWith(
-          _$_MpvResponse value, $Res Function(_$_MpvResponse) then) =
-      __$$_MpvResponseCopyWithImpl<$Res>;
+  factory _$$MpvResponseImplCopyWith(
+          _$MpvResponseImpl value, $Res Function(_$MpvResponseImpl) then) =
+      __$$MpvResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? requestid, String? error, Object? data});
 }
 
 /// @nodoc
-class __$$_MpvResponseCopyWithImpl<$Res>
-    extends _$MpvResponseCopyWithImpl<$Res, _$_MpvResponse>
-    implements _$$_MpvResponseCopyWith<$Res> {
-  __$$_MpvResponseCopyWithImpl(
-      _$_MpvResponse _value, $Res Function(_$_MpvResponse) _then)
+class __$$MpvResponseImplCopyWithImpl<$Res>
+    extends _$MpvResponseCopyWithImpl<$Res, _$MpvResponseImpl>
+    implements _$$MpvResponseImplCopyWith<$Res> {
+  __$$MpvResponseImplCopyWithImpl(
+      _$MpvResponseImpl _value, $Res Function(_$MpvResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MpvResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1310,7 +1375,7 @@ class __$$_MpvResponseCopyWithImpl<$Res>
     Object? error = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$_MpvResponse(
+    return _then(_$MpvResponseImpl(
       requestid: freezed == requestid
           ? _value.requestid
           : requestid // ignore: cast_nullable_to_non_nullable
@@ -1326,11 +1391,11 @@ class __$$_MpvResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MpvResponse extends _MpvResponse {
-  const _$_MpvResponse({this.requestid, this.error, this.data}) : super._();
+class _$MpvResponseImpl extends _MpvResponse {
+  const _$MpvResponseImpl({this.requestid, this.error, this.data}) : super._();
 
-  factory _$_MpvResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_MpvResponseFromJson(json);
+  factory _$MpvResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MpvResponseImplFromJson(json);
 
   @override
   final int? requestid;
@@ -1345,30 +1410,32 @@ class _$_MpvResponse extends _MpvResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MpvResponse &&
+            other is _$MpvResponseImpl &&
             (identical(other.requestid, requestid) ||
                 other.requestid == requestid) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, requestid, error, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MpvResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MpvResponseCopyWith<_$_MpvResponse> get copyWith =>
-      __$$_MpvResponseCopyWithImpl<_$_MpvResponse>(this, _$identity);
+  _$$MpvResponseImplCopyWith<_$MpvResponseImpl> get copyWith =>
+      __$$MpvResponseImplCopyWithImpl<_$MpvResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MpvResponseToJson(
+    return _$$MpvResponseImplToJson(
       this,
     );
   }
@@ -1378,11 +1445,11 @@ abstract class _MpvResponse extends MpvResponse {
   const factory _MpvResponse(
       {final int? requestid,
       final String? error,
-      final Object? data}) = _$_MpvResponse;
+      final Object? data}) = _$MpvResponseImpl;
   const _MpvResponse._() : super._();
 
   factory _MpvResponse.fromJson(Map<String, dynamic> json) =
-      _$_MpvResponse.fromJson;
+      _$MpvResponseImpl.fromJson;
 
   @override
   int? get requestid;
@@ -1390,9 +1457,12 @@ abstract class _MpvResponse extends MpvResponse {
   String? get error;
   @override
   Object? get data;
+
+  /// Create a copy of MpvResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_MpvResponseCopyWith<_$_MpvResponse> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MpvResponseImplCopyWith<_$MpvResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1446,6 +1516,8 @@ mixin _$MpvEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this MpvEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -1464,31 +1536,36 @@ class _$MpvEventCopyWithImpl<$Res, $Val extends MpvEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$MpvEventOtherCopyWith<$Res> {
-  factory _$$MpvEventOtherCopyWith(
-          _$MpvEventOther value, $Res Function(_$MpvEventOther) then) =
-      __$$MpvEventOtherCopyWithImpl<$Res>;
+abstract class _$$MpvEventOtherImplCopyWith<$Res> {
+  factory _$$MpvEventOtherImplCopyWith(
+          _$MpvEventOtherImpl value, $Res Function(_$MpvEventOtherImpl) then) =
+      __$$MpvEventOtherImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String event});
 }
 
 /// @nodoc
-class __$$MpvEventOtherCopyWithImpl<$Res>
-    extends _$MpvEventCopyWithImpl<$Res, _$MpvEventOther>
-    implements _$$MpvEventOtherCopyWith<$Res> {
-  __$$MpvEventOtherCopyWithImpl(
-      _$MpvEventOther _value, $Res Function(_$MpvEventOther) _then)
+class __$$MpvEventOtherImplCopyWithImpl<$Res>
+    extends _$MpvEventCopyWithImpl<$Res, _$MpvEventOtherImpl>
+    implements _$$MpvEventOtherImplCopyWith<$Res> {
+  __$$MpvEventOtherImplCopyWithImpl(
+      _$MpvEventOtherImpl _value, $Res Function(_$MpvEventOtherImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? event = null,
   }) {
-    return _then(_$MpvEventOther(
+    return _then(_$MpvEventOtherImpl(
       null == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
@@ -1499,11 +1576,11 @@ class __$$MpvEventOtherCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MpvEventOther extends MpvEventOther {
-  const _$MpvEventOther(this.event) : super._();
+class _$MpvEventOtherImpl extends MpvEventOther {
+  const _$MpvEventOtherImpl(this.event) : super._();
 
-  factory _$MpvEventOther.fromJson(Map<String, dynamic> json) =>
-      _$$MpvEventOtherFromJson(json);
+  factory _$MpvEventOtherImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MpvEventOtherImplFromJson(json);
 
   @override
   final String event;
@@ -1514,22 +1591,24 @@ class _$MpvEventOther extends MpvEventOther {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MpvEventOther &&
+            other is _$MpvEventOtherImpl &&
             (identical(other.event, event) || other.event == event));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, event);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MpvEventOtherCopyWith<_$MpvEventOther> get copyWith =>
-      __$$MpvEventOtherCopyWithImpl<_$MpvEventOther>(this, _$identity);
+  _$$MpvEventOtherImplCopyWith<_$MpvEventOtherImpl> get copyWith =>
+      __$$MpvEventOtherImplCopyWithImpl<_$MpvEventOtherImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1595,42 +1674,49 @@ class _$MpvEventOther extends MpvEventOther {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MpvEventOtherToJson(
+    return _$$MpvEventOtherImplToJson(
       this,
     );
   }
 }
 
 abstract class MpvEventOther extends MpvEvent {
-  const factory MpvEventOther(final String event) = _$MpvEventOther;
+  const factory MpvEventOther(final String event) = _$MpvEventOtherImpl;
   const MpvEventOther._() : super._();
 
   factory MpvEventOther.fromJson(Map<String, dynamic> json) =
-      _$MpvEventOther.fromJson;
+      _$MpvEventOtherImpl.fromJson;
 
   String get event;
-  @JsonKey(ignore: true)
-  _$$MpvEventOtherCopyWith<_$MpvEventOther> get copyWith =>
+
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MpvEventOtherImplCopyWith<_$MpvEventOtherImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MpvEventPropertyChangeCopyWith<$Res> {
-  factory _$$MpvEventPropertyChangeCopyWith(_$MpvEventPropertyChange value,
-          $Res Function(_$MpvEventPropertyChange) then) =
-      __$$MpvEventPropertyChangeCopyWithImpl<$Res>;
+abstract class _$$MpvEventPropertyChangeImplCopyWith<$Res> {
+  factory _$$MpvEventPropertyChangeImplCopyWith(
+          _$MpvEventPropertyChangeImpl value,
+          $Res Function(_$MpvEventPropertyChangeImpl) then) =
+      __$$MpvEventPropertyChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id, String name, Object? data});
 }
 
 /// @nodoc
-class __$$MpvEventPropertyChangeCopyWithImpl<$Res>
-    extends _$MpvEventCopyWithImpl<$Res, _$MpvEventPropertyChange>
-    implements _$$MpvEventPropertyChangeCopyWith<$Res> {
-  __$$MpvEventPropertyChangeCopyWithImpl(_$MpvEventPropertyChange _value,
-      $Res Function(_$MpvEventPropertyChange) _then)
+class __$$MpvEventPropertyChangeImplCopyWithImpl<$Res>
+    extends _$MpvEventCopyWithImpl<$Res, _$MpvEventPropertyChangeImpl>
+    implements _$$MpvEventPropertyChangeImplCopyWith<$Res> {
+  __$$MpvEventPropertyChangeImplCopyWithImpl(
+      _$MpvEventPropertyChangeImpl _value,
+      $Res Function(_$MpvEventPropertyChangeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1638,7 +1724,7 @@ class __$$MpvEventPropertyChangeCopyWithImpl<$Res>
     Object? name = null,
     Object? data = freezed,
   }) {
-    return _then(_$MpvEventPropertyChange(
+    return _then(_$MpvEventPropertyChangeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1654,14 +1740,14 @@ class __$$MpvEventPropertyChangeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MpvEventPropertyChange extends MpvEventPropertyChange {
-  const _$MpvEventPropertyChange(
+class _$MpvEventPropertyChangeImpl extends MpvEventPropertyChange {
+  const _$MpvEventPropertyChangeImpl(
       {required this.id, required this.name, this.data, final String? $type})
       : $type = $type ?? 'property-change',
         super._();
 
-  factory _$MpvEventPropertyChange.fromJson(Map<String, dynamic> json) =>
-      _$$MpvEventPropertyChangeFromJson(json);
+  factory _$MpvEventPropertyChangeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MpvEventPropertyChangeImplFromJson(json);
 
   @override
   final int id;
@@ -1679,26 +1765,28 @@ class _$MpvEventPropertyChange extends MpvEventPropertyChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MpvEventPropertyChange &&
+            other is _$MpvEventPropertyChangeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, name, const DeepCollectionEquality().hash(data));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MpvEventPropertyChangeCopyWith<_$MpvEventPropertyChange> get copyWith =>
-      __$$MpvEventPropertyChangeCopyWithImpl<_$MpvEventPropertyChange>(
-          this, _$identity);
+  _$$MpvEventPropertyChangeImplCopyWith<_$MpvEventPropertyChangeImpl>
+      get copyWith => __$$MpvEventPropertyChangeImplCopyWithImpl<
+          _$MpvEventPropertyChangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1764,7 +1852,7 @@ class _$MpvEventPropertyChange extends MpvEventPropertyChange {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MpvEventPropertyChangeToJson(
+    return _$$MpvEventPropertyChangeImplToJson(
       this,
     );
   }
@@ -1774,16 +1862,19 @@ abstract class MpvEventPropertyChange extends MpvEvent {
   const factory MpvEventPropertyChange(
       {required final int id,
       required final String name,
-      final Object? data}) = _$MpvEventPropertyChange;
+      final Object? data}) = _$MpvEventPropertyChangeImpl;
   const MpvEventPropertyChange._() : super._();
 
   factory MpvEventPropertyChange.fromJson(Map<String, dynamic> json) =
-      _$MpvEventPropertyChange.fromJson;
+      _$MpvEventPropertyChangeImpl.fromJson;
 
   int get id;
   String get name;
   Object? get data;
-  @JsonKey(ignore: true)
-  _$$MpvEventPropertyChangeCopyWith<_$MpvEventPropertyChange> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of MpvEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MpvEventPropertyChangeImplCopyWith<_$MpvEventPropertyChangeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -19,6 +19,8 @@ final torrentsProvider = StreamProvider<List<Torrent>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef TorrentsRef = StreamProviderRef<List<Torrent>>;
 String _$animebytesTorrentIdsHash() =>
     r'f3c095121b750b3e704d7e757c6d96a494bd32ce';
@@ -35,6 +37,8 @@ final animebytesTorrentIdsProvider = AutoDisposeProvider<Set<int>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AnimebytesTorrentIdsRef = AutoDisposeProviderRef<Set<int>>;
 String _$freeSpaceHash() => r'e1603e520ea58844045351e63668193fedef43f8';
 
@@ -49,6 +53,8 @@ final freeSpaceProvider = FutureProvider<int>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FreeSpaceRef = FutureProviderRef<int>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

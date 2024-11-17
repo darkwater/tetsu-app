@@ -39,6 +39,7 @@ class AnimeCard extends ConsumerWidget {
           imageTag: imageTag,
           imageUrl: imageUrl,
           imageZoomable: imageZoomable,
+          onTap: onTap,
           title: title,
           subtitle: subtitle,
           progress: progress,
@@ -47,29 +48,26 @@ class AnimeCard extends ConsumerWidget {
       ),
     );
 
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 14,
-        ),
-        child: (body == null && actions.isEmpty)
-            ? leftSide
-            : Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  leftSide,
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: _RightSide(
-                      actions: actions,
-                      child: body,
-                    ),
-                  ),
-                ],
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 14,
       ),
+      child: (body == null && actions.isEmpty)
+          ? leftSide
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                leftSide,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _RightSide(
+                    actions: actions,
+                    child: body,
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
@@ -78,6 +76,7 @@ class _LeftSide extends ConsumerWidget {
   final String imageTag;
   final String? imageUrl;
   final bool imageZoomable;
+  final Function()? onTap;
   final String? title;
   final String? subtitle;
   final double? progress;
@@ -87,6 +86,7 @@ class _LeftSide extends ConsumerWidget {
     required this.imageTag,
     required this.imageUrl,
     required this.imageZoomable,
+    required this.onTap,
     required this.title,
     required this.subtitle,
     required this.progress,
@@ -165,7 +165,9 @@ class _LeftSide extends ConsumerWidget {
                               value: downloaded ?? 1,
                               backgroundColor: Colors.transparent,
                               valueColor: AlwaysStoppedAnimation<Color?>(
-                                Theme.of(context).colorScheme.surfaceVariant,
+                                Theme.of(context)
+                                    .colorScheme
+                                    .surfaceContainerHighest,
                               ),
                             ),
                           ),
@@ -173,41 +175,24 @@ class _LeftSide extends ConsumerWidget {
                             child: LinearProgressIndicator(
                               value: progress,
                               backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation<Color?>(
-                                Colors.red,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  if (progress != null)
-                    SizedBox(
-                      height: 3,
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: LinearProgressIndicator(
-                              value: downloaded ?? 1,
-                              backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation<Color?>(
-                                Theme.of(context).colorScheme.surfaceVariant,
-                              ),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: LinearProgressIndicator(
-                              value: progress,
-                              backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation<Color?>(
-                                Colors.deepPurple[300],
-                              ),
+                              // valueColor: AlwaysStoppedAnimation<Color?>(
+                              //   Colors.red,
+                              // ),
                             ),
                           ),
                         ],
                       ),
                     ),
                 ],
+              ),
+            ),
+          ),
+        if (onTap != null)
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
               ),
             ),
           ),

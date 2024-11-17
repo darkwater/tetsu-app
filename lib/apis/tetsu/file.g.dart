@@ -6,14 +6,15 @@ part of 'file.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TetsuFile _$$_TetsuFileFromJson(Map<String, dynamic> json) => _$_TetsuFile(
+_$TetsuFileImpl _$$TetsuFileImplFromJson(Map<String, dynamic> json) =>
+    _$TetsuFileImpl(
       path: json['path'] as String,
-      fid: json['fid'] as int,
-      aid: json['aid'] as int,
-      eid: json['eid'] as int,
-      gid: json['gid'] as int,
-      state: json['state'] as int,
-      size: json['size'] as int,
+      fid: (json['fid'] as num).toInt(),
+      aid: (json['aid'] as num).toInt(),
+      eid: (json['eid'] as num).toInt(),
+      gid: (json['gid'] as num).toInt(),
+      state: (json['state'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
       ed2k: json['ed2k'] as String,
       colourDepth: json['colour_depth'] as String,
       quality: json['quality'] as String,
@@ -22,7 +23,7 @@ _$_TetsuFile _$$_TetsuFileFromJson(Map<String, dynamic> json) => _$_TetsuFile(
           .map((e) => e as String)
           .toList(),
       audioBitrateList: (json['audio_bitrate_list'] as List<dynamic>)
-          .map((e) => e as int)
+          .map((e) => (e as num).toInt())
           .toList(),
       videoCodec: (json['video_codec'] as List<dynamic>)
           .map((e) => e as String)
@@ -35,12 +36,12 @@ _$_TetsuFile _$$_TetsuFileFromJson(Map<String, dynamic> json) => _$_TetsuFile(
           .toList(),
       dubLanguage: json['dub_language'] as String,
       subLanguage: json['sub_language'] as String,
-      lengthInSeconds: json['length_in_seconds'] as int,
+      lengthInSeconds: (json['length_in_seconds'] as num).toInt(),
       description: json['description'] as String,
       airedDate: DateTime.parse(json['aired_date'] as String),
     );
 
-Map<String, dynamic> _$$_TetsuFileToJson(_$_TetsuFile instance) =>
+Map<String, dynamic> _$$TetsuFileImplToJson(_$TetsuFileImpl instance) =>
     <String, dynamic>{
       'path': instance.path,
       'fid': instance.fid,

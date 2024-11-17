@@ -12,7 +12,7 @@ part of 'search_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AnimebytesSearchResponse _$AnimebytesSearchResponseFromJson(
     Map<String, dynamic> json) {
@@ -27,8 +27,12 @@ mixin _$AnimebytesSearchResponse {
   @JsonKey(defaultValue: [])
   List<AnimebytesSearchResult> get groups => throw _privateConstructorUsedError;
 
+  /// Serializes this AnimebytesSearchResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnimebytesSearchResponseCopyWith<AnimebytesSearchResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$AnimebytesSearchResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +93,8 @@ class _$AnimebytesSearchResponseCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -97,12 +105,12 @@ class _$AnimebytesSearchResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnimebytesSearchResponseCopyWith<$Res>
+abstract class _$$AnimebytesSearchResponseImplCopyWith<$Res>
     implements $AnimebytesSearchResponseCopyWith<$Res> {
-  factory _$$_AnimebytesSearchResponseCopyWith(
-          _$_AnimebytesSearchResponse value,
-          $Res Function(_$_AnimebytesSearchResponse) then) =
-      __$$_AnimebytesSearchResponseCopyWithImpl<$Res>;
+  factory _$$AnimebytesSearchResponseImplCopyWith(
+          _$AnimebytesSearchResponseImpl value,
+          $Res Function(_$AnimebytesSearchResponseImpl) then) =
+      __$$AnimebytesSearchResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,14 +124,17 @@ abstract class _$$_AnimebytesSearchResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnimebytesSearchResponseCopyWithImpl<$Res>
+class __$$AnimebytesSearchResponseImplCopyWithImpl<$Res>
     extends _$AnimebytesSearchResponseCopyWithImpl<$Res,
-        _$_AnimebytesSearchResponse>
-    implements _$$_AnimebytesSearchResponseCopyWith<$Res> {
-  __$$_AnimebytesSearchResponseCopyWithImpl(_$_AnimebytesSearchResponse _value,
-      $Res Function(_$_AnimebytesSearchResponse) _then)
+        _$AnimebytesSearchResponseImpl>
+    implements _$$AnimebytesSearchResponseImplCopyWith<$Res> {
+  __$$AnimebytesSearchResponseImplCopyWithImpl(
+      _$AnimebytesSearchResponseImpl _value,
+      $Res Function(_$AnimebytesSearchResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,7 +143,7 @@ class __$$_AnimebytesSearchResponseCopyWithImpl<$Res>
     Object? matches = null,
     Object? groups = null,
   }) {
-    return _then(_$_AnimebytesSearchResponse(
+    return _then(_$AnimebytesSearchResponseImpl(
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -156,8 +167,8 @@ class __$$_AnimebytesSearchResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
-class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
-  const _$_AnimebytesSearchResponse(
+class _$AnimebytesSearchResponseImpl extends _AnimebytesSearchResponse {
+  const _$AnimebytesSearchResponseImpl(
       {required this.results,
       required this.pagination,
       required this.matches,
@@ -166,8 +177,8 @@ class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
       : _groups = groups,
         super._();
 
-  factory _$_AnimebytesSearchResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_AnimebytesSearchResponseFromJson(json);
+  factory _$AnimebytesSearchResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnimebytesSearchResponseImplFromJson(json);
 
   @override
   final int results;
@@ -190,10 +201,10 @@ class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnimebytesSearchResponse &&
+            other is _$AnimebytesSearchResponseImpl &&
             (identical(other.results, results) || other.results == results) &&
             (identical(other.pagination, pagination) ||
                 other.pagination == pagination) &&
@@ -201,21 +212,23 @@ class _$_AnimebytesSearchResponse extends _AnimebytesSearchResponse {
             const DeepCollectionEquality().equals(other._groups, _groups));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, results, pagination, matches,
       const DeepCollectionEquality().hash(_groups));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnimebytesSearchResponseCopyWith<_$_AnimebytesSearchResponse>
-      get copyWith => __$$_AnimebytesSearchResponseCopyWithImpl<
-          _$_AnimebytesSearchResponse>(this, _$identity);
+  _$$AnimebytesSearchResponseImplCopyWith<_$AnimebytesSearchResponseImpl>
+      get copyWith => __$$AnimebytesSearchResponseImplCopyWithImpl<
+          _$AnimebytesSearchResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnimebytesSearchResponseToJson(
+    return _$$AnimebytesSearchResponseImplToJson(
       this,
     );
   }
@@ -228,11 +241,11 @@ abstract class _AnimebytesSearchResponse extends AnimebytesSearchResponse {
           required final int matches,
           @JsonKey(defaultValue: [])
           required final List<AnimebytesSearchResult> groups}) =
-      _$_AnimebytesSearchResponse;
+      _$AnimebytesSearchResponseImpl;
   const _AnimebytesSearchResponse._() : super._();
 
   factory _AnimebytesSearchResponse.fromJson(Map<String, dynamic> json) =
-      _$_AnimebytesSearchResponse.fromJson;
+      _$AnimebytesSearchResponseImpl.fromJson;
 
   @override
   int get results;
@@ -243,9 +256,12 @@ abstract class _AnimebytesSearchResponse extends AnimebytesSearchResponse {
   @override
   @JsonKey(defaultValue: [])
   List<AnimebytesSearchResult> get groups;
+
+  /// Create a copy of AnimebytesSearchResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_AnimebytesSearchResponseCopyWith<_$_AnimebytesSearchResponse>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AnimebytesSearchResponseImplCopyWith<_$AnimebytesSearchResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -259,8 +275,12 @@ mixin _$Pagination {
   double get max => throw _privateConstructorUsedError;
   Limit get limit => throw _privateConstructorUsedError;
 
+  /// Serializes this Pagination to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaginationCopyWith<Pagination> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -286,6 +306,8 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -309,6 +331,8 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
     ) as $Val);
   }
 
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LimitCopyWith<$Res> get limit {
@@ -319,11 +343,11 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
 }
 
 /// @nodoc
-abstract class _$$_PaginationCopyWith<$Res>
+abstract class _$$PaginationImplCopyWith<$Res>
     implements $PaginationCopyWith<$Res> {
-  factory _$$_PaginationCopyWith(
-          _$_Pagination value, $Res Function(_$_Pagination) then) =
-      __$$_PaginationCopyWithImpl<$Res>;
+  factory _$$PaginationImplCopyWith(
+          _$PaginationImpl value, $Res Function(_$PaginationImpl) then) =
+      __$$PaginationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int current, double max, Limit limit});
@@ -333,13 +357,15 @@ abstract class _$$_PaginationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaginationCopyWithImpl<$Res>
-    extends _$PaginationCopyWithImpl<$Res, _$_Pagination>
-    implements _$$_PaginationCopyWith<$Res> {
-  __$$_PaginationCopyWithImpl(
-      _$_Pagination _value, $Res Function(_$_Pagination) _then)
+class __$$PaginationImplCopyWithImpl<$Res>
+    extends _$PaginationCopyWithImpl<$Res, _$PaginationImpl>
+    implements _$$PaginationImplCopyWith<$Res> {
+  __$$PaginationImplCopyWithImpl(
+      _$PaginationImpl _value, $Res Function(_$PaginationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -347,7 +373,7 @@ class __$$_PaginationCopyWithImpl<$Res>
     Object? max = null,
     Object? limit = null,
   }) {
-    return _then(_$_Pagination(
+    return _then(_$PaginationImpl(
       current: null == current
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
@@ -367,13 +393,13 @@ class __$$_PaginationCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
-class _$_Pagination extends _Pagination {
-  const _$_Pagination(
+class _$PaginationImpl extends _Pagination {
+  const _$PaginationImpl(
       {required this.current, required this.max, required this.limit})
       : super._();
 
-  factory _$_Pagination.fromJson(Map<String, dynamic> json) =>
-      _$$_PaginationFromJson(json);
+  factory _$PaginationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaginationImplFromJson(json);
 
   @override
   final int current;
@@ -388,28 +414,30 @@ class _$_Pagination extends _Pagination {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Pagination &&
+            other is _$PaginationImpl &&
             (identical(other.current, current) || other.current == current) &&
             (identical(other.max, max) || other.max == max) &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, current, max, limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaginationCopyWith<_$_Pagination> get copyWith =>
-      __$$_PaginationCopyWithImpl<_$_Pagination>(this, _$identity);
+  _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
+      __$$PaginationImplCopyWithImpl<_$PaginationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaginationToJson(
+    return _$$PaginationImplToJson(
       this,
     );
   }
@@ -419,11 +447,11 @@ abstract class _Pagination extends Pagination {
   const factory _Pagination(
       {required final int current,
       required final double max,
-      required final Limit limit}) = _$_Pagination;
+      required final Limit limit}) = _$PaginationImpl;
   const _Pagination._() : super._();
 
   factory _Pagination.fromJson(Map<String, dynamic> json) =
-      _$_Pagination.fromJson;
+      _$PaginationImpl.fromJson;
 
   @override
   int get current;
@@ -431,9 +459,12 @@ abstract class _Pagination extends Pagination {
   double get max;
   @override
   Limit get limit;
+
+  /// Create a copy of Pagination
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PaginationCopyWith<_$_Pagination> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -447,8 +478,12 @@ mixin _$Limit {
   int get coerced => throw _privateConstructorUsedError;
   int get max => throw _privateConstructorUsedError;
 
+  /// Serializes this Limit to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Limit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LimitCopyWith<Limit> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -470,6 +505,8 @@ class _$LimitCopyWithImpl<$Res, $Val extends Limit>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Limit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -495,20 +532,25 @@ class _$LimitCopyWithImpl<$Res, $Val extends Limit>
 }
 
 /// @nodoc
-abstract class _$$_LimitCopyWith<$Res> implements $LimitCopyWith<$Res> {
-  factory _$$_LimitCopyWith(_$_Limit value, $Res Function(_$_Limit) then) =
-      __$$_LimitCopyWithImpl<$Res>;
+abstract class _$$LimitImplCopyWith<$Res> implements $LimitCopyWith<$Res> {
+  factory _$$LimitImplCopyWith(
+          _$LimitImpl value, $Res Function(_$LimitImpl) then) =
+      __$$LimitImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int min, int coerced, int max});
 }
 
 /// @nodoc
-class __$$_LimitCopyWithImpl<$Res> extends _$LimitCopyWithImpl<$Res, _$_Limit>
-    implements _$$_LimitCopyWith<$Res> {
-  __$$_LimitCopyWithImpl(_$_Limit _value, $Res Function(_$_Limit) _then)
+class __$$LimitImplCopyWithImpl<$Res>
+    extends _$LimitCopyWithImpl<$Res, _$LimitImpl>
+    implements _$$LimitImplCopyWith<$Res> {
+  __$$LimitImplCopyWithImpl(
+      _$LimitImpl _value, $Res Function(_$LimitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Limit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -516,7 +558,7 @@ class __$$_LimitCopyWithImpl<$Res> extends _$LimitCopyWithImpl<$Res, _$_Limit>
     Object? coerced = null,
     Object? max = null,
   }) {
-    return _then(_$_Limit(
+    return _then(_$LimitImpl(
       min: null == min
           ? _value.min
           : min // ignore: cast_nullable_to_non_nullable
@@ -536,12 +578,13 @@ class __$$_LimitCopyWithImpl<$Res> extends _$LimitCopyWithImpl<$Res, _$_Limit>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
-class _$_Limit extends _Limit {
-  const _$_Limit({required this.min, required this.coerced, required this.max})
+class _$LimitImpl extends _Limit {
+  const _$LimitImpl(
+      {required this.min, required this.coerced, required this.max})
       : super._();
 
-  factory _$_Limit.fromJson(Map<String, dynamic> json) =>
-      _$$_LimitFromJson(json);
+  factory _$LimitImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LimitImplFromJson(json);
 
   @override
   final int min;
@@ -556,28 +599,30 @@ class _$_Limit extends _Limit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Limit &&
+            other is _$LimitImpl &&
             (identical(other.min, min) || other.min == min) &&
             (identical(other.coerced, coerced) || other.coerced == coerced) &&
             (identical(other.max, max) || other.max == max));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, min, coerced, max);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Limit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LimitCopyWith<_$_Limit> get copyWith =>
-      __$$_LimitCopyWithImpl<_$_Limit>(this, _$identity);
+  _$$LimitImplCopyWith<_$LimitImpl> get copyWith =>
+      __$$LimitImplCopyWithImpl<_$LimitImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LimitToJson(
+    return _$$LimitImplToJson(
       this,
     );
   }
@@ -587,10 +632,10 @@ abstract class _Limit extends Limit {
   const factory _Limit(
       {required final int min,
       required final int coerced,
-      required final int max}) = _$_Limit;
+      required final int max}) = _$LimitImpl;
   const _Limit._() : super._();
 
-  factory _Limit.fromJson(Map<String, dynamic> json) = _$_Limit.fromJson;
+  factory _Limit.fromJson(Map<String, dynamic> json) = _$LimitImpl.fromJson;
 
   @override
   int get min;
@@ -598,9 +643,12 @@ abstract class _Limit extends Limit {
   int get coerced;
   @override
   int get max;
+
+  /// Create a copy of Limit
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_LimitCopyWith<_$_Limit> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LimitImplCopyWith<_$LimitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -631,8 +679,12 @@ mixin _$AnimebytesSearchResult {
   bool? get ongoing => throw _privateConstructorUsedError;
   List<AnimebytesTorrent> get torrents => throw _privateConstructorUsedError;
 
+  /// Serializes this AnimebytesSearchResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AnimebytesSearchResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnimebytesSearchResultCopyWith<AnimebytesSearchResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -672,6 +724,8 @@ class _$AnimebytesSearchResultCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnimebytesSearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -752,11 +806,12 @@ class _$AnimebytesSearchResultCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnimebytesSearchResultCopyWith<$Res>
+abstract class _$$AnimebytesSearchResultImplCopyWith<$Res>
     implements $AnimebytesSearchResultCopyWith<$Res> {
-  factory _$$_AnimebytesSearchResultCopyWith(_$_AnimebytesSearchResult value,
-          $Res Function(_$_AnimebytesSearchResult) then) =
-      __$$_AnimebytesSearchResultCopyWithImpl<$Res>;
+  factory _$$AnimebytesSearchResultImplCopyWith(
+          _$AnimebytesSearchResultImpl value,
+          $Res Function(_$AnimebytesSearchResultImpl) then) =
+      __$$AnimebytesSearchResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -778,14 +833,17 @@ abstract class _$$_AnimebytesSearchResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnimebytesSearchResultCopyWithImpl<$Res>
+class __$$AnimebytesSearchResultImplCopyWithImpl<$Res>
     extends _$AnimebytesSearchResultCopyWithImpl<$Res,
-        _$_AnimebytesSearchResult>
-    implements _$$_AnimebytesSearchResultCopyWith<$Res> {
-  __$$_AnimebytesSearchResultCopyWithImpl(_$_AnimebytesSearchResult _value,
-      $Res Function(_$_AnimebytesSearchResult) _then)
+        _$AnimebytesSearchResultImpl>
+    implements _$$AnimebytesSearchResultImplCopyWith<$Res> {
+  __$$AnimebytesSearchResultImplCopyWithImpl(
+      _$AnimebytesSearchResultImpl _value,
+      $Res Function(_$AnimebytesSearchResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnimebytesSearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -804,7 +862,7 @@ class __$$_AnimebytesSearchResultCopyWithImpl<$Res>
     Object? ongoing = freezed,
     Object? torrents = null,
   }) {
-    return _then(_$_AnimebytesSearchResult(
+    return _then(_$AnimebytesSearchResultImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -868,8 +926,8 @@ class __$$_AnimebytesSearchResultCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
-class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
-  const _$_AnimebytesSearchResult(
+class _$AnimebytesSearchResultImpl extends _AnimebytesSearchResult {
+  const _$AnimebytesSearchResultImpl(
       {@JsonKey(name: 'ID') required this.id,
       required this.categoryName,
       required this.groupName,
@@ -891,8 +949,8 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
         _torrents = torrents,
         super._();
 
-  factory _$_AnimebytesSearchResult.fromJson(Map<String, dynamic> json) =>
-      _$$_AnimebytesSearchResultFromJson(json);
+  factory _$AnimebytesSearchResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnimebytesSearchResultImplFromJson(json);
 
   @override
   @JsonKey(name: 'ID')
@@ -951,10 +1009,10 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnimebytesSearchResult &&
+            other is _$AnimebytesSearchResultImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
@@ -978,7 +1036,7 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
             const DeepCollectionEquality().equals(other._torrents, _torrents));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -997,16 +1055,18 @@ class _$_AnimebytesSearchResult extends _AnimebytesSearchResult {
       ongoing,
       const DeepCollectionEquality().hash(_torrents));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnimebytesSearchResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnimebytesSearchResultCopyWith<_$_AnimebytesSearchResult> get copyWith =>
-      __$$_AnimebytesSearchResultCopyWithImpl<_$_AnimebytesSearchResult>(
-          this, _$identity);
+  _$$AnimebytesSearchResultImplCopyWith<_$AnimebytesSearchResultImpl>
+      get copyWith => __$$AnimebytesSearchResultImplCopyWithImpl<
+          _$AnimebytesSearchResultImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnimebytesSearchResultToJson(
+    return _$$AnimebytesSearchResultImplToJson(
       this,
     );
   }
@@ -1030,18 +1090,18 @@ abstract class _AnimebytesSearchResult extends AnimebytesSearchResult {
       required final bool? incomplete,
       required final bool? ongoing,
       required final List<AnimebytesTorrent>
-          torrents}) = _$_AnimebytesSearchResult;
+          torrents}) = _$AnimebytesSearchResultImpl;
   const _AnimebytesSearchResult._() : super._();
 
   factory _AnimebytesSearchResult.fromJson(Map<String, dynamic> json) =
-      _$_AnimebytesSearchResult.fromJson;
+      _$AnimebytesSearchResultImpl.fromJson;
 
   @override
   @JsonKey(name: 'ID')
   int get id;
   @override
-  String get categoryName;
-  @override // required String fullName,
+  String get categoryName; // required String fullName,
+  @override
   String get groupName;
   @override
   int? get seriesId;
@@ -1068,10 +1128,13 @@ abstract class _AnimebytesSearchResult extends AnimebytesSearchResult {
   bool? get ongoing;
   @override
   List<AnimebytesTorrent> get torrents;
+
+  /// Create a copy of AnimebytesSearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_AnimebytesSearchResultCopyWith<_$_AnimebytesSearchResult> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AnimebytesSearchResultImplCopyWith<_$AnimebytesSearchResultImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AnimebytesTorrent _$AnimebytesTorrentFromJson(Map<String, dynamic> json) {
@@ -1097,8 +1160,12 @@ mixin _$AnimebytesTorrent {
       throw _privateConstructorUsedError;
   DateTime get uploadTime => throw _privateConstructorUsedError;
 
+  /// Serializes this AnimebytesTorrent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AnimebytesTorrent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnimebytesTorrentCopyWith<AnimebytesTorrent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1136,6 +1203,8 @@ class _$AnimebytesTorrentCopyWithImpl<$Res, $Val extends AnimebytesTorrent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnimebytesTorrent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1216,11 +1285,11 @@ class _$AnimebytesTorrentCopyWithImpl<$Res, $Val extends AnimebytesTorrent>
 }
 
 /// @nodoc
-abstract class _$$_AnimebytesTorrentCopyWith<$Res>
+abstract class _$$AnimebytesTorrentImplCopyWith<$Res>
     implements $AnimebytesTorrentCopyWith<$Res> {
-  factory _$$_AnimebytesTorrentCopyWith(_$_AnimebytesTorrent value,
-          $Res Function(_$_AnimebytesTorrent) then) =
-      __$$_AnimebytesTorrentCopyWithImpl<$Res>;
+  factory _$$AnimebytesTorrentImplCopyWith(_$AnimebytesTorrentImpl value,
+          $Res Function(_$AnimebytesTorrentImpl) then) =
+      __$$AnimebytesTorrentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1241,13 +1310,15 @@ abstract class _$$_AnimebytesTorrentCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnimebytesTorrentCopyWithImpl<$Res>
-    extends _$AnimebytesTorrentCopyWithImpl<$Res, _$_AnimebytesTorrent>
-    implements _$$_AnimebytesTorrentCopyWith<$Res> {
-  __$$_AnimebytesTorrentCopyWithImpl(
-      _$_AnimebytesTorrent _value, $Res Function(_$_AnimebytesTorrent) _then)
+class __$$AnimebytesTorrentImplCopyWithImpl<$Res>
+    extends _$AnimebytesTorrentCopyWithImpl<$Res, _$AnimebytesTorrentImpl>
+    implements _$$AnimebytesTorrentImplCopyWith<$Res> {
+  __$$AnimebytesTorrentImplCopyWithImpl(_$AnimebytesTorrentImpl _value,
+      $Res Function(_$AnimebytesTorrentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnimebytesTorrent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1266,7 +1337,7 @@ class __$$_AnimebytesTorrentCopyWithImpl<$Res>
     Object? fileList = null,
     Object? uploadTime = null,
   }) {
-    return _then(_$_AnimebytesTorrent(
+    return _then(_$AnimebytesTorrentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1330,8 +1401,8 @@ class __$$_AnimebytesTorrentCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
-class _$_AnimebytesTorrent extends _AnimebytesTorrent {
-  const _$_AnimebytesTorrent(
+class _$AnimebytesTorrentImpl extends _AnimebytesTorrent {
+  const _$AnimebytesTorrentImpl(
       {@JsonKey(name: 'ID') required this.id,
       required this.editionData,
       required this.rawDownMultiplier,
@@ -1349,8 +1420,8 @@ class _$_AnimebytesTorrent extends _AnimebytesTorrent {
       : _fileList = fileList,
         super._();
 
-  factory _$_AnimebytesTorrent.fromJson(Map<String, dynamic> json) =>
-      _$$_AnimebytesTorrentFromJson(json);
+  factory _$AnimebytesTorrentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnimebytesTorrentImplFromJson(json);
 
   @override
   @JsonKey(name: 'ID')
@@ -1394,10 +1465,10 @@ class _$_AnimebytesTorrent extends _AnimebytesTorrent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnimebytesTorrent &&
+            other is _$AnimebytesTorrentImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other.editionData, editionData) &&
@@ -1422,7 +1493,7 @@ class _$_AnimebytesTorrent extends _AnimebytesTorrent {
                 other.uploadTime == uploadTime));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1441,16 +1512,18 @@ class _$_AnimebytesTorrent extends _AnimebytesTorrent {
       const DeepCollectionEquality().hash(_fileList),
       uploadTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnimebytesTorrent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnimebytesTorrentCopyWith<_$_AnimebytesTorrent> get copyWith =>
-      __$$_AnimebytesTorrentCopyWithImpl<_$_AnimebytesTorrent>(
+  _$$AnimebytesTorrentImplCopyWith<_$AnimebytesTorrentImpl> get copyWith =>
+      __$$AnimebytesTorrentImplCopyWithImpl<_$AnimebytesTorrentImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnimebytesTorrentToJson(
+    return _$$AnimebytesTorrentImplToJson(
       this,
     );
   }
@@ -1471,11 +1544,11 @@ abstract class _AnimebytesTorrent extends AnimebytesTorrent {
       required final int size,
       required final int fileCount,
       required final List<AnimebytesTorrentFile> fileList,
-      required final DateTime uploadTime}) = _$_AnimebytesTorrent;
+      required final DateTime uploadTime}) = _$AnimebytesTorrentImpl;
   const _AnimebytesTorrent._() : super._();
 
   factory _AnimebytesTorrent.fromJson(Map<String, dynamic> json) =
-      _$_AnimebytesTorrent.fromJson;
+      _$AnimebytesTorrentImpl.fromJson;
 
   @override
   @JsonKey(name: 'ID')
@@ -1506,9 +1579,12 @@ abstract class _AnimebytesTorrent extends AnimebytesTorrent {
   List<AnimebytesTorrentFile> get fileList;
   @override
   DateTime get uploadTime;
+
+  /// Create a copy of AnimebytesTorrent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_AnimebytesTorrentCopyWith<_$_AnimebytesTorrent> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AnimebytesTorrentImplCopyWith<_$AnimebytesTorrentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1522,8 +1598,12 @@ mixin _$AnimebytesTorrentFile {
   String get filename => throw _privateConstructorUsedError;
   int get size => throw _privateConstructorUsedError;
 
+  /// Serializes this AnimebytesTorrentFile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AnimebytesTorrentFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnimebytesTorrentFileCopyWith<AnimebytesTorrentFile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1548,6 +1628,8 @@ class _$AnimebytesTorrentFileCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnimebytesTorrentFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1568,31 +1650,35 @@ class _$AnimebytesTorrentFileCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnimebytesTorrentFileCopyWith<$Res>
+abstract class _$$AnimebytesTorrentFileImplCopyWith<$Res>
     implements $AnimebytesTorrentFileCopyWith<$Res> {
-  factory _$$_AnimebytesTorrentFileCopyWith(_$_AnimebytesTorrentFile value,
-          $Res Function(_$_AnimebytesTorrentFile) then) =
-      __$$_AnimebytesTorrentFileCopyWithImpl<$Res>;
+  factory _$$AnimebytesTorrentFileImplCopyWith(
+          _$AnimebytesTorrentFileImpl value,
+          $Res Function(_$AnimebytesTorrentFileImpl) then) =
+      __$$AnimebytesTorrentFileImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String filename, int size});
 }
 
 /// @nodoc
-class __$$_AnimebytesTorrentFileCopyWithImpl<$Res>
-    extends _$AnimebytesTorrentFileCopyWithImpl<$Res, _$_AnimebytesTorrentFile>
-    implements _$$_AnimebytesTorrentFileCopyWith<$Res> {
-  __$$_AnimebytesTorrentFileCopyWithImpl(_$_AnimebytesTorrentFile _value,
-      $Res Function(_$_AnimebytesTorrentFile) _then)
+class __$$AnimebytesTorrentFileImplCopyWithImpl<$Res>
+    extends _$AnimebytesTorrentFileCopyWithImpl<$Res,
+        _$AnimebytesTorrentFileImpl>
+    implements _$$AnimebytesTorrentFileImplCopyWith<$Res> {
+  __$$AnimebytesTorrentFileImplCopyWithImpl(_$AnimebytesTorrentFileImpl _value,
+      $Res Function(_$AnimebytesTorrentFileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnimebytesTorrentFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? filename = null,
     Object? size = null,
   }) {
-    return _then(_$_AnimebytesTorrentFile(
+    return _then(_$AnimebytesTorrentFileImpl(
       filename: null == filename
           ? _value.filename
           : filename // ignore: cast_nullable_to_non_nullable
@@ -1607,12 +1693,13 @@ class __$$_AnimebytesTorrentFileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnimebytesTorrentFile extends _AnimebytesTorrentFile {
-  const _$_AnimebytesTorrentFile({required this.filename, required this.size})
+class _$AnimebytesTorrentFileImpl extends _AnimebytesTorrentFile {
+  const _$AnimebytesTorrentFileImpl(
+      {required this.filename, required this.size})
       : super._();
 
-  factory _$_AnimebytesTorrentFile.fromJson(Map<String, dynamic> json) =>
-      _$$_AnimebytesTorrentFileFromJson(json);
+  factory _$AnimebytesTorrentFileImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnimebytesTorrentFileImplFromJson(json);
 
   @override
   final String filename;
@@ -1625,29 +1712,31 @@ class _$_AnimebytesTorrentFile extends _AnimebytesTorrentFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnimebytesTorrentFile &&
+            other is _$AnimebytesTorrentFileImpl &&
             (identical(other.filename, filename) ||
                 other.filename == filename) &&
             (identical(other.size, size) || other.size == size));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, filename, size);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnimebytesTorrentFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnimebytesTorrentFileCopyWith<_$_AnimebytesTorrentFile> get copyWith =>
-      __$$_AnimebytesTorrentFileCopyWithImpl<_$_AnimebytesTorrentFile>(
-          this, _$identity);
+  _$$AnimebytesTorrentFileImplCopyWith<_$AnimebytesTorrentFileImpl>
+      get copyWith => __$$AnimebytesTorrentFileImplCopyWithImpl<
+          _$AnimebytesTorrentFileImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnimebytesTorrentFileToJson(
+    return _$$AnimebytesTorrentFileImplToJson(
       this,
     );
   }
@@ -1656,18 +1745,21 @@ class _$_AnimebytesTorrentFile extends _AnimebytesTorrentFile {
 abstract class _AnimebytesTorrentFile extends AnimebytesTorrentFile {
   const factory _AnimebytesTorrentFile(
       {required final String filename,
-      required final int size}) = _$_AnimebytesTorrentFile;
+      required final int size}) = _$AnimebytesTorrentFileImpl;
   const _AnimebytesTorrentFile._() : super._();
 
   factory _AnimebytesTorrentFile.fromJson(Map<String, dynamic> json) =
-      _$_AnimebytesTorrentFile.fromJson;
+      _$AnimebytesTorrentFileImpl.fromJson;
 
   @override
   String get filename;
   @override
   int get size;
+
+  /// Create a copy of AnimebytesTorrentFile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_AnimebytesTorrentFileCopyWith<_$_AnimebytesTorrentFile> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AnimebytesTorrentFileImplCopyWith<_$AnimebytesTorrentFileImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
