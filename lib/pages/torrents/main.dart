@@ -3,7 +3,9 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:tetsu_app/providers/torrents.dart";
 import "package:tetsu_app/utils.dart";
+import "package:tetsu_app/widgets/adaptive_scaffold.dart";
 import "package:tetsu_app/widgets/ago_builder.dart";
+import "package:tetsu_app/widgets/main_navigation.dart";
 
 class TorrentsMainPane extends ConsumerWidget {
   const TorrentsMainPane({super.key});
@@ -11,10 +13,11 @@ class TorrentsMainPane extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
-      child: Scaffold(
+      child: AdaptiveScaffold(
         appBar: AppBar(
           title: const Text("Torrents"),
         ),
+        sidePanel: const MainNavigation(),
         body: ref.watch(torrentsProvider).when(
               data: (torrents) {
                 final relevant = torrents

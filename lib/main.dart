@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: router,
       title: "Tetsu",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -32,6 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
+      routerConfig: router,
     );
   }
 }

@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tetsu_app/apis/animebytes/search_result.dart';
 import 'package:tetsu_app/providers/animebytes.dart';
+import 'package:tetsu_app/widgets/adaptive_scaffold.dart';
 import 'package:tetsu_app/widgets/anime_card.dart';
 import 'package:tetsu_app/widgets/html_text.dart';
-import 'package:tetsu_app/widgets/image.dart';
+import 'package:tetsu_app/widgets/main_navigation.dart';
 
 import 'torrent.dart';
 
@@ -89,10 +90,11 @@ class AnimebytesMainPane extends ConsumerWidget {
     }
 
     if (results.hasValue && results.value!.isEmpty || results.hasError) {
-      return Scaffold(
+      return AdaptiveScaffold(
         appBar: AppBar(
           title: const Text("AnimeBytes"),
         ),
+        sidePanel: const MainNavigation(),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -279,7 +281,7 @@ class _FilterButton extends ConsumerWidget {
 class _ResultChild extends StatelessWidget {
   final AnimebytesSearchResult result;
 
-  const _ResultChild(this.result, {super.key});
+  const _ResultChild(this.result);
 
   @override
   Widget build(BuildContext context) {

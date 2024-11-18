@@ -5,25 +5,28 @@ import 'package:tetsu_app/apis/anichart/queries/__generated__/airing.data.gql.da
 import 'package:tetsu_app/providers/airing.dart';
 import 'package:tetsu_app/providers/animebytes.dart';
 import 'package:tetsu_app/utils.dart';
+import 'package:tetsu_app/widgets/adaptive_scaffold.dart';
 import 'package:tetsu_app/widgets/anime_card.dart';
 import 'package:tetsu_app/widgets/html_text.dart';
+import 'package:tetsu_app/widgets/main_navigation.dart';
 
 class AiringMainPane extends ConsumerWidget {
   const AiringMainPane({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return AdaptiveScaffold(
       appBar: AppBar(
         title: const Text("Airing"),
       ),
+      sidePanel: MainNavigation(),
       body: ref.watch(airingProvider).when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Text(err.toString()),
             data: (data) => LayoutBuilder(builder: (context, constraints) {
               return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: constraints.maxWidth > 800 ? 2 : 1,
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 800,
                   childAspectRatio: 7 / 4,
                 ),
                 itemCount: data.Page!.media!.length,
@@ -83,7 +86,7 @@ class AiringMainPane extends ConsumerWidget {
 
                         print(abId);
 
-                        if (abId != null) {
+                        if (context.mounted && abId != null) {
                           context.push("/animebytes/$abId");
                         }
                       },

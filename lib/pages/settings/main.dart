@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tetsu_app/preferences.dart';
+import 'package:tetsu_app/widgets/adaptive_scaffold.dart';
+import 'package:tetsu_app/widgets/main_navigation.dart';
 
 import 'choice_pref.dart';
 import 'input_pref.dart';
@@ -10,10 +12,11 @@ class SettingsMainPane extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return AdaptiveScaffold(
       appBar: AppBar(
         title: const Text("Settings"),
       ),
+      sidePanel: const MainNavigation(),
       body: ListView(
         children: [
           _Header("AnimeBytes"),

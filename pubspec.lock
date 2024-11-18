@@ -14,22 +14,6 @@ packages:
     description: dart
     source: sdk
     version: "0.3.2"
-  adaptive_breakpoints:
-    dependency: transitive
-    description:
-      name: adaptive_breakpoints
-      sha256: "56dd5f1016f4d5732b80628d1b63a29d8c9cabe4d66a8a5fe63fdbec7b3af5cd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.7"
-  adaptive_navigation:
-    dependency: "direct main"
-    description:
-      name: adaptive_navigation
-      sha256: "87c08c5c8b954f2266518c1efb98a1d0ae09cd8cbef69c4d4fd7ea28d4b9fd51"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.10"
   analyzer:
     dependency: transitive
     description:
@@ -395,14 +379,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_adaptive_scaffold:
-    dependency: "direct main"
-    description:
-      name: flutter_adaptive_scaffold
-      sha256: "8c515a2cb8abb3a567f8e77f10b33f47bb6fcadfe31f62364e0aca36280cdf93"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
   flutter_cache_manager:
     dependency: transitive
     description:
