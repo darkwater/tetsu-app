@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+import "package:tetsu_app/apis/tetsu/anime.dart";
 import "package:tetsu_app/pages/airing/main.dart";
 import "package:tetsu_app/pages/animebytes/group.dart";
 import "package:tetsu_app/pages/animebytes/main.dart";
@@ -8,6 +9,7 @@ import "package:tetsu_app/pages/settings/main.dart";
 import "package:tetsu_app/pages/torrents/main.dart";
 import "package:tetsu_app/pages/watch/details.dart";
 import "package:tetsu_app/pages/watch/main.dart";
+import "package:tetsu_app/widgets/main_navigation.dart";
 
 final pages = [
   Page(
@@ -16,27 +18,32 @@ final pages = [
     icon: Icons.folder_outlined,
     selectedIcon: Icons.folder,
     main: (_) => WatchMainPane(),
-    defaultExtra: WatchExtra.inProgress,
+    defaultExtra: WatchExtra.inProgress(),
     subnav: [
       Subnav(
         label: "In progress",
-        extra: WatchExtra.inProgress,
+        extra: WatchExtra.inProgress(),
+        trailing: (context) => WatchSubnavCount(TetsuAnimeCategory.inProgress),
       ),
       Subnav(
         label: "New",
-        extra: WatchExtra.new_,
+        extra: WatchExtra.new_(),
+        trailing: (context) => WatchSubnavCount(TetsuAnimeCategory.new_),
       ),
       Subnav(
         label: "Completed",
-        extra: WatchExtra.completed,
+        extra: WatchExtra.completed(),
+        trailing: (context) => WatchSubnavCount(TetsuAnimeCategory.completed),
       ),
       Subnav(
         label: "Dropped",
-        extra: WatchExtra.dropped,
+        extra: WatchExtra.dropped(),
+        trailing: (context) => WatchSubnavCount(TetsuAnimeCategory.dropped),
       ),
       Subnav(
         label: "All",
-        extra: WatchExtra.all,
+        extra: WatchExtra.all(),
+        trailing: (context) => WatchSubnavCount(null),
       ),
     ],
   ),
@@ -93,7 +100,7 @@ final routes = [
 
 final router = GoRouter(
   initialLocation: "/",
-  initialExtra: WatchExtra.inProgress,
+  initialExtra: WatchExtra.inProgress(),
   routes: [
     ...pages.map((page) => page.route()),
     // ShellRoute(
@@ -189,9 +196,11 @@ class Page {
 class Subnav {
   final String label;
   final Object? extra;
+  final Function(dynamic context)? trailing;
 
   const Subnav({
     required this.label,
     required this.extra,
+    this.trailing,
   });
 }

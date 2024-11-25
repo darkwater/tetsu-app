@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tetsu_app/widgets/image.dart';
 
+_LeftSideState? _currentlyActive;
+
 class AnimeCard extends ConsumerWidget {
   final String imageTag;
   final String? imageUrl;
@@ -11,9 +13,19 @@ class AnimeCard extends ConsumerWidget {
   final String? subtitle;
   final List<Widget> actions;
   final Function()? onTap;
+  final Widget Function()? contextMenuBuilder;
   final double? progress;
   final double? downloaded;
   final Widget? body;
+
+  static void hideAnyContextMenu() {
+    if (_currentlyActive != null) {
+      _currentlyActive!.setState(() {
+        _currentlyActive!.contextMenuVisible = false;
+      });
+      _currentlyActive = null;
+    }
+  }
 
   const AnimeCard({
     super.key,
@@ -24,6 +36,7 @@ class AnimeCard extends ConsumerWidget {
     this.subtitle,
     this.actions = const [],
     this.onTap,
+    this.contextMenuBuilder,
     this.progress,
     this.downloaded,
     this.body,
@@ -35,11 +48,13 @@ class AnimeCard extends ConsumerWidget {
       aspectRatio: 5 / 7,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
+        clipBehavior: Clip.antiAlias,
         child: _LeftSide(
           imageTag: imageTag,
           imageUrl: imageUrl,
           imageZoomable: imageZoomable,
           onTap: onTap,
+          contextMenuBuilder: contextMenuBuilder,
           title: title,
           subtitle: subtitle,
           progress: progress,
@@ -72,11 +87,12 @@ class AnimeCard extends ConsumerWidget {
   }
 }
 
-class _LeftSide extends ConsumerWidget {
+class _LeftSide extends ConsumerStatefulWidget {
   final String imageTag;
   final String? imageUrl;
   final bool imageZoomable;
   final Function()? onTap;
+  final Widget Function()? contextMenuBuilder;
   final String? title;
   final String? subtitle;
   final double? progress;
@@ -87,6 +103,7 @@ class _LeftSide extends ConsumerWidget {
     required this.imageUrl,
     required this.imageZoomable,
     required this.onTap,
+    required this.contextMenuBuilder,
     required this.title,
     required this.subtitle,
     required this.progress,
@@ -94,21 +111,31 @@ class _LeftSide extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_LeftSide> createState() => _LeftSideState();
+}
+
+class _LeftSideState extends ConsumerState<_LeftSide> {
+  bool contextMenuVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned.fill(
-          child: imageUrl != null
-              ? (imageZoomable
+          child: Container(color: Colors.black),
+        ),
+        Positioned.fill(
+          child: widget.imageUrl != null
+              ? (widget.imageZoomable
                   ? ZoomableNetworkImage(
-                      tag: imageTag,
-                      url: imageUrl!,
+                      tag: widget.imageTag,
+                      url: widget.imageUrl!,
                       fit: BoxFit.cover,
                     )
                   : Hero(
-                      tag: imageTag,
+                      tag: widget.imageTag,
                       child: CachedNetworkImage(
-                        imageUrl: imageUrl!,
+                        imageUrl: widget.imageUrl!,
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(),
                         ),
@@ -120,7 +147,7 @@ class _LeftSide extends ConsumerWidget {
                   color: Colors.grey,
                 ),
         ),
-        if (title != null)
+        if (widget.title != null)
           Positioned.fill(
             top: null,
             child: Material(
@@ -137,15 +164,15 @@ class _LeftSide extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title!,
+                          widget.title!,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        if (subtitle != null) ...[
+                        if (widget.subtitle != null) ...[
                           const SizedBox(height: 6),
                           Text(
-                            subtitle!,
+                            widget.subtitle!,
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w500,
@@ -155,14 +182,14 @@ class _LeftSide extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  if (progress != null)
+                  if (widget.progress != null)
                     SizedBox(
                       height: 3,
                       child: Stack(
                         children: [
                           Positioned.fill(
                             child: LinearProgressIndicator(
-                              value: downloaded ?? 1,
+                              value: widget.downloaded ?? 1,
                               backgroundColor: Colors.transparent,
                               valueColor: AlwaysStoppedAnimation<Color?>(
                                 Theme.of(context)
@@ -173,7 +200,7 @@ class _LeftSide extends ConsumerWidget {
                           ),
                           Positioned.fill(
                             child: LinearProgressIndicator(
-                              value: progress,
+                              value: widget.progress,
                               backgroundColor: Colors.transparent,
                               // valueColor: AlwaysStoppedAnimation<Color?>(
                               //   Colors.red,
@@ -187,17 +214,56 @@ class _LeftSide extends ConsumerWidget {
               ),
             ),
           ),
-        if (onTap != null)
+        if (contextMenuVisible && widget.contextMenuBuilder != null)
+          Positioned.fill(
+            child: TapRegion(
+              behavior: HitTestBehavior.opaque,
+              // consumeOutsideTaps: true,
+              onTapOutside: (_) => setState(() {
+                contextMenuVisible = false;
+                _currentlyActive = null;
+              }),
+              child: Material(
+                color: Colors.black87,
+                child: ListTileTheme(
+                  data: ListTileThemeData(
+                    textColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  child: Center(
+                    child: widget.contextMenuBuilder!(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        if ((widget.onTap != null || widget.contextMenuBuilder != null) &&
+            !contextMenuVisible)
           Positioned.fill(
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: onTap,
+                onTap: widget.onTap,
+                onLongPress: _onLongPress(),
+                onSecondaryTap: _onLongPress(),
               ),
             ),
           ),
       ],
     );
+  }
+
+  Function()? _onLongPress() {
+    return widget.contextMenuBuilder != null
+        ? () => setState(() {
+              contextMenuVisible = true;
+              if (_currentlyActive != null && _currentlyActive != this) {
+                _currentlyActive!.setState(() {
+                  _currentlyActive!.contextMenuVisible = false;
+                });
+              }
+              _currentlyActive = this;
+            })
+        : null;
   }
 }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tetsu_app/apis/tetsu/anime.dart';
+import 'package:tetsu_app/apis/tetsu/file.dart';
 import 'package:tetsu_app/providers/tetsu.dart';
 import 'package:tetsu_app/utils.dart';
 import 'package:tetsu_app/widgets/adaptive_scaffold.dart';
@@ -14,7 +16,7 @@ class WatchMainPane extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final anime = ref.watch(tetsuAllAnimeProvider);
 
-    final extra = GoRouterState.of(context).extra as WatchExtra;
+    final extra = GoRouterState.of(context).extra as WatchExtra?;
 
     return AdaptiveScaffold(
       appBar: AppBar(
@@ -23,22 +25,9 @@ class WatchMainPane extends ConsumerWidget {
       sidePanel: MainNavigation(),
       body: anime.when(
         data: (animes) {
-          final filtered = animes.where((a) {
-            final progress = a.watchProgress?.animeProgress ?? 0;
-            final watchedRecently = a.watchProgress?.lastUpdated.isBefore(
-                  DateTime.now().subtract(const Duration(hours: 24)),
-                ) ??
-                false;
-
-            return switch (extra) {
-              WatchExtra.all => true,
-              WatchExtra.inProgress =>
-                !watchedRecently && progress > 0 && progress < 1,
-              WatchExtra.new_ => progress == 0,
-              WatchExtra.completed => progress == 1,
-              WatchExtra.dropped => watchedRecently && progress < 1,
-            };
-          }).toList();
+          final filtered = extra?.category != null
+              ? animes.where((a) => a.category == extra?.category).toList()
+              : animes;
 
           return RefreshIndicator(
             onRefresh: () => ref.refresh(tetsuAllAnimeProvider.future),
@@ -62,6 +51,51 @@ class WatchMainPane extends ConsumerWidget {
                       onTap: () {
                         context.push("/watch/${anime.aid}");
                       },
+                      contextMenuBuilder: () => ListView(
+                        shrinkWrap: true,
+                        children: [
+                          ListTile(
+                            title: const Text("Details"),
+                            onTap: () {
+                              context.push("/watch/${anime.aid}");
+                            },
+                          ),
+                          ListTile(
+                            title: const Text("Mark as watched"),
+                            onTap: () async {
+                              final episodes = Map.fromEntries(
+                                (await ref.watch(
+                                  tetsuEpisodesProvider(anime.aid).future,
+                                ))
+                                    .map((e) =>
+                                        MapEntry(e.eid, int.tryParse(e.epno))),
+                              );
+
+                              final files = await ref
+                                  .watch(tetsuFilesProvider(anime.aid).future);
+
+                              // find the file with the highest epno (ignoring C01, S01, etc)
+                              TetsuFile? file;
+                              int? latestEpno;
+                              for (final f in files) {
+                                final epno = episodes[f.eid];
+                                if (epno == null) continue;
+                                if (latestEpno == null || epno > latestEpno) {
+                                  latestEpno = epno;
+                                  file = f;
+                                }
+                              }
+
+                              if (file != null) {
+                                await tetsu.setWatchProgress(file.path, 1.0);
+                                ref.invalidate(tetsuAllAnimeProvider);
+                              }
+
+                              AnimeCard.hideAnyContextMenu();
+                            },
+                          ),
+                        ],
+                      ),
                       imageTag: "anidb-${anime.aid}",
                       imageUrl:
                           "https://cdn.anidb.net/images/main/${anime.picname}",
@@ -103,10 +137,12 @@ class WatchMainPane extends ConsumerWidget {
   }
 }
 
-enum WatchExtra {
-  inProgress,
-  new_,
-  completed,
-  dropped,
-  all,
+class WatchExtra {
+  final TetsuAnimeCategory? category;
+
+  const WatchExtra.all() : category = null;
+  const WatchExtra.inProgress() : category = TetsuAnimeCategory.inProgress;
+  const WatchExtra.new_() : category = TetsuAnimeCategory.new_;
+  const WatchExtra.completed() : category = TetsuAnimeCategory.completed;
+  const WatchExtra.dropped() : category = TetsuAnimeCategory.dropped;
 }

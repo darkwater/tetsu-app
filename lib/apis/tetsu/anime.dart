@@ -39,6 +39,32 @@ class TetsuAnime with _$TetsuAnime {
 
   factory TetsuAnime.fromJson(Map<String, Object?> json) =>
       _$TetsuAnimeFromJson(json);
+
+  double get progress => watchProgress?.animeProgress ?? 0;
+  bool get watchedRecently =>
+      watchProgress?.lastUpdated.isAfter(
+        DateTime.now().subtract(const Duration(days: 30)),
+      ) ??
+      false;
+
+  TetsuAnimeCategory get category {
+    if (progress == 1) {
+      return TetsuAnimeCategory.completed;
+    } else if (progress == 0) {
+      return TetsuAnimeCategory.new_;
+    } else if (watchedRecently) {
+      return TetsuAnimeCategory.inProgress;
+    } else {
+      return TetsuAnimeCategory.dropped;
+    }
+  }
+}
+
+enum TetsuAnimeCategory {
+  inProgress,
+  new_,
+  completed,
+  dropped,
 }
 
 @freezed
