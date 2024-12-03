@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quiver/iterables.dart';
 import 'package:tetsu_app/apis/tetsu/mpv/message.dart';
 import 'package:tetsu_app/providers/mpv.dart';
 import 'package:tetsu_app/providers/tetsu.dart';
@@ -170,19 +172,22 @@ class WatchDetailsPage extends ConsumerWidget {
               },
               child: ListView(
                 children: [
-                  // SizedBox(
-                  //   height: 300,
-                  //   child: Row(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       ZoomableNetworkImage(
-                  //         tag: "anidb-$aid",
-                  //         url: "https://cdn.anidb.net/images/main/${anime.picname}",
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  // header,
+                  SizedBox(
+                    height: 300,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        for (final pair in zip([
+                          anime.relatedAidList,
+                          anime.relatedAidType,
+                        ]))
+                          _RelatedAnime(
+                            aid: pair.first as int,
+                            type: pair.last as String,
+                          ),
+                      ],
+                    ),
+                  ),
                   // if (categories.length != 1 ||
                   //     categories.keys.first != selectedCategory)
                   //   _TabBar(categories),
@@ -266,6 +271,43 @@ class _TabBarState extends ConsumerState<_TabBar>
     return TabBar(
       tabs: widget.categories.values.map((v) => Tab(text: v)).toList(),
       controller: controller,
+    );
+  }
+}
+
+class _RelatedAnime extends ConsumerWidget {
+  final int aid;
+  final String type;
+
+  const _RelatedAnime({
+    required this.aid,
+    required this.type,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final anime = ref.watch(tetsuAnimeProvider(aid));
+    return AnimeCard(
+      imageTag: "anidb-$aid",
+      imageUrl: anime.hasValue
+          ? "https://cdn.anidb.net/images/main/${anime.requireValue.picname}"
+          : null,
+      title: anime.valueOrNull?.romajiName,
+      subtitle: switch (type) {
+        "1" => "Sequel",
+        "2" => "Prequel",
+        "11" => "Same setting",
+        "12" => "Alternative setting",
+        "32" => "Alternative version",
+        "41" => "Music video",
+        "42" => "Character",
+        "51" => "Side story",
+        "52" => "Parent story",
+        "61" => "Summary",
+        "62" => "Full story",
+        _ => "Other",
+      },
+      onTap: () => context.push("/watch/$aid"),
     );
   }
 }

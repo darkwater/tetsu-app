@@ -33,7 +33,7 @@ class TetsuAnime with _$TetsuAnime {
     required int otherCount,
     required int trailerCount,
     required int parodyCount,
-    required Links links,
+    @JsonKey(defaultValue: emptyLinks) required Links links,
     required WatchProgress? watchProgress,
   }) = _TetsuAnime;
 
@@ -98,3 +98,11 @@ class WatchProgress with _$WatchProgress {
   factory WatchProgress.fromJson(Map<String, Object?> json) =>
       _$WatchProgressFromJson(json);
 }
+
+List<int> intsFromStrings(List<String> strings) =>
+    strings.map(int.parse).toList();
+
+List<String> intsToStrings(List<int> ints) =>
+    ints.map((e) => e.toString()).toList();
+
+Links emptyLinks() => Links();

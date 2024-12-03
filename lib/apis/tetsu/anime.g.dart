@@ -38,7 +38,9 @@ _$TetsuAnimeImpl _$$TetsuAnimeImplFromJson(Map<String, dynamic> json) =>
       otherCount: (json['other_count'] as num).toInt(),
       trailerCount: (json['trailer_count'] as num).toInt(),
       parodyCount: (json['parody_count'] as num).toInt(),
-      links: Links.fromJson(json['links'] as Map<String, dynamic>),
+      links: json['links'] == null
+          ? emptyLinks()
+          : Links.fromJson(json['links'] as Map<String, dynamic>),
       watchProgress: json['watch_progress'] == null
           ? null
           : WatchProgress.fromJson(

@@ -42,6 +42,7 @@ mixin _$TetsuAnime {
   int get otherCount => throw _privateConstructorUsedError;
   int get trailerCount => throw _privateConstructorUsedError;
   int get parodyCount => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: emptyLinks)
   Links get links => throw _privateConstructorUsedError;
   WatchProgress? get watchProgress => throw _privateConstructorUsedError;
 
@@ -84,7 +85,7 @@ abstract class $TetsuAnimeCopyWith<$Res> {
       int otherCount,
       int trailerCount,
       int parodyCount,
-      Links links,
+      @JsonKey(defaultValue: emptyLinks) Links links,
       WatchProgress? watchProgress});
 
   $LinksCopyWith<$Res> get links;
@@ -287,7 +288,7 @@ abstract class _$$TetsuAnimeImplCopyWith<$Res>
       int otherCount,
       int trailerCount,
       int parodyCount,
-      Links links,
+      @JsonKey(defaultValue: emptyLinks) Links links,
       WatchProgress? watchProgress});
 
   @override
@@ -462,7 +463,7 @@ class _$TetsuAnimeImpl extends _TetsuAnime {
       required this.otherCount,
       required this.trailerCount,
       required this.parodyCount,
-      required this.links,
+      @JsonKey(defaultValue: emptyLinks) required this.links,
       required this.watchProgress})
       : _relatedAidList = relatedAidList,
         _relatedAidType = relatedAidType,
@@ -542,6 +543,7 @@ class _$TetsuAnimeImpl extends _TetsuAnime {
   @override
   final int parodyCount;
   @override
+  @JsonKey(defaultValue: emptyLinks)
   final Links links;
   @override
   final WatchProgress? watchProgress;
@@ -668,7 +670,7 @@ abstract class _TetsuAnime extends TetsuAnime {
       required final int otherCount,
       required final int trailerCount,
       required final int parodyCount,
-      required final Links links,
+      @JsonKey(defaultValue: emptyLinks) required final Links links,
       required final WatchProgress? watchProgress}) = _$TetsuAnimeImpl;
   const _TetsuAnime._() : super._();
 
@@ -720,6 +722,7 @@ abstract class _TetsuAnime extends TetsuAnime {
   @override
   int get parodyCount;
   @override
+  @JsonKey(defaultValue: emptyLinks)
   Links get links;
   @override
   WatchProgress? get watchProgress;
