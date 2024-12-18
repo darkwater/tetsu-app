@@ -70,6 +70,7 @@ class TransmissionClient {
       "method": "torrent-add",
       "arguments": {
         "filename": torrentUrl,
+        "download-dir": "/data/torrents/anime",
       },
     });
   }

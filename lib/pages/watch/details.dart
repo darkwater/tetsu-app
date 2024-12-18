@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quiver/iterables.dart';
 import 'package:tetsu_app/apis/tetsu/mpv/message.dart';
+import 'package:tetsu_app/pages/animebytes/torrent_list.dart';
+import 'package:tetsu_app/providers/animebytes.dart';
 import 'package:tetsu_app/providers/mpv.dart';
 import 'package:tetsu_app/providers/tetsu.dart';
 import 'package:tetsu_app/utils.dart';
 import 'package:tetsu_app/widgets/anime_card.dart';
 
-final _selectedCategoryProvider = StateProvider.autoDispose<int>((ref) => 1);
+final _selectedCategoryProvider =
+    StateProvider.autoDispose<SidebarItem>((ref) => SidebarItem.about);
 
 class WatchDetailsPage extends ConsumerWidget {
   final int aid;
@@ -113,24 +116,20 @@ class WatchDetailsPage extends ConsumerWidget {
     final episodes = eProvider.requireValue;
     final files = fProvider.requireValue;
 
-    final categories = {
-      1: "Episodes",
-      2: "Special eps",
-      3: "Credits",
-      4: "Trailers",
-      5: "Parodies",
-      6: "Other",
-    };
-
     final entries = files
         .map((f) => (f, episodes.firstWhere((e) => e.eid == f.eid)))
         .toList();
 
-    categories.removeWhere((id, _) => !entries.any((e) => e.$2.etype == id));
+    final categories = SidebarItem.values.toList();
+    categories.removeWhere((item) =>
+        item.etype != null &&
+        !entries.any(
+          (e) => e.$2.etype == item.etype,
+        ));
 
     final selectedCategory = ref.watch(_selectedCategoryProvider);
 
-    entries.retainWhere((e) => e.$2.etype == selectedCategory);
+    entries.retainWhere((e) => e.$2.etype == selectedCategory.etype);
 
     return Scaffold(
       appBar: AppBar(
@@ -147,16 +146,15 @@ class WatchDetailsPage extends ConsumerWidget {
             child: ListView(
               children: [
                 header,
-                for (final cat in categories.entries)
+                for (final cat in categories)
                   ListTile(
-                    leading: (cat.key == selectedCategory)
-                        ? Icon(Icons.movie)
-                        : Icon(Icons.movie_outlined),
-                    title: Text(cat.value),
-                    selected: cat.key == selectedCategory,
+                    leading: (cat == selectedCategory)
+                        ? Icon(cat.selectedIcon)
+                        : Icon(cat.icon),
+                    title: Text(cat.label),
+                    selected: cat == selectedCategory,
                     onTap: () {
-                      ref.read(_selectedCategoryProvider.notifier).state =
-                          cat.key;
+                      ref.read(_selectedCategoryProvider.notifier).state = cat;
                     },
                   ),
               ],
@@ -170,66 +168,97 @@ class WatchDetailsPage extends ConsumerWidget {
                   ref.refresh(tetsuFilesProvider(aid).future),
                 ]);
               },
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: 300,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        for (final pair in zip([
-                          anime.relatedAidList,
-                          anime.relatedAidType,
-                        ]))
-                          _RelatedAnime(
-                            aid: pair.first as int,
-                            type: pair.last as String,
-                          ),
-                      ],
+              child: switch (selectedCategory) {
+                SidebarItem.about => Center(
+                    child: Text(
+                      prefTitle(
+                        kanji: anime.kanjiName,
+                        romaji: anime.romajiName,
+                        english: anime.englishName,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  // if (categories.length != 1 ||
-                  //     categories.keys.first != selectedCategory)
-                  //   _TabBar(categories),
-                  for (final (file, episode) in entries)
-                    ListTile(
-                      leading: SizedBox(
-                        width: 34,
-                        child: Text(
-                          episode.epno.replaceFirst(RegExp(r"^0"), ""),
-                          textAlign: TextAlign.end,
-                          textScaler: TextScaler.linear(1.5),
-                        ),
-                      ),
-                      title: Text(prefTitle(
-                        kanji: episode.kanji,
-                        romaji: episode.romaji,
-                        english: episode.eng,
-                        fallback: file.path.split("/").last,
-                      )),
-                      subtitle: Text(file.path),
-                      onTap: () async {
-                        final mpv = ref.read(mpvProvider);
-                        mpv.sendControl(ControlMessage.start());
-                        await Future.delayed(Duration(seconds: 1));
-                        mpv.send(MpvRequest(command: ["loadfile", file.path]));
-                      },
-                      selected: anime.watchProgress?.lastEid == episode.eid,
-                      trailing: PopupMenuButton(
-                        icon: Icon(Icons.more_vert),
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            child: Text("Mark as watched"),
-                            onTap: () async {
-                              await tetsu.setWatchProgress(file.path, 1.0);
-                              ref.invalidate(tetsuAllAnimeProvider);
-                            },
+                SidebarItem.torrents => anime.links.animebytesId != null
+                    ? AbTorrentsList(anime.links.animebytesId!)
+                    : Consumer(builder: (context, ref, _) {
+                        ref
+                            .read(abSearchResultsProvider(anime.romajiName, {})
+                                .future)
+                            .then((res) {
+                          if (context.mounted) {
+                            ref.invalidate(tetsuAllAnimeProvider);
+                          }
+                        });
+
+                        return const Center(
+                          child: Text("No torrents available"),
+                        );
+                      }),
+                _ => ListView(
+                    key: ValueKey(selectedCategory),
+                    children: [
+                      if (anime.relatedAidList.isNotEmpty)
+                        SizedBox(
+                          height: 300,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              for (final pair in zip([
+                                anime.relatedAidList,
+                                anime.relatedAidType,
+                              ]))
+                                _RelatedAnime(
+                                  aid: pair.first as int,
+                                  type: pair.last as String,
+                                ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
+                        ),
+                      // if (categories.length != 1 ||
+                      //     categories.keys.first != selectedCategory)
+                      //   _TabBar(categories),
+                      for (final (file, episode) in entries)
+                        ListTile(
+                          leading: SizedBox(
+                            width: 34,
+                            child: Text(
+                              episode.epno.replaceFirst(RegExp(r"^0"), ""),
+                              textAlign: TextAlign.end,
+                              textScaler: TextScaler.linear(1.5),
+                            ),
+                          ),
+                          title: Text(prefTitle(
+                            kanji: episode.kanji,
+                            romaji: episode.romaji,
+                            english: episode.eng,
+                            fallback: file.path.split("/").last,
+                          )),
+                          subtitle: Text(file.path),
+                          onTap: () async {
+                            final mpv = ref.read(mpvProvider);
+                            mpv.sendControl(ControlMessage.start());
+                            await Future.delayed(Duration(seconds: 1));
+                            mpv.send(
+                                MpvRequest(command: ["loadfile", file.path]));
+                          },
+                          selected: anime.watchProgress?.lastEid == episode.eid,
+                          trailing: PopupMenuButton(
+                            icon: Icon(Icons.more_vert),
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                child: Text("Mark as watched"),
+                                onTap: () async {
+                                  await tetsu.setWatchProgress(file.path, 1.0);
+                                  ref.invalidate(tetsuAllAnimeProvider);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+              },
             ),
           ),
         ],
@@ -238,42 +267,42 @@ class WatchDetailsPage extends ConsumerWidget {
   }
 }
 
-class _TabBar extends ConsumerStatefulWidget {
-  final Map<int, String> categories;
+// class _TabBar extends ConsumerStatefulWidget {
+//   final Map<int, String> categories;
 
-  const _TabBar(this.categories);
+//   const _TabBar(this.categories);
 
-  @override
-  ConsumerState<_TabBar> createState() => _TabBarState();
-}
+//   @override
+//   ConsumerState<_TabBar> createState() => _TabBarState();
+// }
 
-class _TabBarState extends ConsumerState<_TabBar>
-    with SingleTickerProviderStateMixin {
-  late final TabController controller;
+// class _TabBarState extends ConsumerState<_TabBar>
+//     with SingleTickerProviderStateMixin {
+//   late final TabController controller;
 
-  @override
-  void initState() {
-    super.initState();
+//   @override
+//   void initState() {
+//     super.initState();
 
-    controller = TabController(
-      length: widget.categories.length,
-      vsync: this,
-    );
+//     controller = TabController(
+//       length: widget.categories.length,
+//       vsync: this,
+//     );
 
-    controller.addListener(() {
-      ref.read(_selectedCategoryProvider.notifier).state =
-          widget.categories.keys.toList()[controller.index];
-    });
-  }
+//     controller.addListener(() {
+//       ref.read(_selectedCategoryProvider.notifier).state =
+//           widget.categories.keys.toList()[controller.index];
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      tabs: widget.categories.values.map((v) => Tab(text: v)).toList(),
-      controller: controller,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TabBar(
+//       tabs: widget.categories.values.map((v) => Tab(text: v)).toList(),
+//       controller: controller,
+//     );
+//   }
+// }
 
 class _RelatedAnime extends ConsumerWidget {
   final int aid;
@@ -310,4 +339,28 @@ class _RelatedAnime extends ConsumerWidget {
       onTap: () => context.push("/watch/$aid"),
     );
   }
+}
+
+enum SidebarItem {
+  about("About", icon: Icons.info_outline, selectedIcon: Icons.info),
+  torrents("Torrents",
+      icon: Icons.download_outlined, selectedIcon: Icons.download),
+  episodes("Episodes", etype: 1),
+  specials("Specials", etype: 2),
+  credits("Credits", etype: 3),
+  trailers("Trailers", etype: 4),
+  parodies("Parodies", etype: 5),
+  other("Other", etype: 6);
+
+  final String label;
+  final int? etype;
+  final IconData icon;
+  final IconData selectedIcon;
+
+  const SidebarItem(
+    this.label, {
+    this.etype,
+    this.icon = Icons.movie_outlined,
+    this.selectedIcon = Icons.movie,
+  });
 }
